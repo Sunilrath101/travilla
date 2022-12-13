@@ -1,0 +1,22 @@
+.navbar_container{
+    background-color: #262626;
+    color:#666666;
+    display: flex;
+    height: 60px;
+    align-items: center;
+    justify-content: space-between;
+}
+.website_icon{
+    display: flex;
+    margin-left: 13px;
+    align-items: center
+}
+.navbar_items_profile:hover{
+background: #262626;
+}
+.navbar_items{
+    display: flex;
+    height: 60px;
+    align-items: center;
+    margin-right: 13px;
+}
