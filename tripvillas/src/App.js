@@ -1,5 +1,7 @@
 import "./App.css";
+import DashBoard from "./DashBoard/DashBoard";
 import AllRoutes from "./Pages/AllRoutes";
+import DashboardHome from "./Pages/DashboardHome";
 
 function App() {
   return (
