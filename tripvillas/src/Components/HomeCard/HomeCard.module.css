@@ -1,0 +1,35 @@
+.box{
+  /* border: 1px soldi green; */
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 40px;
+}
+.box > h2{
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.box > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+.box > div > div {
+    /* border: 1px solid green; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+.box > div > div > img{
+    width: 20%;
+  }
+.box > div > div > p{
+    margin: 20px 0;
+  }

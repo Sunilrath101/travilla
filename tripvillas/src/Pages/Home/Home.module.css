@@ -1,5 +1,102 @@
-.container {
+.main {
   width: 100%;
-  height: 100vh;
-  background-color: blue;
+  height: 100%;
+}
+/* Sectio 1 */
+
+.section1{
+  /* border: 1px solid red; */
+  height: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(https://d2v8elt324ukrb.cloudfront.net/static/new_template/media/Pimal2-1.2d5d237dbd32.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.section1 > .box{
+  background-color: rgba(0, 0, 0, 0.447);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+.section1 > .box > h1{
+  font-size: 25px;
+}
+
+.section3{
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 40px;
+  height: auto;
+}
+.section3 > .left{
+  border: 1px soldi green;
+  width: 32%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 40px;
+}
+.section3 > .left >h2{
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.section3 > .left > div{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.section3 > .left > div > div {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.section3 > .left > div > div > img{
+  width: 20%;
+}
+.section3 > .left > div > div > p{
+  margin: 20px 0;
+}
+.section3 > .right{
+  /* border: 1px solid blue; */
+  width: 62%;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+}
+
+/* Sectio  4 */
+
+.section4{
+  /* border: 1px solid red; */
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  gap: 0 40px;
+}
+
+footer{
+  padding: 0 40px;
+}
+footer > h2{
+  font-size: 18px;
 }
