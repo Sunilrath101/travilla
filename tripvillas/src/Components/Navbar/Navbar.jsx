@@ -90,9 +90,9 @@ const Navbar = () => {
           updateProfile(user, {
             displayName: signupFormVal.name,
           });
-          // updatePhoneNumber(user, {
-          //   phoneNumber: signupFormVal.mobile,
-          // });
+          updatePhoneNumber(user, {
+            phoneNumber: signupFormVal.mobile,
+          });
           console.log(user);
         })
         .catch((er) => {
