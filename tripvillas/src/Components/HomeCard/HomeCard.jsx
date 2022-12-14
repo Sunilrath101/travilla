@@ -1,4 +1,5 @@
 import React from 'react'
+import Button from '../Button/Button'
 import style from './HomeCard.module.css'
 
 const HomeCard = () => {
@@ -23,6 +24,7 @@ const HomeCard = () => {
             <p>Food Delivery Or Central Restaurant</p>
           </div>
         </div>
+        <Button text="EXPLORE INVESTMENT OPPORTUNITIES"/>
     </div>
   )
 }
