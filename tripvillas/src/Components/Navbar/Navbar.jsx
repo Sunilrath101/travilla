@@ -1,6 +1,15 @@
 import styles from "./Navbar.module.css";
 import React from "react";
 import {
+  getAuth,
+  signInWithPhoneNumber,
+  RecaptchaVerifier,
+  updateProfile,
+  updatePhoneNumber,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+
+import {
   Button,
   Drawer,
   DrawerBody,
@@ -30,19 +39,80 @@ import {
   InputGroup,
   InputLeftAddon,
   FormHelperText,
+  FormErrorMessage,
+  Alert,
+  AlertIcon,
 } from "@chakra-ui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { MdArrowDropDown } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 import { useState } from "react";
+import { auth } from "../Firebase/AuthenticationWithEmail";
 const Navbar = () => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
   const btnRef = React.useRef();
+  const Auth = getAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isopen, setopen] = useState(false); // for clicking on navbar's profile icon
   const [Isopen, Setopen] = useState(false); // for clicking on signin or signup
   const [showphoneN, setshowEmail] = useState(true);
+  const [showotp, setshowOtp] = useState(false);
+  const [error, setError] = useState("");
+  const [dis, setSubmitdis] = useState(false);
+  const [signupFormVal, setSignupForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    mobile: "",
+  });
+
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    if (
+      signupFormVal.name == "" ||
+      signupFormVal.email == "" ||
+      signupFormVal.mobile == ""
+    ) {
+      console.log("hello");
+      setError("Please, fill all the Credentials!!");
+    } else {
+      // sign up with email
+      setSubmitdis(true);
+      createUserWithEmailAndPassword(
+        auth,
+        signupFormVal.email,
+        signupFormVal.password
+      )
+        .then((re) => {
+          setSubmitdis(false);
+          const user = re.user;
+          updateProfile(user, {
+            displayName: signupFormVal.name,
+          });
+          // updatePhoneNumber(user, {
+          //   phoneNumber: signupFormVal.mobile,
+          // });
+          console.log(user);
+        })
+        .catch((er) => {
+          setSubmitdis(false);
+          setError(er.message);
+        });
+      setError("");
+      Setopen(true);
+      handleSignUptoSignIn();
+    }
+  };
+  const handleSignInwithEmail = () => {};
+  const handleSignInwithPhone = () => {};
+
+  const handleotpevent = (e) => {
+    e.preventDefault();
+    setshowOtp(true);
+    console.log(signupFormVal);
+    handleSignUptoSignIn();
+  };
   const onclose = () => {
     setopen(false);
   };
@@ -72,8 +142,8 @@ const Navbar = () => {
         <img
           src="https://d2v8elt324ukrb.cloudfront.net/static/riotuikit/images/logo.c72056a22f91.png"
           alt="tripvillas-img"
-          height="21px"
-          width="171px"
+          height="19px"
+          width="141px"
         />
       </div>
       <div className={styles.navbar_items}>
@@ -92,6 +162,7 @@ const Navbar = () => {
                 background: "#262626",
                 backgroundColor: "#262626",
               }}
+              _active={{ background: "#262626" }}
               icon={<RxAvatar fontSize={"28px"} color="#fff" />}
             />
             <MenuList
@@ -116,7 +187,7 @@ const Navbar = () => {
                 size="lg"
               >
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent borderRadius={"0"}>
                   <ModalHeader>
                     <div className={styles.login_heading}>
                       <div>
@@ -162,7 +233,7 @@ const Navbar = () => {
                           </FormHelperText>
                         </>
                       ) : (
-                        <FormControl>
+                        <>
                           <InputGroup marginBottom={"10px"}>
                             <Input
                               type="email"
@@ -177,55 +248,57 @@ const Navbar = () => {
                               placeholder="Password"
                             />
                           </InputGroup>
-                        </FormControl>
+                        </>
                       )}
-                    </FormControl>
-                    <div style={{ height: "70px" }}>
-                      <div
-                        style={{
-                          color: "#1E87F0",
-                          fontSize: "16px",
-                          fontWeight: "400",
-                          margin: "30px 0px 0px 10px",
-                          cursor: "pointer",
-                          display: "inline-flex",
-                        }}
-                        onClick={handleEmailChange}
-                      >
-                        {showphoneN
-                          ? "Sign In With Email?"
-                          : "Sign In With Mobile & One Time Password?"}
+                      <div style={{ height: "70px" }}>
+                        <div
+                          style={{
+                            color: "#1E87F0",
+                            fontSize: "16px",
+                            fontWeight: "400",
+                            margin: "30px 0px 0px 10px",
+                            cursor: "pointer",
+                            display: "inline-flex",
+                          }}
+                          onClick={handleEmailChange}
+                        >
+                          {showphoneN
+                            ? "Sign In With Email?"
+                            : "Sign In With Mobile & One Time Password?"}
+                        </div>
                       </div>
-                    </div>
-                    <hr
-                      style={{
-                        color: "#9999",
-                        width: "100%",
-                        margin: "auto",
-                      }}
-                    />
+                      <hr
+                        style={{
+                          color: "#9999",
+                          width: "100%",
+                          margin: "auto",
+                          marginBottom: "10px",
+                        }}
+                      />
+                      <div
+                        style={{ display: "flex", justifyContent: "flex-end" }}
+                      >
+                        <Button
+                          onClick={onclose}
+                          borderRadius={"0px"}
+                          fontWeight="400"
+                          mr={3}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          background={"#1E87F0"}
+                          color="#fff"
+                          borderRadius={"0px"}
+                          fontWeight="400"
+                          _hover={{ background: "#1E67F7" }}
+                          _focus={{ background: "#1E67F7" }}
+                        >
+                          {showphoneN ? "Verify with OTP" : "SIGN IN"}
+                        </Button>
+                      </div>
+                    </FormControl>
                   </ModalBody>
-
-                  <ModalFooter>
-                    <Button
-                      onClick={onclose}
-                      borderRadius={"0px"}
-                      fontWeight="400"
-                      mr={3}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      background={"#1E87F0"}
-                      color="#fff"
-                      borderRadius={"0px"}
-                      fontWeight="400"
-                      _hover={{ background: "#1E67F7" }}
-                      _focus={{ background: "#1E67F7" }}
-                    >
-                      {showphoneN ? "Verify with OTP" : "SIGN IN"}
-                    </Button>
-                  </ModalFooter>
                 </ModalContent>
               </Modal>
               {/* </MenuItem> */}
@@ -246,7 +319,7 @@ const Navbar = () => {
                 size="lg"
               >
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent borderRadius={"0"}>
                   <ModalHeader>
                     <div className={styles.login_heading}>
                       <div>
@@ -280,6 +353,7 @@ const Navbar = () => {
                       lineHeight={"1.75rem"}
                       noOfLines={""}
                       gap={"3"}
+                      //onSubmit={handleSignUp}
                     >
                       <InputGroup>
                         <InputLeftAddon children="+91" borderRadius={"0"} />
@@ -287,6 +361,13 @@ const Navbar = () => {
                           type="tel"
                           placeholder="Mobile number"
                           borderRadius={"0"}
+                          onChange={(e) =>
+                            setSignupForm((prev) => ({
+                              ...prev,
+                              mobile: e.target.value,
+                            }))
+                          }
+                          value={signupFormVal.mobile}
                         />
                       </InputGroup>
                       <FormHelperText marginTop="-10px">
@@ -297,6 +378,13 @@ const Navbar = () => {
                           type="email"
                           borderRadius={"0"}
                           placeholder="Email Address"
+                          onChange={(e) =>
+                            setSignupForm((prev) => ({
+                              ...prev,
+                              email: e.target.value,
+                            }))
+                          }
+                          value={signupFormVal.email}
                         />
                       </InputGroup>
                       <InputGroup>
@@ -304,43 +392,71 @@ const Navbar = () => {
                           type="password"
                           borderRadius={"0"}
                           placeholder="Password"
+                          onChange={(e) =>
+                            setSignupForm((prev) => ({
+                              ...prev,
+                              password: e.target.value,
+                            }))
+                          }
                         />
                       </InputGroup>
                       <InputGroup gap={"3"}>
-                        <Input placeholder="First Name" borderRadius={"0"} />
+                        <Input
+                          placeholder="First Name"
+                          borderRadius={"0"}
+                          onChange={(e) =>
+                            setSignupForm((prev) => ({
+                              ...prev,
+                              name: e.target.value,
+                            }))
+                          }
+                          value={signupFormVal.name}
+                        />
                         <Input placeholder="Last Name" borderRadius={"0"} />
                       </InputGroup>
+                      {error ? (
+                        <Alert status="error">
+                          <AlertIcon />
+                          {error}
+                        </Alert>
+                      ) : null}
+                      <hr
+                        style={{
+                          color: "#9999",
+                          width: "100%",
+                          margin: "auto",
+                          marginTop: "15px",
+                        }}
+                      />
+                      <div
+                        style={{ display: "flex", justifyContent: "flex-end" }}
+                      >
+                        <Button
+                          onClick={Onclose}
+                          borderRadius={"0px"}
+                          fontWeight="400"
+                          mr={3}
+                          float="right"
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          float="right"
+                          background={"#1E87F0"}
+                          color="#fff"
+                          borderRadius={"0px"}
+                          fontWeight="400"
+                          _hover={{ background: "#1E67F7" }}
+                          _focus={{ background: "#1E67F7" }}
+                          // type="submit"
+                          onClick={handleSignUp}
+                          disabled={dis}
+                        >
+                          SIGN UP
+                        </Button>
+                      </div>
                     </FormControl>
-                    <hr
-                      style={{
-                        color: "#9999",
-                        width: "100%",
-                        margin: "auto",
-                        marginTop: "15px",
-                      }}
-                    />
                   </ModalBody>
-
-                  <ModalFooter>
-                    <Button
-                      onClick={Onclose}
-                      borderRadius={"0px"}
-                      fontWeight="400"
-                      mr={3}
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      background={"#1E87F0"}
-                      color="#fff"
-                      borderRadius={"0px"}
-                      fontWeight="400"
-                      _hover={{ background: "#1E67F7" }}
-                      _focus={{ background: "#1E67F7" }}
-                    >
-                      Verify with OTP
-                    </Button>
-                  </ModalFooter>
                 </ModalContent>
               </Modal>
             </MenuList>
@@ -352,7 +468,7 @@ const Navbar = () => {
             border={"none"}
             color="#fff"
             icon={<MdArrowDropDown />}
-            width="89px"
+            width="79px"
             _focus={{ border: "none" }}
           >
             {" "}
@@ -381,7 +497,7 @@ const Navbar = () => {
               background: "#262626",
               backgroundColor: "#262626",
             }}
-            icon={<GiHamburgerMenu />}
+            icon={<GiHamburgerMenu fontSize={"24px"} />}
           >
             Open
           </IconButton>
