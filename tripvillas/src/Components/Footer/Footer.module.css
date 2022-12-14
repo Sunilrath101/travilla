@@ -1,0 +1,7 @@
+.box{
+    display: flex;
+    gap: 40px;
+}
+.first{
+    border: 1px solid red;
+}
