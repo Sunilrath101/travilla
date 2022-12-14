@@ -1,0 +1,162 @@
+.container{
+  width: 100%;
+  min-height: 640px;
+  background-color: rgb(220, 59, 59);
+  }
+
+.nav{
+    width: 100%;
+    height: 49px;
+    background-color: lawngreen;
+}
+
+.mainpanel{
+    display: flex;
+    height: 570px;
+    width: 98%;
+    margin: auto;
+    background-color: azure;
+}
+
+.leftpanel{
+    width: 220px;
+    height: 100%;
+    background-color: rgb(189, 155, 162);
+}
+.user_nam{
+    height: 50px;
+    width: 190px;
+    margin: auto;
+    background-color: white;
+    padding: 5px 10px 7px;
+    
+}
+.leftpanel div{
+    height: 51px;
+    width: 192px;
+    margin: auto;
+    padding: 16px 10px 16px 11px;
+    background-color: rgb(243, 86, 243);
+    border: 1px solid black;
+}
+
+.rightpanel{
+    width: 1100px;
+    height: 100%;
+    /* background-color: rgb(190, 125, 190); */
+    position: relative;
+ }
+
+/*
+.addnewproperty{
+    width: 150px;
+    height: 33px;
+    font-size: 13px;
+    background-color: #3b9ff3;
+    padding: 6px 12px;
+    color: #ffffff;
+    border-radius: 2px;
+    margin-left: 5px;
+}
+.twobuttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rulesbtn{
+    width: 67px;
+    height: 31px;
+    background-color: #ffffff;
+    align-items: center;
+    padding: 2px 5px ;
+    margin-right: 20px ;
+    border-radius: 2px;
+    color: #333333;
+
+} */
+
+/* .noresults{
+    margin-left: 5px;
+    margin-top: 50px;
+    width: 98%;
+    height: 76px;
+    background-color: #c26565;
+}
+
+.noresults > div{
+    margin-left: 10px;
+    width: 133px;
+    height: 36px;
+    color: #ffffff;
+    font-size: 26px;
+}
+
+.noresults > div~p{
+    color: #ffffff;
+    margin-left: 10px;
+} */
+
+
+.pro_main{
+    height: 100%;
+    width: 100%;
+    border: 3px solid red;
+    background-color: blue;
+}
+
+.probox{
+    height: 1079px;
+    color: #666666;
+    width:  100%;
+    background-color: #ffffffe6;
+    border: 1px solid black
+}
+
+
+
+
+
+
+
+.privatetag{
+    height: 52px;
+    width: 100%;
+    background-color: #2C3742;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.privatetag > button {
+    height: 33px;
+    width: 146px;
+    padding: 3px 5px;
+    background-color: #45b5b9 ;
+    font-size: 13px;
+    border-radius: 2px;
+    align-self: flex-end;
+}
+
+.pathbread{
+    height: 41px;
+    width: 1146px;
+    border: 1px dotted grey;
+    padding: 0px 13px ;
+    color: #333333;
+    background-color: #FFFFFF;
+}
+
+.pathbread > ol{
+    height: 41px;
+    width: 174px;
+    padding: 11px 34px 11px 0px;
+}
+
+.pathbread > ol li{
+    height: 19px;
+    color: #7c7c7c;
+}
+

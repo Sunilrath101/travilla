@@ -1,0 +1,20 @@
+.noresults{
+    margin-left: 5px;
+    margin-top: 50px;
+    width: 98%;
+    height: 76px;
+    background-color: #c26565;
+}
+
+.noresults > div{
+    margin-left: 10px;
+    width: 133px;
+    height: 36px;
+    color: #ffffff;
+    font-size: 26px;
+}
+
+.noresults > div~p{
+    color: #ffffff;
+    margin-left: 10px;
+}
