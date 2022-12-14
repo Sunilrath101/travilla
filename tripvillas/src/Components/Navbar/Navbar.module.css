@@ -1,0 +1,80 @@
+.navbar_container {
+  background-color: #262626;
+  color: #666666;
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+}
+.website_icon {
+  display: flex;
+  margin-left: 13px;
+  align-items: center;
+}
+.navbar_items_profile:hover {
+  background: #262626;
+}
+.navbar_items {
+  display: flex;
+  height: 60px;
+  align-items: center;
+  margin-right: 13px;
+}
+.navbar_items_drawer {
+  background-color: #262626;
+}
+.navbar_items_drawer_body {
+  color: #666666;
+
+  text-align: center;
+}
+.navbar_items_drawer_top > div > div:nth-child(1) {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+  width: 290px;
+}
+.navbar_items_drawer_top > div {
+  line-height: 1.74rem;
+  /* transition:all ease-in 3s ; */
+}
+.navbar_items_drawer_top > div > :hover {
+  color: #999;
+  cursor: pointer;
+}
+.navbar_items_drawer_middle {
+  margin-top: 40px;
+  line-height: 1.45rem;
+}
+
+.navbar_items_drawer_middle > div > div:nth-child(1) {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+  width: 290px;
+  margin-bottom: 10px;
+}
+.navbar_items_drawer_middle > div > :hover {
+  color: #999;
+  cursor: pointer;
+}
+.navbar_items_drawer_middle > div p {
+  font-size: 13px;
+}
+.navbar_items_drawer_bottom {
+  margin-top: 20px;
+}
+.navbar_items_drawer_bottom > div {
+  line-height: 1.65rem;
+}
+.navbar_items_drawer_bottom > div > div:hover {
+  color: #999;
+  cursor: pointer;
+}
+.login_heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 15px;
+  margin-top:15px;
+}
