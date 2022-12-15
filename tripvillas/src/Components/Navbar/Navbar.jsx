@@ -134,7 +134,7 @@ const Navbar = () => {
   };
   const signOut = () => {
     dispatch(signOutReq());
-    dispatch(signOutSuccess());
+    dispatch(signOutSuccess()).then(() => {});
     dispatch(signOutErr());
   };
   const handleLoginWithEmail = () => {
@@ -218,6 +218,9 @@ const Navbar = () => {
               }}
               _active={{ background: "#262626" }}
               icon={isAuth ? null : <RxAvatar fontSize={"28px"} color="#fff" />}
+              fontWeight="500"
+              fontSize={"18px"}
+              color="#fff"
             >
               {isAuth ? user : null}
             </MenuButton>
@@ -226,12 +229,14 @@ const Navbar = () => {
                 textAlign={"center"}
                 display={"grid"}
                 gridTemplateColumns="1 1"
+                // onClick={() => Setopen(false)}
               >
                 <Button
                   variant={"ghost"}
                   _hover={{ background: "#fff", color: "#999" }}
                   _focus={{ background: "#fff" }}
-                  onClick={signOut}
+                  // onClick={signOut}
+                  // onClick={() = }
                 >
                   SIGN OUT
                 </Button>
