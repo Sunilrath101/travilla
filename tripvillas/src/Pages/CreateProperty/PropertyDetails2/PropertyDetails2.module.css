@@ -1,0 +1,110 @@
+.container {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.container > div {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.box_1 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* border: 1px solid rgb(15, 128, 0); */
+  border-bottom: 1px solid #cccc;
+}
+.box_1 > h1 {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  padding: 0.6rem;
+}
+.box_2 {
+  width: 90%;
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  /* border: 1px solid rgb(226, 206, 115); */
+}
+.box_2_selection_1,
+.box_2_selection_3 {
+  width: 40%;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  row-gap: 2rem;
+  align-items: left;
+  border: 1px solid #cccc;
+  margin: 2rem 0;
+}
+
+.box_2_selection_1 > div,
+.box_2_selection_3 > div {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1rem;
+  align-items: center;
+}
+.box_2_selection_2 {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid rgb(226, 206, 115); */
+}
+/* .box_2_selection_3 {
+  width: 40%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid rgb(226, 206, 115);
+} */
+.box_3 {
+  border-top: 1px solid gray;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 3rem;
+  /* border: 1px solid goldenrod; */
+}
+.box_3 > button:nth-child(1) {
+  border: 1px solid gray;
+  padding: 0.5rem 1.5rem;
+}
+.box_3 > button:nth-child(2) {
+  color: white;
+  background-color: #1e87f0;
+  padding: 0.5rem 1.5rem;
+}
+@media screen and (max-width: 1000px) {
+  .box_2 {
+    flex-direction: column;
+  }
+  .box_2_selection_1,
+  .box_2_selection_3 {
+    width: 100%;
+  }
+  .box_2_selection_1 > div,
+  .box_2_selection_3 > div {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto;
+  }
+  .box_2_selection_2 {
+    width: 100%;
+  }
+}
