@@ -116,7 +116,7 @@ const Navbar = () => {
           }).then(() => {
             dispatch(signUpSuccess());
           });
-          // console.log(user)
+          console.log(user)
           //ispatch(signUpSuccess(user.displayName));
           updatePhoneNumber(user, {
             phoneNumber: signupFormVal.mobile,
