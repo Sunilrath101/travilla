@@ -5,7 +5,7 @@ import AllRoutes from "./Pages/AllRoutes";
 function App() {
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      <Navbar />
       <AllRoutes />
     </div>
   );
