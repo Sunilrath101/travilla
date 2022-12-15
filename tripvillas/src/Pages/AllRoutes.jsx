@@ -8,8 +8,12 @@ const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+<<<<<<< HEAD
       <Route path="/dashBoard" element={<DashBoard />} />
       <Route path="/host/create-property" element={<CreateProperty />} />
+=======
+      <Route path="/dashboard" element={<DashBoard />} />
+>>>>>>> main
     </Routes>
   );
 };

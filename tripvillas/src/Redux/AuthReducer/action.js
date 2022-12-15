@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import {getAuth} from 'firebase/auth'
+import { getAuth } from "firebase/auth";
+import * as types from "./actionTypes";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -12,14 +13,72 @@ const firebaseConfig = {
   storageBucket: "firbaseforhotelapp.appspot.com",
   messagingSenderId: "995641773535",
   appId: "1:995641773535:web:6c51b961ee5474d92e886a",
-  measurementId: "G-EE32ZYV3P7"
+  measurementId: "G-EE32ZYV3P7",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth=getAuth()
+const auth = getAuth();
 
-export {app,auth}
+const signUpReq = () => {
+  return {
+    type: types.SIGN_UP_REQ,
+  };
+};
+const signUpSuccess = () => {
+  return {
+    type: types.SIGN_UP_SUCCESS,
+  };
+};
+const signUpErr = () => {
+  return {
+    type: types.SIGN_UP_ERROR,
+  };
+};
+const loginReq = () => {
+  return {
+    type: types.LOGIN_REQ,
+  };
+};
+const loginSuccess = (user) => {
+  return {
+    type: types.LOGIN_SUCCESS,
+    payload: user,
+  };
+};
+const loginError = () => {
+  return {
+    type: types.LOGIN_ERROR,
+  };
+};
+const signOutReq = () => {
+  return {
+    type: types.SIGN_OUT_REQ,
+  };
+};
+const signOutSuccess = () => {
+  return {
+    type: types.SIGN_OUT_SUCCESS,
+  };
+};
+const signOutErr = () => {
+  return {
+    type: types.SIGN_OUT_ERR,
+  };
+};
+export {
+  app,
+  auth,
+  signUpErr,
+  signUpReq,
+  signUpSuccess,
+  loginError,
+  loginReq,
+  loginSuccess,
+  signOutErr,
+  signOutReq,
+  signOutSuccess,
+};
 /*
 {showotp ? (
                         <>
