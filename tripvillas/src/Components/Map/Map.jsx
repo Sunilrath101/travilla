@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 
-const Map = ({ city = "delhi", width = "100%", height = "400px" }) => {
+const Map = ({ city = "delhi", width = "100%", height = "800px" }) => {
   return (
     <div>
       <iframe

@@ -1,6 +1,7 @@
 import React from "react";
 import HotelCardVertical from "../../Components/HotelCardVertical/HotelCardVertical";
 import style from './HotelLists.module.css'
+import Map from '../../Components/Map/Map'
 
 const HotelLists = () => {
   return <div className={style.container}>
@@ -21,7 +22,7 @@ const HotelLists = () => {
       </div>
     </div>
     <div className={style.right}>
-
+      <Map/>
     </div>
     
   </div>;
