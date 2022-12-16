@@ -11,6 +11,14 @@ const HotelLists = () => {
         <div>MODIFY SEARCH</div>
       </div>
       <div className={style.bottom}>
+        <div className={style.tools}>
+          <p>Total 283 results</p>
+          <select name="sort-by" id="">
+            <option value="rel">Relevance</option>
+            <option value="lth">Price (Low to High)</option>
+            <option value="htl">Price (High to Low)</option>
+          </select>
+        </div>
         <div className={style.lists}>
           <HotelCardVertical/>
           <HotelCardVertical/>

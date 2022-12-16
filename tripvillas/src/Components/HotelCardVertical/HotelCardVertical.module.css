@@ -1,7 +1,8 @@
 .container{
-    border:  1px solid red;
+    /* border:  1px solid red; */
     display: flex;
-    
+    box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
+    margin: 20px 0;
 }
 .container > img{
     width: 40%;
@@ -34,9 +35,9 @@
 }
 .third{
     display: flex;
-    background-color:  rgb(0, 170, 255);
-    width: 25%;
-    color: white;
+    /* background-color:  rgb(0, 170, 255); */
+    width: 45%;
+    /* color: white; */
 }
 .third > h2{
     font-size: 22px;
