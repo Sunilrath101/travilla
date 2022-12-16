@@ -1,0 +1,48 @@
+.container{
+    border:  1px solid red;
+    display: flex;
+    
+}
+.container > img{
+    width: 40%;
+}
+.details{
+    width: 60%;
+    padding: 20px;
+}
+.details > div{
+    margin-bottom: 20px;
+    /* border: 1px solid green; */
+}
+.first > div:first-child{
+    /* border: 1px solid black; */
+    display: flex;
+    justify-content: space-between;
+}
+.first > h2{
+    font-size: 22px;
+}
+.first > h2 + p{
+    color: rgb(0, 170, 255);
+}
+.second > div{
+    display: flex;
+}
+.second > div > p{
+    border: 1px solid black;
+    margin-right: 15px;
+}
+.third{
+    display: flex;
+    background-color:  rgb(0, 170, 255);
+    width: 25%;
+    color: white;
+}
+.third > h2{
+    font-size: 22px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+.thierd > p{
+    color: gray;
+}

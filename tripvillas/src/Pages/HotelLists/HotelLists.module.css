@@ -1,0 +1,33 @@
+.container{
+    border: 1px solid red;
+    display: flex;
+}
+.left{
+    border: 1px solid green;
+    width: 60%;
+    background-color: white;
+    /* position: fixed; */
+}
+.left > .top{
+    /* top: 110px; */
+    position: fixed;
+    border: 1px solid gray;
+    background-color: white;
+    width: 60%;
+    
+}
+.left > .bottom{
+    overflow-y: scroll;
+    overflow: auto;
+}
+.lists{
+    padding: 10px 40px;
+    overflow-y: scroll;
+}
+.right{
+    width: 40%;
+    border: 1px solid blue;
+    height: 100vh;
+    position: fixed;
+    right: 0;
+}
