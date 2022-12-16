@@ -1,6 +1,7 @@
 import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import style from './Footer.module.css'
+import style from './Footer.module.css';
+import {Link} from 'react-router-dom';
 
 const Footer = () => {
   return <div>
@@ -19,7 +20,7 @@ const Footer = () => {
     <TabPanel className={style.box}>
       <div className={style.first}>
         <div>
-          <p>India</p>
+          <Link to='/search-state'>India</Link>
           <p>3262 holiday homes</p>
         </div>
         <div>
