@@ -1,9 +1,9 @@
 .container{
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
 }
 .left{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     width: 60%;
     background-color: white;
     /* position: fixed; */
@@ -14,14 +14,26 @@
     border: 1px solid gray;
     background-color: white;
     width: 60%;
-    
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+}
+.left > .top > div{
+    padding: 5px;
+    border: 1px solid rgb(219, 214, 214);
 }
 .left > .bottom{
+    margin-top: 100px;
     overflow-y: scroll;
     overflow: auto;
+    padding: 10px 40px;
+}
+.tools{
+    display: flex;
+    justify-content: space-between;
 }
 .lists{
-    padding: 10px 40px;
+    
     overflow-y: scroll;
 }
 .right{
