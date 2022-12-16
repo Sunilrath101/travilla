@@ -17,7 +17,6 @@ const HotelLists = () => {
           <HotelCardVertical/>
           <HotelCardVertical/>
           <HotelCardVertical/>
-          <HotelCardVertical/>
         </div>
       </div>
     </div>
