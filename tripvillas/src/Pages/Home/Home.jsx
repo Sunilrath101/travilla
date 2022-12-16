@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import style from "./Home.module.css";
-import { Box, Heading, HStack } from '@chakra-ui/react'
-import { Container, VStack } from '@chakra-ui/react'
+import { Box, Heading } from '@chakra-ui/react'
 import Searchbar from "../../Components/Searchbar/Searchbar";
 import BoxSlider from "./BoxSlider";
 import HomeImageBox from "../../Components/HomeImageBox/HomeImageBox";
 import HomeCard from "../../Components/HomeCard/HomeCard";
 import Footer from '../../Components/Footer/Footer.jsx'
+import axios from "axios";
 
 
 const Home = () => {
+
+  const [bodyData, setBodyData]= useState();
+  const [vactionIdeas, setVacationIdeas] = useState();
+
+  const fetchBodyData=()=>{
+    axios
+      .get("https://long-plum-mite-cape.cyclic.app/bodySection")
+      .then((res)=> setBodyData(res.data))
+      .catch((err)=> console.log(err))
+  }
+
+  const fetchVactionIdeas=()=>{
+    axios
+      .get("https://long-plum-mite-cape.cyclic.app/vacationIdeas")
+      .then((res)=> setVacationIdeas(res.data))
+      .catch((err)=> console.log(err))
+  }
+
+  useEffect(()=>{
+    fetchBodyData();
+    fetchVactionIdeas();
+  },[])
+
   return( 
   <>
   <div className={style.main}>
@@ -56,12 +79,15 @@ const Home = () => {
         </div>
       </div>
       <div className={style.right}>
-        <HomeImageBox/>
-        <HomeImageBox/>
-        <HomeImageBox/>
-        <HomeImageBox/>
-        <HomeImageBox/>
-        <HomeImageBox/>
+        {
+          bodyData && bodyData.map((item)=>{
+            return <HomeImageBox
+            name={item.name}
+            img={item.img}
+            location={item.location}
+            />
+          })
+        }
       </div>
     </div>
 
@@ -76,7 +102,7 @@ const Home = () => {
       <Heading as='h2' m="10px 0">
         Vacation Ideas
       </Heading>
-      <BoxSlider/>
+      <BoxSlider />
     </Box>
 
     
