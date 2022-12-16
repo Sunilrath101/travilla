@@ -1,0 +1,26 @@
+.container{
+    border: 1px solid black;
+    background-color: white;
+    padding: 5px;
+}
+form{
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+form >  div{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+input, select{
+    border: 1px solid grey;
+    padding: 15px 20px;
+}
+.btn{
+    background-color: blue;
+    padding: 10px 15px;
+}

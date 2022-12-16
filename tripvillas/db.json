@@ -1,0 +1,169 @@
+{
+  "properties": [
+    {
+      "id": 1,
+      "title": "Classic Room",
+      "city": "Betalbatim",
+      "state": "Goa",
+      "country": "India",
+      "property_type": "Villa",
+      "number_of_property": 4,
+      "max_guests": 2,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "amenities": ["Kitchen", "TV", "AC", "Fridge", "Microwave", "Sofa"],
+      "common_amenities": [
+        "Wifi",
+        "Spa",
+        "Parking",
+        "Foosball Table",
+        "Garden/Lawn"
+      ],
+      "pets_allowed": false,
+      "image": [
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg"
+      ],
+      "currency": "INR",
+      "rate": {
+        "weekday": 2000,
+        "weekend": 5000
+      },
+      "meal_plan": "European Plan",
+      "cancellation_policy": "Common"
+    },
+    {
+      "id": 2,
+      "title": "Classic Room",
+      "city": "Betalbatim",
+      "state": "Goa",
+      "country": "India",
+      "property_type": "Villa",
+      "number_of_property": 4,
+      "max_guests": 2,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "amenities": ["Kitchen", "TV", "AC", "Fridge", "Microwave", "Sofa"],
+      "common_amenities": [
+        "Wifi",
+        "Spa",
+        "Parking",
+        "Foosball Table",
+        "Garden/Lawn"
+      ],
+      "pets_allowed": false,
+      "image": [
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg"
+      ],
+      "currency": "INR",
+      "rate": {
+        "weekday": 2000,
+        "weekend": 5000
+      },
+      "meal_plan": "European Plan",
+      "cancellation_policy": "Common"
+    },
+    {
+      "id": 3,
+      "title": "Classic Room",
+      "city": "Betalbatim",
+      "state": "Goa",
+      "country": "India",
+      "property_type": "Villa",
+      "number_of_property": 4,
+      "max_guests": 2,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "amenities": ["Kitchen", "TV", "AC", "Fridge", "Microwave", "Sofa"],
+      "common_amenities": [
+        "Wifi",
+        "Spa",
+        "Parking",
+        "Foosball Table",
+        "Garden/Lawn"
+      ],
+      "pets_allowed": false,
+      "image": [
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg"
+      ],
+      "currency": "INR",
+      "rate": {
+        "weekday": 2000,
+        "weekend": 5000
+      },
+      "meal_plan": "European Plan",
+      "cancellation_policy": "Common"
+    },
+    {
+      "id": 4,
+      "title": "Classic Room",
+      "city": "Betalbatim",
+      "state": "Goa",
+      "country": "India",
+      "property_type": "Villa",
+      "number_of_property": 4,
+      "max_guests": 2,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "amenities": ["Kitchen", "TV", "AC", "Fridge", "Microwave", "Sofa"],
+      "common_amenities": [
+        "Wifi",
+        "Spa",
+        "Parking",
+        "Foosball Table",
+        "Garden/Lawn"
+      ],
+      "pets_allowed": false,
+      "image": [
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg"
+      ],
+      "currency": "INR",
+      "rate": {
+        "weekday": 2000,
+        "weekend": 5000
+      },
+      "meal_plan": "European Plan",
+      "cancellation_policy": "Common"
+    },
+    {
+      "id": 5,
+      "title": "Classic Room",
+      "city": "Betalbatim",
+      "state": "Goa",
+      "country": "India",
+      "property_type": "Villa",
+      "number_of_property": 4,
+      "max_guests": 2,
+      "bedrooms": 2,
+      "bathrooms": 2,
+      "amenities": ["Kitchen", "TV", "AC", "Fridge", "Microwave", "Sofa"],
+      "common_amenities": [
+        "Wifi",
+        "Spa",
+        "Parking",
+        "Foosball Table",
+        "Garden/Lawn"
+      ],
+      "pets_allowed": false,
+      "image": [
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg",
+        "https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/33540220/f85b5aa9c7ff11e99e4f0a8e1b1ce4da_watermarked_image_1024.jpeg"
+      ],
+      "currency": "INR",
+      "rate": {
+        "weekday": 2000,
+        "weekend": 5000
+      },
+      "meal_plan": "European Plan",
+      "cancellation_policy": "Common"
+    }
+  ]
+}

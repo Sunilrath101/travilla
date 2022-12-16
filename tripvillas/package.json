@@ -11,8 +11,11 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
+    "firebase": "^9.15.0",
     "framer-motion": "^7.7.2",
+    "json-server": "^0.17.1",
     "react": "^18.2.0",
+    "react-calendar": "^4.0.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
     "react-multi-date-picker": "^3.3.4",
@@ -27,6 +30,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "server": "json-server --watch db.json --port 8080",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

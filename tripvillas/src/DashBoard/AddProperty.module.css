@@ -1,0 +1,28 @@
+
+.addnewproperty{
+    width: 150px;
+    height: 33px;
+    font-size: 13px;
+    background-color: #3b9ff3;
+    padding: 6px 12px;
+    color: #ffffff;
+    border-radius: 2px;
+    margin-left: 5px;
+}
+.twobuttons{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.rulesbtn{
+    width: 67px;
+    height: 31px;
+    background-color: #ffffff;
+    /* background-color: red; */
+    align-items: center;
+    padding: 2px 5px ;
+    margin-right: 20px ;
+    border-radius: 2px;
+    color: #333333;
+}
