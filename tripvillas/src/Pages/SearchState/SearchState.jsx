@@ -3,7 +3,6 @@ import Searchbar from "../../Components/Searchbar/Searchbar";
 import Footer from "../../Components/Footer/Footer";
 import style from './SearchState.module.css'
 
-
 const SearchState = () => {
   return <div>
     <div className={style.searchbox}>
