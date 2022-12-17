@@ -89,10 +89,12 @@
   /* border: 1px solid goldenrod; */
 }
 .box_3 > button:nth-child(1) {
+  font-size: 0.75rem;
   border: 1px solid gray;
   padding: 0.5rem 1.5rem;
 }
 .box_3 > button:nth-child(2) {
+  font-size: 0.75rem;
   color: white;
   background-color: #1e87f0;
   padding: 0.5rem 1.5rem;

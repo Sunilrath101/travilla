@@ -126,10 +126,12 @@
   /* border: 1px solid goldenrod; */
 }
 .box_3 > button:nth-child(1) {
+  font-size: 0.75rem;
   border: 1px solid gray;
   padding: 0.5rem 1.5rem;
 }
 .box_3 > button:nth-child(2) {
+  font-size: 0.75rem;
   color: white;
   background-color: #1e87f0;
   padding: 0.5rem 1.5rem;
@@ -138,7 +140,7 @@
 @media screen and (max-width: 451px) {
   .box_2_selection_2 {
     width: 100%;
-    padding: 2rem 0;
+    padding: 2rem 1rem;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     justify-content: space-between;
@@ -157,13 +159,17 @@
 }
 
 @media screen and (min-width: 451px) and (max-width: 1000px) {
-  .box_2_selection_2 {
+  .box_2_selection_1 > div {
     width: 100%;
-    padding: 2rem 0;
+  }
+  .box_2_selection_2 > div {
+    width: 100%;
+    padding: 1rem 0 1rem;
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     justify-content: space-between;
-    row-gap: 2rem;
+    row-gap: 0.5rem;
+    column-gap: 3rem;
   }
   .box_2_selection_3 > div {
     grid-template-columns: repeat(2, 1fr);
