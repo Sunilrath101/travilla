@@ -20,6 +20,7 @@ const Searchbar = ({query}) => {
     guests: "",
   });
 
+
   console.log(query)
 
   const navigate = useNavigate("");
