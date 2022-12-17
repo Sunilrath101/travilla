@@ -13,7 +13,8 @@ import { Navigate } from "react-router";
   const [mobile,setMobile] = useState("");
   const [fname,setFname] = useState("");
   const [email,setEmail] = useState("");
-
+  const { bookedData } = useSelector((state)=>state.dataReducer)
+   console.log(bookedData)
   const {isAuth} = useSelector((state)=> state.authReducer)
 
   const myfunc = () => {
