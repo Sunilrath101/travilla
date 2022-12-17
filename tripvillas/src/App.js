@@ -7,10 +7,8 @@ import SingleHotel from "./Pages/SingleHotel/SingleHotel";
 function App() {
   return (
     <div className="App">
-      {/* <Navbar /> */}
+      <Navbar />
       <AllRoutes />
-       <SingleHotel />
-       <BookingPage />
     </div>
   );
 }

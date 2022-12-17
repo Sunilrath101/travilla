@@ -31,7 +31,7 @@ const SingleHotel = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
     const { userId } = useParams();
 
-   
+   console.log(date)
   var country = "India";
   var state = "Goa";
   var city = "Vizag";
