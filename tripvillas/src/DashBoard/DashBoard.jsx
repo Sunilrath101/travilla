@@ -32,6 +32,7 @@ import AllMyProperties from "./AllMyProperties";
 import MyBookings from "./MyBookings";
 
 const DashBoard = () => {
+  console.log("welcome");
   return (
     <>
       <div className={styles.container}>
