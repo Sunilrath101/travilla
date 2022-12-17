@@ -1,0 +1,19 @@
+.searchbox{
+    /* border: 1px solid red; */
+    width: 85%;
+    margin: 50px auto;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+.searchbox > h2{
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+.searchbox > h3{
+    font-size: 22px;
+    margin-bottom: 30px;
+}

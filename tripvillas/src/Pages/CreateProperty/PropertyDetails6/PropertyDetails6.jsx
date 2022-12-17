@@ -1,14 +1,20 @@
 import React from "react";
 import styles from "./PropertyDetails6.module.css";
 import {
+  Button,
   Checkbox,
-  Heading,
-  Radio,
-  RadioGroup,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   Select,
-  Stack,
+  useDisclosure,
 } from "@chakra-ui/react";
 const PropertyDetails6 = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [value, setValue] = React.useState("1");
   return (
     <div className={styles.container}>
@@ -89,6 +95,23 @@ const PropertyDetails6 = () => {
                     Breakfast, Lunch, Dinner
                   </option>
                 </Select>
+                <p onClick={onOpen}>SHOW MEAL PLANS</p>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Meal Plans</ModalHeader>
+
+                    <ModalBody>
+                      <h1>sdjghkljhl</h1>
+                    </ModalBody>
+
+                    <ModalFooter display="flex" justifyContent="flex-start">
+                      <Button colorScheme="#cccc" variant="outline">
+                        Button
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
               </div>
               <div>
                 <label>Cancellation Policy</label>
@@ -101,26 +124,6 @@ const PropertyDetails6 = () => {
                   <option value="Non Refundable">Non Refundable</option>
                 </Select>
               </div>
-            </div>
-          </div>
-          <div className={styles.box_2_selection_3}>
-            <h1>Select whats applicable for Apartment</h1>
-            <div onChange={setValue} value={value}>
-              <Checkbox value="Kitchen">Kitchen</Checkbox>
-              <Checkbox value="AC">AC</Checkbox>
-              <Checkbox value="TV">TV</Checkbox>
-              <Checkbox value="Sofa">Sofa</Checkbox>
-              <Checkbox value="Microwave">Microwave</Checkbox>
-              <Checkbox value="Fridge">Fridge</Checkbox>
-              <Checkbox value="Induction Cooktop">Induction Cooktop</Checkbox>
-              <Checkbox value="Balcony">Balcony</Checkbox>
-              <Checkbox value="Bathtub">Bathtub</Checkbox>
-              <Checkbox value="Housekeeping">Housekeeping</Checkbox>
-              <Checkbox value="Linen Provided">Linen Provided</Checkbox>
-              <Checkbox value="Private Swimming Pool">
-                Private Swimming Pool
-              </Checkbox>
-              <Checkbox value="Toiletries">Toiletries</Checkbox>
             </div>
           </div>
         </div>

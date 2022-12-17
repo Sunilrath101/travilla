@@ -18,7 +18,13 @@ export const reducer = (state = intialData, { type, payload }) => {
       ...state,BookedData:obj
     }
 
-    default:
-      return state;
-  }
+
+   case types.GetFromLocalStorage :
+    var obj= JSON.parse(localStorage.getItem("BookedData"))||{};console.log(obj); return {
+     ...state,BookedData:obj
+   }
+
+   default:
+     return state;
+ }
 };

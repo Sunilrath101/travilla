@@ -1,11 +1,3 @@
-.container{
-    background-image: url("https://d2vcelvjdj7n25.cloudfront.net/media/property_photos/image_watermarked_1024/13984723/667923dcdbae11e985440a8e1b1ce4da_watermarked_image_1024.jpeg");
-    /* background: fixed; */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 150px;  
-}
 .box{
     background-color: rgba(0, 0, 0, 0.447);
     width: 100%;
