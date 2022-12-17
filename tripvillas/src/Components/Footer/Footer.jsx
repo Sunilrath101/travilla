@@ -20,7 +20,7 @@ const Footer = () => {
     <TabPanel className={style.box}>
       <div className={style.first}>
         <div>
-          <Link to='/search-state'>India</Link>
+          <Link to='/search-state/India'>India</Link>
           <p>3262 holiday homes</p>
         </div>
         <div>
