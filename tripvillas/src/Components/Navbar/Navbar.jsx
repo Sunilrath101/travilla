@@ -67,6 +67,7 @@ const Navbar = () => {
   const btnRef = React.useRef();
   const Auth = getAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // true,
   const [isopen, setopen] = useState(false); // for clicking on navbar's profile icon
   const [Isopen, Setopen] = useState(false); // for clicking on signin or signup
   const [showphoneN, setshowEmail] = useState(true);
