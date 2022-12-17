@@ -19,6 +19,9 @@ const Searchbar = ({query}) => {
     checkOut: "",
     guests: "",
   });
+
+  console.log(query)
+
   const navigate = useNavigate("");
   const handleSearch = () => {
     if (searchVal.search == "") {
