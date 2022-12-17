@@ -7,7 +7,7 @@ const Searchbar = () => {
 
   const [cal, setCal] = useState(false)
 
-
+return(
     <div className={style.container}>
       <form action="">
         <div>

@@ -1,7 +1,7 @@
 .container{
   width: 100%;
-  min-height: 640px;
-  background-color: rgb(220, 59, 59);
+  min-height: 620px;
+  /* background-color: rgb(220, 59, 59); */
   }
 
 .nav{
@@ -21,7 +21,7 @@
 .leftpanel{
     width: 220px;
     height: 100%;
-    background-color: rgb(189, 155, 162);
+    background-color: #f8f8f8e6;
 }
 .user_nam{
     height: 50px;
@@ -36,8 +36,9 @@
     width: 192px;
     margin: auto;
     padding: 16px 10px 16px 11px;
-    background-color: rgb(243, 86, 243);
-    border: 1px solid black;
+    /* background-color: rgb(243, 86, 243); */
+    background-color: #f8f8f8e6;
+    border: .1px solid gray;
 }
 
 .rightpanel{
@@ -97,7 +98,7 @@
     margin-left: 10px;
 } */
 
-
+/* 
 .pro_main{
     height: 100%;
     width: 100%;
@@ -106,7 +107,6 @@
 }
 
 .probox{
-    /* height: 1079px; */
   height: 100%;
     color: #666666;
     width:  100%;
@@ -132,25 +132,24 @@
     width: 100%;
     height: 57px;
     border: 1px solid gey;
-}
-
+} */
+/* 
 .firstlast > div{
     width: 100%;
     height: 100%;
-    /* border: 1px solid yellow; */
+   
 }
 
 .firstlast div > div{
     height: 26px;
     width: 95%;
-    /* border: 1px solid green; */
-}
+    }
 
 .needsborder{
     height: 25px;
     border: 1px solid grey;
     margin-bottom: 12px;
-    /* padding: 5px 10px 5px 37px */
+    
 }
 
 .needsborder > input{
@@ -168,7 +167,6 @@
   .needsborder2{
     height: 25px;
     border: 1px solid grey;
-    /* padding: 5px 10px 5px 37px */
 }
   .needsborder2 > input{
     width: 100%;
@@ -184,7 +182,7 @@
 .mobileandcode{
     display: flex;
     height: 57px;
-}
+} */
 
 
 
@@ -200,10 +198,10 @@
 
 
 /* 3------------------------------------------- */
-.needsborder3{
+/* .needsborder3{
     height: 25px;
     border: 1px solid grey;
-    /* padding: 5px 10px 5px 37px */
+  
 }
   .needsborder3 > input{
     width: 100%;
@@ -214,14 +212,14 @@
     background-color: rgb(157, 203, 216);
     border-radius: 0.1px solid lightblue;
     border-width: 0px;
-  }
+  } */
 
 
 /* 4------------------------------------------- */
-.needsborder4{
+/* .needsborder4{
     height: 25px;
     border: 1px solid grey;
-    /* padding: 5px 10px 5px 37px */
+
 }
   .needsborder4 > input{
     width: 100%;
@@ -232,10 +230,10 @@
     background-color: rgb(157, 203, 216);
     border-radius: 0.1px solid lightblue;
     border-width: 0px;
-  }
+  } */
 /* ------------------------------------------------------ */
 /* 2nd box------------------------------------------------- */
-.secondbox{
+/* .secondbox{
     width: 1040px;
     height: 150px;
     border: 1px solid grey;
@@ -251,7 +249,7 @@
 
 .radiobtn input[type=radio]{
     margin-right: 4px;
-}
+} */
 
 
 
@@ -283,7 +281,6 @@
 .pathbread{
     height: 41px;
     width: 1146px;
-    border: 1px dotted grey;
     padding: 0px 13px ;
     color: #333333;
     background-color: #FFFFFF;
@@ -299,4 +296,3 @@
     height: 19px;
     color: #7c7c7c;
 }
-
