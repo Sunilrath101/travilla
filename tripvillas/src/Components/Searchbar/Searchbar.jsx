@@ -12,9 +12,9 @@ import { BiSearch } from "react-icons/bi";
 import { RxExit, RxEnter } from "react-icons/rx";
 import { useNavigate } from "react-router-dom";
 
-const Searchbar = () => {
+const Searchbar = ({query}) => {
   const [searchVal, setSearchval] = useState({
-    search: "",
+    search: query || "",
     checkIn: "",
     checkOut: "",
     guests: "",

@@ -10,7 +10,6 @@ import axios from "axios";
 
 const Home = () => {
   const [bodyData, setBodyData] = useState();
-  const [vactionIdeas, setVacationIdeas] = useState();
 
   const fetchBodyData = () => {
     axios
@@ -19,16 +18,9 @@ const Home = () => {
       .catch((err) => console.log(err));
   };
 
-  const fetchVactionIdeas = () => {
-    axios
-      .get("https://long-plum-mite-cape.cyclic.app/vacationIdeas")
-      .then((res) => setVacationIdeas(res.data))
-      .catch((err) => console.log(err));
-  };
 
   useEffect(() => {
     fetchBodyData();
-    fetchVactionIdeas();
   }, []);
 
   return (
@@ -38,7 +30,7 @@ const Home = () => {
 
         <div className={style.section1}>
           <div className={style.box}>
-            <h1>Book Hotels Vacation Rentals</h1>
+            <h1>Book <strike>Hotels</strike> Vacation Rentals</h1>
             <h1>op Holiday Homes - Villas, Apartments & Homestays</h1>
             <Searchbar />
           </div>
@@ -50,7 +42,7 @@ const Home = () => {
           <Heading as="h2" m="10px 0">
             Top Destination
           </Heading>
-          <BoxSlider />
+          <BoxSlider q="topDestinations"/>
         </Box>
 
         <div className={style.section3}>
@@ -110,7 +102,7 @@ const Home = () => {
           <Heading as="h2" m="10px 0">
             Vacation Ideas
           </Heading>
-          <BoxSlider />
+          <BoxSlider q="vacationIdeas"/>
         </Box>
       </div>
 
