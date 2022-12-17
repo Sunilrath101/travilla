@@ -19,6 +19,7 @@ const Searchbar = () => {
     checkOut: "",
     guests: "",
   });
+  console.log('hello')
   const navigate = useNavigate("");
   const handleSearch = () => {
     if (searchVal.search == "") {
