@@ -23,6 +23,7 @@
     "react-router-dom": "^6.4.5",
     "react-scripts": "5.0.1",
     "react-scroll": "^1.8.9",
+    "react-spinners": "^0.13.7",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
     "styled-components": "^5.3.6",

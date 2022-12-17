@@ -79,7 +79,7 @@ const Aminities = [
           </Box>
           <Box w="100%" >
             <Heading m="30px 14px" size={"md"} >Living Room</Heading>
-             <wrap >
+             <Wrap >
               <WrapItem>
               <Center border={"1px solid grey"} p="10px" borderRadius={"4px"} >TELEVISION WITH CABLE CONNECTION </Center>
               </WrapItem>
@@ -91,7 +91,7 @@ const Aminities = [
               <WrapItem>
               <Center border={"1px solid grey"} p="10px" borderRadius={"4px"} >DINING TABLE </Center>
               </WrapItem>
-             </wrap>
+             </Wrap>
           </Box>
 
           <HStack w="100%" >

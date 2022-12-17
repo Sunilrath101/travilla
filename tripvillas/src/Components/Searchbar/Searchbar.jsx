@@ -8,7 +8,7 @@ const Searchbar = () => {
   const [cal, setCal] = useState(false)
 
 
-    <div className={style.container}>
+   return <div className={style.container}>
       <form action="">
         <div>
           <input type="text" placeholder='Location'/>
@@ -28,7 +28,6 @@ const Searchbar = () => {
       </form>
     </div>
 
-  )
 }
 
 export default Searchbar
