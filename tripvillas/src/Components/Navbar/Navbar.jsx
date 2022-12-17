@@ -4,28 +4,26 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   getAuth,
   signInWithPhoneNumber,
-  RecaptchaVerifier,
   updateProfile,
   updatePhoneNumber,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  linkWithPhoneNumber,
+  RecaptchaVerifier,
 } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import {
   Button,
   Drawer,
   DrawerBody,
-  extendTheme,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   IconButton,
   Input,
   Menu,
   MenuButton,
-  MenuItem,
   MenuList,
   Select,
   useDisclosure,
@@ -35,21 +33,19 @@ import {
   ModalCloseButton,
   ModalBody,
   FormControl,
-  FormLabel,
-  ModalFooter,
   ModalHeader,
   InputGroup,
   InputLeftAddon,
   FormHelperText,
-  FormErrorMessage,
   Alert,
   AlertIcon,
 } from "@chakra-ui/react";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GiHamburgerMenu, GiThirdEye } from "react-icons/gi";
 import { MdArrowDropDown } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 import { useState } from "react";
 import { auth } from "../Firebase/AuthenticationWithEmail";
+import { setUpRecapta } from "../Firebase/AuthenticationWithEmail";
 import {
   loginError,
   loginReq,
@@ -62,6 +58,7 @@ import {
   signUpSuccess,
 } from "../../Redux/AuthReducer/action";
 import { useEffect } from "react";
+import { loadData, saveData } from "../../utils/accesslocalStorage";
 const Navbar = () => {
   const dispatch = useDispatch();
   const { isAuth, user } = useSelector((store) => store.authReducer);
@@ -78,6 +75,9 @@ const Navbar = () => {
   const [dis, setSubmitdis] = useState(false);
   const [loginErr, setLoginErr] = useState("");
   const [loginbtnDis, setLoginbtndis] = useState(false);
+  const [mobileN, setmobileN] = useState("");
+  const [confirmObj, setConfirmObj] = useState("");
+  const [otp, setOtp] = useState("");
   const [loginWithEmail, setLoginEmail] = useState({
     email: "",
     password: "",
@@ -88,7 +88,7 @@ const Navbar = () => {
     password: "",
     mobile: "",
   });
-  const navigate = useNavigate();
+
   const handleSignUp = (e) => {
     e.preventDefault();
     dispatch(signUpReq());
@@ -114,19 +114,24 @@ const Navbar = () => {
           updateProfile(user, {
             displayName: signupFormVal.name,
           }).then(() => {
+            saveData("signUp", [signupFormVal]);
             dispatch(signUpSuccess());
           });
-          console.log(user);
-          //ispatch(signUpSuccess(user.displayName));
-          updatePhoneNumber(user, {
-            phoneNumber: signupFormVal.mobile,
+          setSignupForm({
+            name: "",
+            email: "",
+            password: "",
+            mobile: "",
           });
+          console.log(user);
+          //ispatch(signUpSuccess(user.displayName))
         })
         .catch((er) => {
           setSubmitdis(false);
           dispatch(signUpErr());
           setError(er.message);
         });
+
       setError("");
       Setopen(true);
       handleSignUptoSignIn();
@@ -134,11 +139,10 @@ const Navbar = () => {
   };
   const signOut = () => {
     dispatch(signOutReq());
-    dispatch(signOutSuccess()).then(() => {});
-    dispatch(signOutErr());
+    dispatch(signOutSuccess());
   };
   const handleLoginWithEmail = () => {
-    console.log('hello')
+    console.log("hello");
     dispatch(loginReq());
     setLoginbtndis(true);
     if (!loginWithEmail.email || !loginWithEmail.password) {
@@ -152,20 +156,50 @@ const Navbar = () => {
         .then((re) => {
           dispatch(loginSuccess(re.user.displayName));
           setLoginbtndis(false);
+          loadData("signUp");
+          setLoginEmail({ email: "", password: "" });
+          setopen(false);
         })
         .catch((er) => {
+          console.log(er);
           dispatch(loginError());
           setLoginbtndis(false);
         });
     }
   };
-  const handleSignInwithEmail = () => {};
-  const handleSignInwithPhone = () => {};
-  const handleotpevent = (e) => {
-    e.preventDefault();
-    setshowOtp(true);
-    console.log(signupFormVal);
-    handleSignUptoSignIn();
+  const handleSignInwithPhone = async () => {
+    if (otp === "") {
+      setError("empty field or wrong otp");
+    } else {
+      try {
+        console.log(confirmObj);
+        await confirmObj.confirm(otp);
+        const use = loadData("signUp").filter((item) => item.mobile == mobileN);
+        console.log(use[0].name);
+        dispatch(loginSuccess(use[0].name));
+        setmobileN("");
+      } catch (er) {
+        console.log(er);
+      }
+      setOtp("");
+    }
+  };
+  const handleotpevent = async () => {
+    if (mobileN == "") {
+      setError("Please enter a valid number");
+      console.log("Please enter a valid number");
+    } else {
+      setError("");
+      console.log(mobileN);
+      try {
+        const res = await setUpRecapta(mobileN);
+        console.log(res);
+        setConfirmObj(res);
+        setshowOtp(true);
+      } catch (er) {
+        console.log(er);
+      }
+    }
   };
   const onclose = () => {
     setopen(false);
@@ -204,6 +238,8 @@ const Navbar = () => {
       <div className={styles.navbar_items}>
         <div className={styles.navbar_items_profile}>
           <Menu
+            // isOpen={isopen}
+            // onClose={onclose}
             _focus={{
               background: "#262626",
               backgroundColor: "#262626",
@@ -222,6 +258,7 @@ const Navbar = () => {
               fontWeight="500"
               fontSize={"18px"}
               color="#fff"
+              // onClick={()=>setopen(true)}
             >
               {isAuth ? user : null}
             </MenuButton>
@@ -299,17 +336,50 @@ const Navbar = () => {
                       <FormControl>
                         {showphoneN ? (
                           <>
-                            <InputGroup>
-                              <InputLeftAddon children="+91" borderRadius="0" />
-                              <Input
-                                type="tel"
-                                placeholder="Mobile number"
-                                borderRadius="0"
-                              />
-                            </InputGroup>
-                            <FormHelperText>
-                              only digits are allowed
-                            </FormHelperText>
+                            {showotp ? (
+                              <>
+                                <Input
+                                  placeholder="Enter OTP here"
+                                  borderRadius={"0"}
+                                  value={otp}
+                                  onChange={(e) => setOtp(e.target.value)}
+                                />
+                                <div
+                                  style={{
+                                    color: "#1E87F0",
+                                    fontSize: "14px",
+                                    fontWeight: "300",
+                                    display: "inline-flex",
+                                    cursor: "pointer",
+                                  }}
+                                  onClick={() => setshowOtp(false)}
+                                >
+                                  Go Back
+                                </div>
+                              </>
+                            ) : (
+                              <>
+                                <InputGroup>
+                                  <InputLeftAddon
+                                    children="+91"
+                                    borderRadius="0"
+                                  />
+                                  <Input
+                                    type="tel"
+                                    placeholder="Mobile number"
+                                    borderRadius="0"
+                                    value={mobileN}
+                                    onChange={(e) => setmobileN(e.target.value)}
+                                    // TODO:
+                                    //FIXME:
+                                  />
+                                </InputGroup>
+
+                                <FormHelperText>
+                                  only digits are allowed
+                                </FormHelperText>
+                              </>
+                            )}
                           </>
                         ) : (
                           <>
@@ -350,6 +420,7 @@ const Navbar = () => {
                             ) : null}
                           </>
                         )}
+                        {showotp ? "" : <div id="recaptcha-container" />}
                         <div style={{ height: "70px" }}>
                           <div
                             style={{
@@ -397,9 +468,12 @@ const Navbar = () => {
                               borderRadius={"0px"}
                               fontWeight="400"
                               _hover={{ background: "#1E67F7" }}
+                              onClick={
+                                showotp ? handleSignInwithPhone : handleotpevent
+                              }
                               _focus={{ background: "#1E67F7" }}
                             >
-                              Verify with OTP
+                              {showotp ? "SIGN IN" : "Verify with OTP"}
                             </Button>
                           ) : (
                             <Button
@@ -594,7 +668,6 @@ const Navbar = () => {
             width="79px"
             _focus={{ border: "none" }}
           >
-            {" "}
             <option style={{ color: "#666666" }} value="option1">
               INR
             </option>
@@ -624,68 +697,72 @@ const Navbar = () => {
           >
             Open
           </IconButton>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton color="#999" />
-              <DrawerHeader fontSize={"16px"} background="#262626">
-                {/* ARE YOU A PROPERTY OWNER/MANAGER? */}
-              </DrawerHeader>
-              <DrawerBody background="#262626">
-//                 <div className={styles.navbar_items_drawer_body}>
-//                   <div className={styles.navbar_items_drawer_top}>
-//                     <div>
-//                       <div>ARE YOU A PROPERTY OWNER/MANAGER?</div>
-//                       <div>List New Property</div>
-//                       <div>Sign In to Your Dashboard</div>
-//                     </div>
-//                     <hr style={{ marginTop: "20px" }} />
-//                   </div>
-//                   <div className={styles.navbar_items_drawer_middle}>
-//                     <div>
-//                       <div>HOLIDAY HOMES FOR SALE</div>
-//                       <div>
-//                         <div>TripVillas Managed</div>
-//                         <p>Homes form a grade developers. Rentals guaranteed</p>
-//                       </div>
-//                       <div>
-//                         <div>Marketplace</div>
-//                         <p>
-//                           See what homes are up for sale from different property
-//                           owners.
-//                         </p>
-//                       </div>
-//                     </div>
-//                   </div>
-//                   <hr style={{ marginTop: "20px" }} />
-//                   <div className={styles.navbar_items_drawer_bottom}>
-//                     <div>
-//                       <div>About Us</div>
-//                       <div>Privacy Policy</div>
-//                       <div>Terms of Use</div>
-//                       <div>FAQs</div>
-//                       <div>Contact Us</div>
-//                     </div>
-//                   </div>
-//                 </div>
-//                 <hr style={{ marginTop: "20px" }} />
-//                 <div
-                  style={{
-                    color: "#999",
-                    textAlign: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  © Tripvillas Pte Ltd
-                </div>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
+          <div className={styles.navbar_items_drawer_container}>
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              onClose={onClose}
+              finalFocusRef={btnRef}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton color="#999" />
+                <DrawerHeader fontSize={"16px"} background="#262626">
+                  {/* ARE YOU A PROPERTY OWNER/MANAGER? */}
+                </DrawerHeader>
+                <DrawerBody background="#262626">
+                  <div className={styles.navbar_items_drawer_body}>
+                    <div className={styles.navbar_items_drawer_top}>
+                      <div>
+                        <div>ARE YOU A PROPERTY OWNER/MANAGER?</div>
+                        <div>List New Property</div>
+                        <div>Sign In to Your Dashboard</div>
+                      </div>
+                      <hr style={{ marginTop: "20px" }} />
+                    </div>
+                    <div className={styles.navbar_items_drawer_middle}>
+                      <div>
+                        <div>HOLIDAY HOMES FOR SALE</div>
+                        <div>
+                          <div>TripVillas Managed</div>
+                          <p>
+                            Homes form a grade developers. Rentals guaranteed
+                          </p>
+                        </div>
+                        <div>
+                          <div>Marketplace</div>
+                          <p>
+                            See what homes are up for sale from different
+                            property owners.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <hr style={{ marginTop: "20px" }} />
+                    <div className={styles.navbar_items_drawer_bottom}>
+                      <div>
+                        <div>About Us</div>
+                        <div>Privacy Policy</div>
+                        <div>Terms of Use</div>
+                        <div>FAQs</div>
+                        <div>Contact Us</div>
+                      </div>
+                    </div>
+                  </div>
+                  // <hr style={{ marginTop: "20px" }} />
+                  <div
+                    style={{
+                      color: "#999",
+                      textAlign: "center",
+                      marginTop: "10px",
+                    }}
+                  >
+                    © Tripvillas Pte Ltd
+                  </div>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+          </div>
         </div>
       </div>
     </div>

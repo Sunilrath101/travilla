@@ -5,6 +5,8 @@
   height: 60px;
   align-items: center;
   justify-content: space-between;
+
+
 }
 .website_icon {
   display: flex;
@@ -78,3 +80,6 @@
   margin-right: 15px;
   margin-top:15px;
 }
+/* .navbar_items_drawer_container{
+  z-index: 99999999;
+} */
