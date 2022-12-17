@@ -34,8 +34,3 @@ export const reducer = (state = intialData, { type, payload }) => {
       return state;
   }
 };
-
-
-
-
-
