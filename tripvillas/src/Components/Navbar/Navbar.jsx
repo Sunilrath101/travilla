@@ -131,7 +131,7 @@ const Navbar = () => {
           dispatch(signUpErr());
           setError(er.message);
         });
-      
+
       setError("");
       Setopen(true);
       handleSignUptoSignIn();
@@ -190,7 +190,7 @@ const Navbar = () => {
       console.log("Please enter a valid number");
     } else {
       setError("");
-      console.log(mobileN)
+      console.log(mobileN);
       try {
         const res = await setUpRecapta(mobileN);
         console.log(res);
@@ -697,68 +697,72 @@ const Navbar = () => {
           >
             Open
           </IconButton>
-          <Drawer
-            isOpen={isOpen}
-            placement="right"
-            onClose={onClose}
-            finalFocusRef={btnRef}
-          >
-            <DrawerOverlay />
-            <DrawerContent>
-              <DrawerCloseButton color="#999" />
-              <DrawerHeader fontSize={"16px"} background="#262626">
-                {/* ARE YOU A PROPERTY OWNER/MANAGER? */}
-              </DrawerHeader>
-              <DrawerBody background="#262626">
-                <div className={styles.navbar_items_drawer_body}>
-                  <div className={styles.navbar_items_drawer_top}>
-                    <div>
-                      <div>ARE YOU A PROPERTY OWNER/MANAGER?</div>
-                      <div>List New Property</div>
-                      <div>Sign In to Your Dashboard</div>
+          <div className={styles.navbar_items_drawer_container}>
+            <Drawer
+              isOpen={isOpen}
+              placement="right"
+              onClose={onClose}
+              finalFocusRef={btnRef}
+            >
+              <DrawerOverlay />
+              <DrawerContent>
+                <DrawerCloseButton color="#999" />
+                <DrawerHeader fontSize={"16px"} background="#262626">
+                  {/* ARE YOU A PROPERTY OWNER/MANAGER? */}
+                </DrawerHeader>
+                <DrawerBody background="#262626">
+                  <div className={styles.navbar_items_drawer_body}>
+                    <div className={styles.navbar_items_drawer_top}>
+                      <div>
+                        <div>ARE YOU A PROPERTY OWNER/MANAGER?</div>
+                        <div>List New Property</div>
+                        <div>Sign In to Your Dashboard</div>
+                      </div>
+                      <hr style={{ marginTop: "20px" }} />
+                    </div>
+                    <div className={styles.navbar_items_drawer_middle}>
+                      <div>
+                        <div>HOLIDAY HOMES FOR SALE</div>
+                        <div>
+                          <div>TripVillas Managed</div>
+                          <p>
+                            Homes form a grade developers. Rentals guaranteed
+                          </p>
+                        </div>
+                        <div>
+                          <div>Marketplace</div>
+                          <p>
+                            See what homes are up for sale from different
+                            property owners.
+                          </p>
+                        </div>
+                      </div>
                     </div>
                     <hr style={{ marginTop: "20px" }} />
-                  </div>
-                  <div className={styles.navbar_items_drawer_middle}>
-                    <div>
-                      <div>HOLIDAY HOMES FOR SALE</div>
+                    <div className={styles.navbar_items_drawer_bottom}>
                       <div>
-                        <div>TripVillas Managed</div>
-                        <p>Homes form a grade developers. Rentals guaranteed</p>
-                      </div>
-                      <div>
-                        <div>Marketplace</div>
-                        <p>
-                          See what homes are up for sale from different property
-                          owners.
-                        </p>
+                        <div>About Us</div>
+                        <div>Privacy Policy</div>
+                        <div>Terms of Use</div>
+                        <div>FAQs</div>
+                        <div>Contact Us</div>
                       </div>
                     </div>
                   </div>
-                  <hr style={{ marginTop: "20px" }} />
-                  <div className={styles.navbar_items_drawer_bottom}>
-                    <div>
-                      <div>About Us</div>
-                      <div>Privacy Policy</div>
-                      <div>Terms of Use</div>
-                      <div>FAQs</div>
-                      <div>Contact Us</div>
-                    </div>
+                  // <hr style={{ marginTop: "20px" }} />
+                  <div
+                    style={{
+                      color: "#999",
+                      textAlign: "center",
+                      marginTop: "10px",
+                    }}
+                  >
+                    © Tripvillas Pte Ltd
                   </div>
-                </div>
-                // <hr style={{ marginTop: "20px" }} />
-                <div
-                  style={{
-                    color: "#999",
-                    textAlign: "center",
-                    marginTop: "10px",
-                  }}
-                >
-                  © Tripvillas Pte Ltd
-                </div>
-              </DrawerBody>
-            </DrawerContent>
-          </Drawer>
+                </DrawerBody>
+              </DrawerContent>
+            </Drawer>
+          </div>
         </div>
       </div>
     </div>
