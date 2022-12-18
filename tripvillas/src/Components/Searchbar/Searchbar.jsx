@@ -21,7 +21,6 @@ const Searchbar = ({query}) => {
   });
 
   console.log("query:", query)
-
   const navigate = useNavigate("");
   const handleSearch = () => {
     if (searchVal.search == "") {

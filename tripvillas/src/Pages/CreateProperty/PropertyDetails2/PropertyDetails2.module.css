@@ -72,7 +72,7 @@
   border: 1px solid rgb(226, 206, 115);
 } */
 .box_3 {
-  border-top: 1px solid gray;
+  border-top: 1px solid #cccc;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -81,12 +81,14 @@
   padding: 1.5rem 3rem;
   /* border: 1px solid goldenrod; */
 }
-.box_3 > button:nth-child(1) {
+.box_3 > a:nth-child(1) > button {
   border: 1px solid gray;
   padding: 0.5rem 1.5rem;
+  font-size: 0.75rem;
 }
-.box_3 > button:nth-child(2) {
+.box_3 > a:nth-child(2) > button {
   color: white;
+  font-size: 0.75rem;
   background-color: #1e87f0;
   padding: 0.5rem 1.5rem;
 }

@@ -1,28 +1,63 @@
-
-.addnewproperty{
-    width: 150px;
-    height: 33px;
-    font-size: 13px;
-    background-color: #3b9ff3;
-    padding: 6px 12px;
-    color: #ffffff;
-    border-radius: 2px;
-    margin-left: 5px;
+.addnewproperty {
+  width: 150px;
+  height: 33px;
+  font-size: 13px;
+  background-color: #3b9ff3;
+  padding: 6px 12px;
+  color: #ffffff;
+  border-radius: 2px;
+  margin-left: 5px;
 }
-.twobuttons{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.twobuttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
-.rulesbtn{
-    width: 67px;
-    height: 31px;
-    background-color: #ffffff;
-    /* background-color: red; */
-    align-items: center;
-    padding: 2px 5px ;
-    margin-right: 20px ;
-    border-radius: 2px;
-    color: #333333;
+.rulesbtn {
+  width: 67px;
+  height: 31px;
+  background-color: #ffffff;
+  /* background-color: red; */
+  align-items: center;
+  padding: 2px 5px;
+  margin-right: 20px;
+  border-radius: 2px;
+  color: #333333;
+}
+.bankAccount {
+  background: #cde0c4;
+  color: green;
+  padding-bottom: 10px;
+  margin: 5px 6px 10px 6px;
+  border-left: 6px solid rgb(108, 190, 27);
+}
+.bankAccount > div:nth-child(2),
+.bankAccount > div:nth-child(3) {
+  margin-left: 10px;
+  font-size: 14px;
+}
+.bankAccount > div:nth-child(1) {
+  margin-left: 10px;
+  padding-top: 8px;
+  font-weight: 700;
+  font-size: 24px;
+  font-size: 1;
+}
+.bankAccount > div:nth-child(4) {
+  display: inline-flex;
+  background-color: #3b9ff3;
+  color: #fff;
+  align-items: center;
+  margin: 5px 10px;
+  padding: 5px 10px;
+  gap:5px;
+}
+.dashboard_bank_btn{
+  border-radius: 3px;
+
+}
+.dashboard_bank_btn:hover{
+  cursor: pointer;
+  background-color: #087edf;
 }

@@ -1,0 +1,124 @@
+.container {
+  width: 100%;
+  /* border: 1px solid red; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+.container > div {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.box_1 {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  /* border: 1px solid rgb(15, 128, 0); */
+  border-bottom: 1px solid #cccc;
+}
+.box_1 > h1 {
+  font-size: 1.5rem;
+  margin-left: 2rem;
+  padding: 0.6rem;
+}
+.box_2 {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* border: 1px solid rgb(226, 206, 115); */
+}
+.box_2 > p:first-child {
+  margin: 2rem 0;
+  font-weight: 700;
+  color: rgba(116, 112, 112, 0.8);
+}
+.map {
+  /* border: 1px solid red; */
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.map > div:nth-child(1) {
+  /* border: 1px solid red; */
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #cccc;
+}
+.map > div:nth-child(1) > input {
+  width: 100%;
+  padding: 0.2rem 1rem;
+}
+.map > div:nth-child(1) > div {
+  width: 100%;
+}
+.map > div:nth-child(2) {
+  /* border: 1px solid red; */
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 1rem;
+}
+.map > div:nth-child(2) > div {
+  width: 100%;
+  padding: 1rem 0.5rem;
+}
+/* selection */
+.map > div:nth-child(2) > div {
+  width: 100%;
+  padding: 1rem 0.5rem;
+}
+/* waring */
+.map > div:nth-child(2) > div:last-child {
+  width: 100%;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: rgba(250, 160, 90, 0.2);
+  color: rgb(250, 160, 90);
+  font-size: 0.8rem;
+  margin: 1rem 0;
+}
+.box_3 {
+  border-top: 1px solid #cccc;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.5rem 3rem;
+}
+.box_3 button {
+  font-size: 0.75rem;
+  color: white;
+  background-color: #1e87f0;
+  padding: 0.5rem 1.5rem;
+}
+@media screen and (max-width: 950px) {
+  .map {
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+  }
+  .map > div:nth-child(1) {
+    width: 100%;
+  }
+  .map > div:nth-child(2) {
+    width: 100%;
+  }
+}

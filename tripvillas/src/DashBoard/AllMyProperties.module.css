@@ -1,0 +1,120 @@
+.idcontainer {
+  width: 1101;
+  margin: auto;
+  height: 34px;
+  background-color: #2c3742;
+  display: flex;
+  justify-content: space-between;
+}
+
+.allmyproperties {
+  padding-top: 10px;
+  background-color: #f8f8f8e6;
+  height: 100%;
+  width: 100%;
+}
+
+.propertyid {
+  height: 13px;
+  margin-left: 5px;
+  align-items: center;
+  color: white;
+}
+
+.viewnsell {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.viewbtn {
+  background-color: #ffffff;
+  color: #333333;
+  padding: 3px 5px;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.sellbtn {
+  background-color: #db4a67;
+  color: white;
+  padding: 3px 5px;
+  border-radius: 2px;
+  font-size: 12px;
+  margin-right: 5px;
+}
+
+.detailsbox {
+  height: 270px;
+  width: 100%;
+  border: 1px solid grey;
+}
+
+.detailsbox > div {
+  height: 240px;
+  width: 100%;
+  padding: 10px;
+  /* border: 3px solid green; */
+}
+
+.leftnright {
+  display: flex;
+  width: 100%;
+}
+
+.leftside {
+  height: 216px;
+  width: 824px;
+  /* border: 2px solid grey; */
+}
+
+.rightside {
+  height: 100%;
+  width: 274px;
+  /* border: 2px solid grey; */
+  background-color: #f5a85a;
+  border-left: 5px solid #eb8218;
+}
+
+.rightside > div > h2 {
+  font-size: 18px;
+  padding-top: 10px;
+  padding-left: 5px;
+  color: #826430;
+  font-weight: bold;
+}
+
+.rightside div {
+  padding-left: 10px;
+}
+
+.rightside > div > button {
+  margin-top: 10px;
+  height: 33px;
+  /* width: 120px; */
+  color: black;
+  padding: 3px 7px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.leftside > div > h2 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.leftside > div > p {
+  font-size: 13px;
+}
+
+table {
+  border: 1px solid grey;
+  width: 95%;
+  margin-top: 20px;
+  padding: 5px 5px 5px 5px;
+}
+
+td {
+  border: 1px solid grey;
+  padding: 15px 5px 5px 5px;
+}

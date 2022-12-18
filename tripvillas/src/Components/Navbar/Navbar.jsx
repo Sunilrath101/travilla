@@ -46,6 +46,7 @@ import { RxAvatar } from "react-icons/rx";
 import { useState } from "react";
 import { auth } from "../Firebase/AuthenticationWithEmail";
 import { setUpRecapta } from "../Firebase/AuthenticationWithEmail";
+import logo from "./logo.png";
 import {
   loginError,
   loginReq,
@@ -58,6 +59,7 @@ import {
   signUpSuccess,
 } from "../../Redux/AuthReducer/action";
 import { useEffect } from "react";
+//C:\Users\Piryanshu\Desktop\TRIPVILLAS WEBSITE\annoying-wing-980\tripvillas\public\logo.png
 import { loadData, saveData } from "../../utils/accesslocalStorage";
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -67,6 +69,7 @@ const Navbar = () => {
   const btnRef = React.useRef();
   const Auth = getAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
+  // true,
   const [isopen, setopen] = useState(false); // for clicking on navbar's profile icon
   const [Isopen, Setopen] = useState(false); // for clicking on signin or signup
   const [showphoneN, setshowEmail] = useState(true);
@@ -228,12 +231,7 @@ const Navbar = () => {
   return (
     <div className={styles.navbar_container}>
       <div className={styles.website_icon}>
-        <img
-          src="https://d2v8elt324ukrb.cloudfront.net/static/riotuikit/images/logo.c72056a22f91.png"
-          alt="tripvillas-img"
-          height="19px"
-          width="141px"
-        />
+        <img src={logo} alt="tripvillas-img" width={"40%"}  />
       </div>
       <div className={styles.navbar_items}>
         <div className={styles.navbar_items_profile}>

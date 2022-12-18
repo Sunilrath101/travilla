@@ -11,6 +11,8 @@
 .website_icon {
   display: flex;
   margin-left: 13px;
+  height: 60px;
+  overflow: hidden;
   align-items: center;
 }
 .navbar_items_profile:hover {

@@ -1,231 +1,83 @@
 import React from "react";
 import AddProperty from "./AddProperty";
 import styles from "./DashBoard.module.css";
-import NoResults from "./NoResults";
-import {
-  Tabs,
-  TabPanel,
-  Tab,
-  TabList,
-  TabPanels,
-  Radio,
-  Stack,
-  RadioGroup,
-} from "@chakra-ui/react";
+import MyProfile from "./MyProfile";
+import AllMyProperties from "./AllMyProperties";
+import MyBookings from "./MyBookings";
+import { loadData } from "../utils/accesslocalStorage";
+import { RxAvatar } from "react-icons/rx";
+import { TagItems } from "./TagItems/TagItems";
+import { CardFooter } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const DashBoard = () => {
+  const { isAuth } = useSelector((store) => store.authReducer);
+  const user = loadData("user");
+  const [activeTab, setActiveTab] = React.useState("Properties");
+  const getCorrectScreen = (tab) => {
+    switch (tab) {
+      case "Properties":
+        return <AddProperty />;
+      case "PropertiesSale":
+        return <AllMyProperties />;
+      case "Bookings":
+        return <MyBookings />;
+      case "Payouts":
+        return <AddProperty />;
+      case "Payouts":
+        return <AddProperty />;
+      case "Accounts":
+        return <AddProperty />;
+      case "Profile":
+        return <MyProfile />;
+      default:
+        return <AddProperty />;
+    }
+  };
+  const navigate = useNavigate();
+  if (!isAuth) {
+    navigate("/");
+    return;
+  }
+  console.log("welcome");
   return (
     <>
-      <div className={styles.container}>
-        <div className={styles.nav}>i m nav</div>
-        <div className={styles.mainpanel}>
-          <div className={styles.leftpanel}>
-            i m sidebar
-            <div className={styles.user_nam}>user name</div>
-            <div>my properties</div>
-            <div>properties for sale</div>
-            <div>bookings</div>
-            <div>payouts</div>
-            <div>bankAccounts</div>
-            <div>Reviews</div>
-            <div>My customers</div>
-            <div>My Profile</div>
+      <div className={styles.dashboard_container}>
+        <div className={styles.dashboard_container_leftpanel}>
+          <div className={styles.dashboard_avatar}>
+            <div style={{ border: "1px solid " }}>
+              <img
+                src="https://d2v8elt324ukrb.cloudfront.net/static/dashboard/img/avatars/male.cc4fc62d561f.png"
+                width={"40px"}
+                alt=""
+              />
+            </div>
+            <div style={{ fontWeight: "500", fontSize: "20px" }}>{user}</div>
           </div>
-          <div className={styles.rightpanel}>
-            <div className={styles.pathbread}>
-              {" "}
-              home /path / path
-              {/* <ol>
-                <li>Home</li>
-                <li>my properties</li>
-              </ol> */}
-            </div>
-            {/* i am right sec
-            <br /> */}
-
-            {/* <AddProperty />
-            <NoResults /> */}
-
-            <div className="pro_main">
-              <Tabs variant="enclosed">
-                <TabList>
-                  <Tab>Profile</Tab>
-                  <Tab>Change Password</Tab>
-                  <Tab>Change Profile Image</Tab>
-                </TabList>
-                <TabPanels>
-                  <TabPanel>
-                    <div className={styles.probox}>
-                      <div>
-                        <p>This will used by TripVillas team to contact you.</p>
-                      </div>
-                      <div className={styles.firstbox}>
-                        <div className={styles.firstlast}>
-                          <div>
-                            <div>First Name</div>
-                            <div className={styles.needsborder}>
-                              {" "}
-                              <input />
-                            </div>
-
-                            <div>Email</div>
-                            <div className={styles.needsborder2}>
-                              {" "}
-                              <input />
-                            </div>
-                          </div>
-
-                          <div>
-                            <div>Last Name</div>
-                            <div className={styles.needsborder}>
-                              <input />
-                            </div>
-
-                            <div className={styles.mobileandcode}>
-                              <div>
-                                <div>Country Code</div>
-                                <div className={styles.needsborder3}>
-                                  {" "}
-                                  <input />
-                                </div>
-                              </div>
-
-                              <div>
-                                <div>Mobile</div>
-                                <div className={styles.needsborder4}>
-                                  {" "}
-                                  <input />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* //------------------------------------------------------------------------- */}
-                      <div className={styles.secondbox}>
-                        <div className={styles.firstlast}>
-                          <div>
-                            <div>About Yourself</div>
-                            <div className={styles.needsborder}>
-                              {" "}
-                              <input type="textarea" />
-                            </div>
-                          </div>
-
-                          <div>
-                            <div>Skype Id</div>
-                            <div className={styles.needsborder}>
-                              <input />
-                            </div>
-
-                            <div>Twitter Id</div>
-                            <div className={styles.needsborder2}>
-                              {" "}
-                              <input />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* 3rd box//--------------------------------------------------------------- */}
-                      <div className={styles.secondbox}>
-                        <div className={styles.firstlast}>
-                          <div className="radiobtn">
-                            Food Habits
-                            <RadioGroup defaultValue="2">
-                              <Stack spacing={5} direction="row">
-                                <Radio colorScheme="grey" value="1">
-                                  Veg
-                                </Radio>
-                                <Radio colorScheme="grey" value="2">
-                                  Non Veg
-                                </Radio>
-
-                                <Radio colorScheme="grey" value="2">
-                                  Occasionally Non Veg
-                                </Radio>
-
-                                <Radio colorScheme="grey" value="2">
-                                  Eggetarian
-                                </Radio>
-
-                                <Radio colorScheme="grey" value="2">
-                                  Jain
-                                </Radio>
-
-                                <Radio colorScheme="grey" value="2">
-                                  Vegan
-                                </Radio>
-                              </Stack>
-                            </RadioGroup>
-                          </div>
-                        </div>
-
-                        <br />
-                        <br />
-                        <br />
-                        <br />
-                        <div className={styles.firstlast}>
-                          <div className="radiobtn">
-                            Drinking Habits
-                            <RadioGroup defaultValue="2">
-                              <Stack spacing={5} direction="row">
-                                <Radio colorScheme="grey" value="1">
-                                  No
-                                </Radio>
-                                <Radio colorScheme="grey" value="2">
-                                  Occasionally
-                                </Radio>
-
-                                <Radio colorScheme="grey" value="2">
-                                  Yes
-                                </Radio>
-                              </Stack>
-                            </RadioGroup>
-                          </div>
-                        </div>
-
-                        <div className={styles.firstlast}>
-                          <div className="radiobtn">
-                            Smoking Habits
-                            <RadioGroup defaultValue="2">
-                              <Stack spacing={5} direction="row">
-                                <Radio colorScheme="grey" value="1">
-                                  No
-                                </Radio>
-                                <Radio colorScheme="grey" value="2">
-                                  Occasionally
-                                </Radio>
-
-                                <Radio colorScheme="grey" value="2">
-                                  Yes
-                                </Radio>
-                              </Stack>
-                            </RadioGroup>
-                          </div>
-                        </div>
-                      </div>
-
-                      {/* //--------------------------------------------------------------- */}
-                    </div>
-                  </TabPanel>
-                  <TabPanel>
-                    <p>two!</p>
-                  </TabPanel>
-                  <TabPanel>
-                    <p>three!</p>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            </div>
-
-            <div className={styles.privatetag}>
-              {" "}
-              <p>(c) Tripvillas Pte. Ltd.</p> <button>leave a message</button>{" "}
-            </div>
+          <div className={styles.dashboard_tagItems}>
+            <TagItems activeTab={activeTab} setActiveTab={setActiveTab} />
           </div>
         </div>
-
-        <h1>hi i am DashBoard</h1>
+        <div className={styles.dashboard_container_rightpanel}>
+          <div
+            style={{
+              height: "50px",
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "13px",
+              color: "GrayText",
+            }}
+          >
+            / home / {activeTab}
+          </div>
+          <div className={styles.dashboard_render}>
+            {getCorrectScreen(activeTab)}
+          </div>
+          <div className={styles.dashboard_footer}>
+            (c) Tripvillas Pte. Ltd.
+          </div>
+        </div>
       </div>
     </>
   );
