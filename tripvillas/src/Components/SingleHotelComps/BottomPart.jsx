@@ -1,4 +1,5 @@
-import { Box, Button, HStack,Wrap, Stack, VStack,Heading,Text, WrapItem, Center, Divider, Spacer } from "@chakra-ui/react"
+import { Box, Button, HStack,Wrap, Stack, VStack,Heading,Text, WrapItem, Center, Divider, Spacer } from "@chakra-ui/react";
+import { useEffect, useRef, useState } from "react";
 import {InfoOutlineIcon} from "@chakra-ui/icons"
 import { FiTag } from "react-icons/fi";
 import  {IoLocationOutline}  from "react-icons/io5";
@@ -6,32 +7,68 @@ import { RxHamburgerMenu } from "react-icons/rx"
 import {Googlemap} from "./Googlemaps";
 
 export function BottomPart () {
+const [isTop,setIstop] = useState(true)
+const [scrollPosition, setScrollPosition] = useState(0);
+
+  const Overview = useRef(null);
+  const Aminitie = useRef(null);
+  const Map = useRef(null);
+  const Policies = useRef(null);
+  const nav = useRef(null)
+  
+  
+  
+  const handleScroll = () => {
+      const position = window.pageYOffset;
+      setScrollPosition(position);
+  };
+  
+  useEffect(() => {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+  
+      return () => {
+          window.removeEventListener('scroll', handleScroll);
+      };
+      if(scrollPosition > 635){
+        setIstop(true)
+      }
+  }, []);
+    
+
+ console.log(isTop,scrollPosition)
+  const scrollFunc = (el) => {
+   window.scrollTo({
+     top:el.current.offsetTop ,
+     behavior : "smooth"
+   })
+ }
+
 
 const Aminities = [
   "POWER BACKUP","SHOPPING CLOSE BY","PARK NEARBY","MICROWAVE","COOKWARE","GAS/STOVE","REFRIGARATOR","TELEVISION","SATELLITE/CABLE CONNECTION","BOOKS & MAGAZINES","PICK AND DROP PACILITY","TRAVEL","GARDEN/LAWN","LINEN PROVIDED","HOT WATER","WESTERN TOILET",'KETTLE','SHOWER','PARKING SPACE','HOUSEKEEPING','RESTAURANTS CLOSE BY','FAN','AIR CONDITIONING','WIRELSS INTERNET','KITCHEN','RAILWAYSTATION CLOSEBY', 'AIRPORT CLOSE BY','SWIMMING POOL', 'BICYCLES','WATER FILTER','IRONING BOARD','TEA/COFFEE MAKER','BEACH NEARBY','HAIR DRYER','POTS & PANS','SPARE MATRESSES','OVEN','BALCONY','24/7 POWER','FIXED INTERNET'
 ]
   return (
     <Box w="100%" >
-      <HStack p=" 40px" pb="0px" >
-      <Button outline="none" colorScheme={"gray"} bg="none"  _hover={{background:"none"}} leftIcon={<InfoOutlineIcon />} variant='solid'>
+      <HStack id="nav" p=" 40px" pb="0px" ref={nav}  position = {isTop ? "fixed" : ""} >
+      <Button outline="none" colorScheme={"gray"} bg="none" onClick={()=>{scrollFunc(Overview)}}  _hover={{background:"none"}} leftIcon={<InfoOutlineIcon />} variant='solid'>
     OVERVIEW
   </Button>
 
-  <Button outline="none" colorScheme={"gray"} bg="none"  _hover={{background:"none"}} leftIcon={<FiTag />} variant='solid'>
+  <Button outline="none" colorScheme={"gray"} bg="none"  onClick={()=>{scrollFunc(Aminitie)}}   _hover={{background:"none"}} leftIcon={<FiTag />} variant='solid'>
     EMINITIES
   </Button>
 
-  <Button outline="none" colorScheme={"gray"} bg="none"  _hover={{background:"none"}} leftIcon={<IoLocationOutline />} variant='solid'>
+  <Button outline="none" colorScheme={"gray"} bg="none" onClick={()=>{scrollFunc(Map)}}  _hover={{background:"none"}} leftIcon={<IoLocationOutline />} variant='solid'>
     MAP
   </Button>
 
-  <Button outline="none" colorScheme={"gray"} bg="none"  _hover={{background:"none"}} leftIcon={<RxHamburgerMenu />} variant='solid'>
+  <Button outline="none" colorScheme={"gray"} bg="none" onClick={()=>{scrollFunc(Policies)}}  _hover={{background:"none"}} leftIcon={<RxHamburgerMenu />} variant='solid'>
     POLICIES & FEES
   </Button>
       </HStack>
       <Divider orientation="horizontal"  />
-      <VStack>
-        <HStack spacing={"20px"} >
+      <VStack ref={Overview} >
+        <HStack spacing={"20px"}>
           <Box alignItems="center" >
             <Box w={"370px"} h={"56.25"} m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} alignItems="center" >
                <Heading>{}</Heading>
@@ -65,7 +102,7 @@ const Aminities = [
           </Box>
         </HStack>
 
-        <VStack  p={"40px"} >
+        <VStack  p={"40px"} ref={Aminitie} >
           <Heading w="100%" textAlign={"left"} >Key Amenities</Heading>
           <Divider orientation="horizontal" />
           <Box p="20px 0px" >
@@ -139,12 +176,12 @@ const Aminities = [
             </Box>
           </HStack>
         </VStack>
-        <Box>
+        <Box ref={Map} >
           <Googlemap />
         </Box>
       </VStack>
 
-      <Box p="40px">
+      <Box p="40px" ref={Policies} >
         <Heading>POLICIES & FEES</Heading>
        < Divider orientation="horizontal" />
       <HStack w="100%" >
