@@ -18,7 +18,7 @@ const AllRoutes = () => {
       <Route path="/hotel-list/:search_query" element={<HotelLists />} />
       <Route path="/host/create-property" element={<CreateProperty />} />
       <Route
-        path="hotel-list/:search_query/singlehotelpage/:id"
+        path="/hotel-list/:search_query/SingleHotel/:id"
         element={<SingleHotel />}
       />
     </Routes>
