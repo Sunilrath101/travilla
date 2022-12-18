@@ -1,0 +1,52 @@
+.payment_method > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #d9dadb;
+  padding: 10px;
+  cursor: pointer;
+}
+.payment_method > div:nth-child(1) {
+  justify-content: flex-start;
+  font-weight: 500;
+  padding: 0px;
+  margin-bottom: 7px;
+  border: none;
+  cursor: default;
+}
+.payment_method > div:hover,
+.cards > div:hover {
+  background: rgb(216, 235, 228);
+  border: 1px solid teal;
+}
+.payment_method > div:nth-child(1):hover,
+.cards > div:nth-child(1):hover {
+  background: #fff;
+  border: none;
+}
+.cards > div {
+  display: flex;
+  border: 1px solid #d9dadb;
+  padding: 10px;
+  cursor: pointer;
+  padding-left: 20px;
+  align-items: center;
+  /* justify-content: space-between; */
+  gap: 20px;
+}
+.payment_wrapper {
+  height: 400px;
+  overflow-y: scroll;
+}
+.cards > div > div:nth-child(1) {
+  width: 10%;
+}
+.cards > div:nth-child(1) {
+  justify-content: flex-start;
+  font-weight: 500;
+  padding: 0px;
+  margin-top: 10px;
+  margin-bottom: 7px;
+  border: none;
+  cursor: default;
+}

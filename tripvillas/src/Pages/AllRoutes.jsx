@@ -12,13 +12,13 @@ const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/dashBoard" element={<DashBoard />} />
+      <Route path="/dashboard" element={<DashBoard />} />
       <Route path="/search-state/:state_query" element={<SearchState />} />
       <Route path="/search-city/:city_query" element={<SearchCity />} />
       <Route path="/hotel-list/:search_query" element={<HotelLists />} />
       <Route path="/host/create-property" element={<CreateProperty />} />
       <Route
-        path="hotel-list/:search_query/singlehotelpage/:id"
+        path="/singlehotelpage/:id"
         element={<SingleHotel />}
       />
     </Routes>
