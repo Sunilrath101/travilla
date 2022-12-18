@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import DashBoard from "../DashBoard/DashBoard";
+import BookingPage from "./BookingPage/BookingPage";
 import CreateProperty from "./CreateProperty/CreateProperty";
 import PropertyDetails1 from "./CreateProperty/PropertyDetails1/PropertyDetails1";
 import PropertyDetails2 from "./CreateProperty/PropertyDetails2/PropertyDetails2";
@@ -34,9 +35,8 @@ const AllRoutes = () => {
       <Route path="/search-city/:city_query" element={<SearchCity />} />
       <Route path="/hotel-list/:search_query" element={<HotelLists />} />
       <Route path="/host/create-property" element={<CreateProperty />} />
-
+      <Route path="/booking" element={<BookingPage />} />
       <Route path="/singlehotelpage/:id" element={<SingleHotel />} />
-
     </Routes>
   );
 };

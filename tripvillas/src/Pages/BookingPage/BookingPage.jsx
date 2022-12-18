@@ -7,6 +7,8 @@ import { CheckIcon } from "@chakra-ui/icons";
 import { useSelector } from "react-redux";
 import { sendSignInLinkToEmail } from "@firebase/auth";
 import { Navigate } from "react-router";
+import { useDisclosure } from "@chakra-ui/react";
+import Payment from "../../Components/Payment/Payment";
 
  const BookingPage = () => {
   const [error,setError] = useState(false)
@@ -16,10 +18,11 @@ import { Navigate } from "react-router";
   const { bookedData } = useSelector((state)=>state.dataReducer)
    console.log(bookedData)
   const {isAuth} = useSelector((state)=> state.authReducer)
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const myfunc = () => {
     if(isAuth){
       
+      onOpen(()=>true)
       if(mobile && fname && email){
         
       }
@@ -186,6 +189,7 @@ import { Navigate } from "react-router";
     <Box display = {error ? "" : "none"}  w="100%" h="50px" bg="red.100" color="red" p="10px" my="40px"  >Please correct the errors above & retry</Box>
  
    <Button h="55px" bg="blue" _hover={{bg:"blue.500"}} w="100%" onClick={myfunc} >AGREE & CONTINUE</Button>
+   <Payment isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
      </VStack>
   </HStack>
 };

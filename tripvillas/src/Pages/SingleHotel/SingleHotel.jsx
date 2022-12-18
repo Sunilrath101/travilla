@@ -15,6 +15,7 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHea
 import { getDatafromLocal, getSingleHotel, sendDatatoLocal } from "../../Redux/DataReducer/action";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 const SingleHotel = () => {
@@ -34,12 +35,12 @@ const SingleHotel = () => {
   const [date,setDate] = useState(initial);
   const [ load,setLoad ] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
-    const {search_query, id } = useParams();
+    const { id } = useParams();
 
 
     useEffect(()=> {
       
-      axios.get(`https://long-plum-mite-cape.cyclic.app/results/15323035`)
+      axios.get(`https://long-plum-mite-cape.cyclic.app/results/${id}`)
       .then((res)=>{
         // console.log("axios")
         // setSingleHotel(res.data)
@@ -53,6 +54,7 @@ const SingleHotel = () => {
 
 
  const details = [ ["Check in",""],["Check Out",""],["Guests",1] ]
+ const navigate=useNavigate()
   const OpenModafunc = () => {
     console.log(date)
     var checkin = `${date[0].day}/${date[0].monthIndex+1}/${ date[0].year}`;
@@ -89,6 +91,7 @@ const SingleHotel = () => {
         if(typeof(date[0])!=='number'){
           dispatch(sendDatatoLocal(BookedData))
         }
+        navigate('/booking')
       }
     }
    }

@@ -11,7 +11,7 @@ import {
   linkWithPhoneNumber,
   RecaptchaVerifier,
 } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Button,
   Drawer,
@@ -231,7 +231,9 @@ const Navbar = () => {
   return (
     <div className={styles.navbar_container}>
       <div className={styles.website_icon}>
-        <img src={logo} alt="tripvillas-img" width={"40%"}  />
+        <Link to="/">
+          <img src={logo} alt="tripvillas-img" width={"40%"} />
+        </Link>
       </div>
       <div className={styles.navbar_items}>
         <div className={styles.navbar_items_profile}>
@@ -713,7 +715,9 @@ const Navbar = () => {
                     <div className={styles.navbar_items_drawer_top}>
                       <div>
                         <div>ARE YOU A PROPERTY OWNER/MANAGER?</div>
-                        <div>List New Property</div>
+                        <Link to="/host/create-property">
+                          <div>List New Property</div>
+                        </Link>
                         <div>Sign In to Your Dashboard</div>
                       </div>
                       <hr style={{ marginTop: "20px" }} />
