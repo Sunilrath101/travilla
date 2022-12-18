@@ -45,7 +45,7 @@ const intialData = {
   singleHotel : {},
 };
 
-}
+
 
 
 // const intialData = {

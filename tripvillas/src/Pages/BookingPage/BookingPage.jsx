@@ -6,8 +6,14 @@ import { Button } from "@chakra-ui/button";
 import { CheckIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { sendSignInLinkToEmail } from "@firebase/auth";
+
 import { Navigate, useParams } from "react-router";
 import { getDatafromLocal } from "../../Redux/DataReducer/action";
+
+import { Navigate } from "react-router";
+import { useDisclosure } from "@chakra-ui/react";
+import Payment from "../../Components/Payment/Payment";
+
 
  const BookingPage = () => {
   const [error,setError] = useState(false)
@@ -22,10 +28,11 @@ import { getDatafromLocal } from "../../Redux/DataReducer/action";
    const r = BookedData.Range;
    const {id} = useParams()
   const {isAuth} = useSelector((state)=> state.authReducer)
-
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const myfunc = () => {
     if(isAuth){
       
+      onOpen(()=>true)
       if(mobile && fname && email){
         
       }
@@ -195,6 +202,7 @@ import { getDatafromLocal } from "../../Redux/DataReducer/action";
     <Box display = {error ? "" : "none"}  w="100%" h="50px" bg="red.100" color="red" p="10px" my="40px"  >Please correct the errors above & retry</Box>
  
    <Button h="55px" bg="blue" _hover={{bg:"blue.500"}} w="100%" onClick={myfunc} >AGREE & CONTINUE</Button>
+   <Payment isOpen={isOpen} onOpen={onOpen} onClose={onClose} />
      </VStack>
   </HStack>
 };

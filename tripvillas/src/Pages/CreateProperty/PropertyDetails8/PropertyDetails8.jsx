@@ -13,9 +13,10 @@ const PropertyDetails8 = () => {
   const navigate = useNavigate();
 
   const navigationHandle = () => {
-    dispatch(addData(data)).then((res) => {
+    // dispatch(addData(data)).then((res) => {
+      addData(data)
       navigate("/dashboard");
-    });
+    // });
   };
 
   useEffect(() => {
