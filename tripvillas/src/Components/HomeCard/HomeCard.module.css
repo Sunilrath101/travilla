@@ -7,6 +7,7 @@
   align-items: center;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding: 40px;
+  width: 100%;
 }
 .box > h2{
   font-size: 22px;
@@ -15,7 +16,8 @@
   margin-bottom: 40px;
 }
 .box > div{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     justify-content: center;
     align-items: center;
   }
@@ -32,4 +34,18 @@
   }
 .box > div > div > p{
     margin: 30px 0;
+  }
+
+
+  @media all and (min-width:481px) and (max-width:1024px){
+    .box > div{
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+
+  @media all and (min-width:320px) and (max-width:481px){
+    .box > div{
+      grid-template-columns: repeat(2, 1fr);
+    }
   }

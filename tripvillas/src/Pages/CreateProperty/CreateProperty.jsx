@@ -12,7 +12,7 @@ import PropertyDetails8 from "./PropertyDetails8/PropertyDetails8";
 
 const CreateProperty = () => {
   const [property, setProperty] = useState({
-    page1: true,
+    page1: false,
     page2: false,
     page3: false,
     page4: false,
