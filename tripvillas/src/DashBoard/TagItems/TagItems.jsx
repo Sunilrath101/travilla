@@ -53,10 +53,11 @@ export const TagItems = ({ setActiveTab, activeTab }) => {
     },
   ];
   return (
-    <VStack  marginTop={"5"}>
-      {tags.map((el) => {
+    <VStack marginTop={"5"}>
+      {tags.map((el, i) => {
         return (
           <div
+            key={i}
             className={styles.tag_item_container}
             onClick={() => setActiveTab(el.case)}
           >

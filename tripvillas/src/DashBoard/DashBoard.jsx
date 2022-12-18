@@ -37,8 +37,7 @@ const DashBoard = () => {
   };
   const navigate = useNavigate();
   if (!isAuth) {
-    navigate("/");
-    return;
+    return navigate("/");
   }
   console.log("welcome");
   return (

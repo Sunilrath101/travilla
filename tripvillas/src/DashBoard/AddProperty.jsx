@@ -5,6 +5,7 @@ import { GrAdd } from "react-icons/gr";
 import { IoMdAdd } from "react-icons/io";
 import { loadData } from "../utils/accesslocalStorage";
 import { Link } from "react-router-dom";
+import AllMyProperties from "./AllMyProperties";
 const AddProperty = () => {
   const [data, setData] = useState(
     loadData("create_property") != undefined ? true : false
@@ -37,13 +38,17 @@ const AddProperty = () => {
       </div>
       <div className={styles.twobuttons}>
         <div>
-          <Link to='/host/create-property' ><button className={styles.addnewproperty}>+ Add New Property</button></Link>
+          <Link to="/host/create-property">
+            <button className={styles.addnewproperty}>
+              + Add New Property
+            </button>
+          </Link>
         </div>
         <div className={styles.rulesbtn}>
           <button>Rules</button>
         </div>
       </div>
-      {data ? null : <NoResults />}
+      {data ? <AllMyProperties /> : <NoResults />}
     </>
   );
 };
