@@ -4,9 +4,9 @@ import {InfoOutlineIcon} from "@chakra-ui/icons"
 import { FiTag } from "react-icons/fi";
 import  {IoLocationOutline}  from "react-icons/io5";
 import { RxHamburgerMenu } from "react-icons/rx"
-import {Googlemap} from "./Googlemaps";
+import * as googleMap from '../Map/Map.jsx'
 
-export function BottomPart () {
+export function BottomPart ({bed,bath,type,guest}) {
 const [isTop,setIstop] = useState(true)
 const [scrollPosition, setScrollPosition] = useState(0);
 
@@ -15,27 +15,34 @@ const [scrollPosition, setScrollPosition] = useState(0);
   const Map = useRef(null);
   const Policies = useRef(null);
   const nav = useRef(null)
-  
-  
-  
+  var search_query = "goa";
+
   const handleScroll = () => {
       const position = window.pageYOffset;
       setScrollPosition(position);
   };
   
   useEffect(() => {
+     if(scrollPosition>650){
       window.addEventListener('scroll', handleScroll, { passive: true });
+      console.log(scrollPosition)
+     }else{
+        setIstop((state)=>!state)
+            console.log(isTop)
+     }
   
       return () => {
           window.removeEventListener('scroll', handleScroll);
+          // if(scrollPosition>650){
+          //   setIstop((state)=>!state)
+          //   console.log(isTop)
+          // } 
       };
-      if(scrollPosition > 635){
-        setIstop(true)
-      }
+      
   }, []);
-    
+     
+   
 
- console.log(isTop,scrollPosition)
   const scrollFunc = (el) => {
    window.scrollTo({
      top:el.current.offsetTop ,
@@ -48,8 +55,8 @@ const Aminities = [
   "POWER BACKUP","SHOPPING CLOSE BY","PARK NEARBY","MICROWAVE","COOKWARE","GAS/STOVE","REFRIGARATOR","TELEVISION","SATELLITE/CABLE CONNECTION","BOOKS & MAGAZINES","PICK AND DROP PACILITY","TRAVEL","GARDEN/LAWN","LINEN PROVIDED","HOT WATER","WESTERN TOILET",'KETTLE','SHOWER','PARKING SPACE','HOUSEKEEPING','RESTAURANTS CLOSE BY','FAN','AIR CONDITIONING','WIRELSS INTERNET','KITCHEN','RAILWAYSTATION CLOSEBY', 'AIRPORT CLOSE BY','SWIMMING POOL', 'BICYCLES','WATER FILTER','IRONING BOARD','TEA/COFFEE MAKER','BEACH NEARBY','HAIR DRYER','POTS & PANS','SPARE MATRESSES','OVEN','BALCONY','24/7 POWER','FIXED INTERNET'
 ]
   return (
-    <Box w="100%" >
-      <HStack id="nav" p=" 40px" pb="0px" ref={nav}  position = {isTop ? "fixed" : ""} >
+    <Box w="100%" mt= "10px" >
+      <HStack w="70%" id="nav" p=" 40px" pb="0px" ref={nav}   position = {isTop ? "fixed" : ""} z-index={isTop ? "2":"none"} top={isTop ? "-8" :"none"} > 
       <Button outline="none" colorScheme={"gray"} bg="none" onClick={()=>{scrollFunc(Overview)}}  _hover={{background:"none"}} leftIcon={<InfoOutlineIcon />} variant='solid'>
     OVERVIEW
   </Button>
@@ -67,31 +74,31 @@ const Aminities = [
   </Button>
       </HStack>
       <Divider orientation="horizontal"  />
-      <VStack ref={Overview} >
-        <HStack spacing={"20px"}>
+      <VStack ref={Overview} w="100%"  >
+        <HStack  spacing={"20px"} flexDirection={{base:"column",md:"column",lg:"row"}} >
           <Box alignItems="center" >
-            <Box w={"370px"} h={"56.25"} m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} alignItems="center" >
-               <Heading>{}</Heading>
+            <Box w={"400px"} h={"96.25"} m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} textAlign="center" alignItems="center" >
+               <Heading>{type}</Heading>
                <Text>Type of Property</Text>
             </Box>
-            <HStack alignItems="center" >
-              <Box alignItems="center" w={"137.5px"} h="56.25px" m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
-              <Heading>{}</Heading>
+            <HStack w="100%" alignItems="center" >
+              <Box alignItems="center" w={"177.5px"} h="96.25px" m="40px" textAlign="center" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
+              <Heading>{bed}</Heading>
                <Text>Bedrooms</Text>
               </Box>
 
-              <Box alignItems="center" w={"137.5px"} h="56.25px" m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
-              <Heading>{}</Heading>
+              <Box alignItems="center" w={"177.5px"} h="96.25px" m="40px" textAlign="center" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
+              <Heading>{bath}</Heading>
                <Text>Bathrooms</Text>
               </Box>
             </HStack>
-            <Box w={"137.5px"} h="56.25px" m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
-              <Heading>{}</Heading>
+            <Box w={"177.5px"} h="96.25px" m="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
+              <Heading>{guest}</Heading>
                <Text>Max. Guests</Text>
               </Box>
           </Box>
 
-          <Box  >
+          <Box w="100%" >
             <Text pb={"20px"} >
             Nestled in the south of Goa is a home away from home. Keeping in mind that one would come to Goa to get close to nature and close to the beach. We have to offer a holiday apartment with one bedroom, living area, dining, kitchen and a small balcony just overlooking the pool. The apartment is in a secured gated complex just across the road from the sands of Benaulim Beach. Literally, a hop, skip and a jump from the main gate.
             </Text>
@@ -176,8 +183,10 @@ const Aminities = [
             </Box>
           </HStack>
         </VStack>
-        <Box ref={Map} >
-          <Googlemap />
+        <Box  p="40px" ref={Map} w="100%" >
+        <Heading>MAP</Heading>
+          <Divider orientation="horizontal" />
+        <googleMap.default width="100%" height="300px" city={search_query} />
         </Box>
       </VStack>
 

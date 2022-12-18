@@ -41,6 +41,10 @@ const intialData = {
   isError: false,
   BookedData: obj,
   hotelList: "",
+
+  singleHotel : {},
+};
+
 }
 
 
@@ -51,6 +55,7 @@ const intialData = {
 //   hotelList: "",
 
 // };
+
 
 export const reducer = (state = intialData, { type, payload }) => {
   switch (type) {
@@ -96,6 +101,7 @@ export const reducer = (state = intialData, { type, payload }) => {
         ...state, BookedData: obj
       }
 
+      case types.getHotelbyId : return { ...state, singleHotel:payload }
     // GET HOTEL LIST 
 
     case types.getHotelListReq:

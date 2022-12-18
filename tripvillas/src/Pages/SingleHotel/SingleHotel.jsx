@@ -1,5 +1,5 @@
 import { background, Box, Button, Center, Heading, HStack,Image, Text, VStack, Wrap, WrapItem,Divider } from "@chakra-ui/react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ImageSwiper } from "../../Components/SingleHotelComps/ImageSwiper";
 import {BottomPart} from "../../Components/SingleHotelComps/BottomPart"
 import { RouteComp } from "../../Components/SingleHotelComps/RouteComp";
@@ -10,43 +10,56 @@ import { Link, Spacer } from "@chakra-ui/layout";
 import { Select } from "@chakra-ui/select";
 import BeatLoader from "react-spinners/BeatLoader"
 import { useParams } from "react-router";
-import { useDisclosure } from "@chakra-ui/hooks"
+import { useDisclosure, useTimeout } from "@chakra-ui/hooks"
 import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay } from "@chakra-ui/modal";
-import { getDatafromLocal, sendDatatoLocal } from "../../Redux/DataReducer/action";
+import { getDatafromLocal, getSingleHotel, sendDatatoLocal } from "../../Redux/DataReducer/action";
 import { useDispatch, useSelector } from "react-redux";
-
+import axios from "axios";
 
 
 const SingleHotel = () => {
   const dispatch = useDispatch()
   dispatch(getDatafromLocal)
-  const {BookedData,hotelList} = useSelector((store)=> store.dataReducer);
-  console.log(hotelList)
+  const {BookedData,singleHotel} = useSelector((store)=> store.dataReducer);
+  const [guests,setGuests] = useState(1)
+  const [val,setVal] = useState("")
+  const [loader,setLoader] = useState(false);
+  const [p,setP]=useState(0)
+
   var initial = []
   if(BookedData.date!=undefined){
      initial = BookedData.date;
   }
-
+   console.log(BookedData)
   const [date,setDate] = useState(initial);
   const [ load,setLoad ] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
-    const { id,search_query } = useParams();
+    const {search_query, id } = useParams();
 
-   console.log(id,search_query)
-  var country = "India";
-  var state = "Goa";
-  var city = "Vizag";
-  var hotel = "hotel";
+
+    useEffect(()=> {
+      
+      axios.get(`https://long-plum-mite-cape.cyclic.app/results/15323035`)
+      .then((res)=>{
+        // console.log("axios")
+        // setSingleHotel(res.data)
+        dispatch(getSingleHotel(res.data))
+        // console.log(res.data)
+      })
+      .catch((err)=>{console.log('err')})
+    },[])
+
   const [availability,setAvailable] = useState(true);
+
 
  const details = [ ["Check in",""],["Check Out",""],["Guests",1] ]
   const OpenModafunc = () => {
-    onOpen();
     console.log(date)
     var checkin = `${date[0].day}/${date[0].monthIndex+1}/${ date[0].year}`;
     var checkout =  `${date[1].day}/${date[1].monthIndex+1}/${ date[1].year}`|| "";
     console.log("checkuot" , checkin,checkout)
-    const details = [ ["Check in",checkin],["Check Out",checkout],["Guests",1] ];
+    const details = [ ["Check in",checkin],["Check Out",checkout],["Guests",guests] ];
+    onOpen();
   }
 
    const submitFunc = () => {
@@ -58,8 +71,7 @@ const SingleHotel = () => {
       var day = `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()}`;
       var checkout =  `${date[1].day}/${date[1].monthIndex+1}/${ date[1].year}`;
       var range = date[1].dayOfBeginning-date[0].dayOfBeginning +1;
-      var price = 52;
-      var guest = +(document.getElementById("guest").value);
+      var price = p;
    
       if(checkin == day  ){
         setAvailable(false)
@@ -69,34 +81,50 @@ const SingleHotel = () => {
           "Checkin" : checkin,
           "Checkout" : checkout,
           Range : range,
-          Price : price,
-          guests : guest || 1,
+          Price : p,
+          guests : guests || 1,
           date : date
          }
-
-         dispatch(sendDatatoLocal(BookedData))
+         console.log(typeof(date[0]))
+        if(typeof(date[0])!=='number'){
+          dispatch(sendDatatoLocal(BookedData))
+        }
       }
     }
    }
+//  console.log(obj)
+    if(singleHotel.title!=undefined){
+      var obj = singleHotel
+   }
  
-  const Facilities = ['SHOWER','PARKING SPACE','HOUSEKEEPING','RESTAURANTS CLOSE BY','FAN','AIR CONDITIONING'];
-
+  //  console.log(obj,typeof(singleHotel))
+   var Facilities = [];
+   for(var a in obj){
+    if(obj[a]===true && a !== "active" ){
+      Facilities.push(a.toUpperCase())
+    }
+   }
+    //  console.log(Facilities)
+    useEffect(()=>{
+      const price = Math.floor(obj?.max_price_in_usd * 80);
+      setP(price)
+    },[obj])
   return   <HStack w={"100%"} p={"20px"}  >
-   <Box w="75%" paddingRight={"40px"} borderRight={"1px solid #A9A9A9"} >
+   <Box w={{base:"100%",md:"100%",lg:"70%"}} marginLeft={{sm:"6%"}} paddingRight={"40px"} borderRight={"1px solid #A9A9A9"} >
    <RouteComp />
    <Divider colorScheme={"#D3D3D3"} orientation='horizontal' />
-   <HStack pt="20px" pl="20px" alignItems={"flex-start"} >
-     <Box width={"558px"} h="450" >
-      <Image  width={"558px"} h="300" fallbackSrc='https://via.placeholder.com/200' />
-      <HStack p="5px" >
-        <Image  width={"279px"} h="150" fallbackSrc='https://via.placeholder.com/150' />
-        <Image width={"279px"} h="150"  fallbackSrc='https://via.placeholder.com/150' />
+   <HStack width={{base:"100%",md:"100%",lg:"100%"}} pt="20px" pl="20px" alignItems={"flex-start"} flexDirection={{base:"column",md:"column",lg:"row"}} >
+     <Box h="450" width={{base:"100%",md:"100%",lg:"558px"}} >
+      <Image  width={{base:"100%", lg:"558px"}} h="300" src={obj?.images_large[0]}  fallbackSrc='https://via.placeholder.com/200' />
+      <HStack p="5px" width={{base:"50%",md:"100%",lg:"100%"}} >
+        <Image  width={"100%"} h="150" src={obj?.images_large[3]}  fallbackSrc='https://via.placeholder.com/150' />
+        <Image width={"100%"} h="150" src={obj?.images_large[2]}  fallbackSrc='https://via.placeholder.com/150' />
       </HStack>
      </Box>
-     <VStack width={"50%"} p="40px" >
-       <Heading>Hotel Name</Heading>
+     <VStack width={{base:"100%",md:"100%",lg:"50%"}} p="40px" >
+       <Heading>{obj?.title}</Heading>
 
-       <Button leftIcon={<IoLocationOutline />} outline="none" colorScheme={"gray"} bg="none" cursor={"default"} _hover={{background:"none"}} >{city},{state},{country}</Button>
+       <Button leftIcon={<IoLocationOutline />} outline="none" colorScheme={"gray"} bg="none" cursor={"default"} _hover={{background:"none"}} >{obj?.city},{obj?.state},{obj?.country}</Button>
 
        <Divider color={"#D3D3C0"} orientation='horizontal' />
        <Wrap>
@@ -109,14 +137,15 @@ const SingleHotel = () => {
      </VStack>
 
   </HStack>
-  <BottomPart />
+  <BottomPart bed = {obj?.number_of_rooms} bath = {obj?.number_of_bathrooms} type = {obj?.property_type} guest={guests} />
    </Box>
 
-   <Divider colorScheme={"#D3D3D3"} orientation='vertical' />
-  <Box w="370px" h={"100%"} position="fixed" top="0" right={"0"} p="40px" >
+   <Divider colorScheme={"#D3D3D3"} orientation='vertical' display = {{base:"none",md:"none","lg":"block"}} />
+  <Box w="370px" h={"100%"} position="fixed" top="14" right={"0"} p="40px"  display = {{base:"none",md:"none","lg":"block"}} >
       <Text>Starting</Text>
       <HStack>
-      <Heading>{}</Heading>
+  
+      <Heading>Rs {p}/-</Heading>
       <Text>per Night</Text>
       </HStack>
 
@@ -141,7 +170,7 @@ const SingleHotel = () => {
   </HStack>
 
   <Box width="100%" my="20px" >
-  <Select id="guest" placeholder='Select Guests'>
+  <Select id="guest" placeholder='Select Guests' onChange={(e)=>{setGuests(e.target.value)}} >
   <option value='1'>1 Guest</option>
   <option value='2'>2 Guests</option>
   <option value='3'>3 Guests</option>
@@ -159,14 +188,14 @@ const SingleHotel = () => {
     </Box>
    <Spacer />
     <Box>
-      <Text fontSize="lg" >50{}</Text>
+      <Text fontSize="lg" >Rs {p+p*14/100}/-</Text>
       <Link onClick={OpenModafunc} fontSize="xs" color="blue" >view Details</Link>
     </Box>
    </HStack>
 
    <Button w="100%" mt="20px"
    colorScheme={"blue"}
-  isLoading={load}
+  isLoading={loader}
    height="50px"
    onClick={submitFunc}
   spinner={<BeatLoader size={10} color='white' />}
@@ -178,12 +207,10 @@ const SingleHotel = () => {
   <Modal size="2xl" blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay  />
         <ModalContent  >
-          <ModalHeader>Modal Title</ModalHeader>
+          <ModalHeader>Booking Summary</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text fontWeight='bold' mb='1rem'>
-              You can scroll the content behind the modal
-            </Text>
+           <Divider orientation="horizontal" />
             <Box w="100%" >
         <Wrap w="100%" spacing="23px" my="20px" >
           { details.map((el)=> {
@@ -202,28 +229,28 @@ const SingleHotel = () => {
       <Box w="100%" p="10px" >
         <HStack my="10px" >
           <Text>Sub Total</Text>
-        <Box w="80%"  borderBottom="1px dashed grey" ></Box>
-        <Text>${}</Text>
+        <Box w="73%"  borderBottom="1px dashed grey" ></Box>
+        <Text>Rs {p}/-</Text>
                 </HStack>
 
                 <HStack my="10px" >
           <Text>Discount</Text>
-          <Box w="80%"  borderBottom="1px dashed grey" ></Box>
+          <Box w="73%"  borderBottom="1px dashed grey" ></Box>
         <Text>${}</Text>
                 </HStack>
 
                 <HStack my="10px" >
           <Text>Tax</Text>
-          <Box w="85%"  borderBottom="1px dashed grey" ></Box>
-        <Text>${}</Text>
+          <Box w="73%"  borderBottom="1px dashed grey" ></Box>
+        <Text>Rs {p*0.14}/-</Text>
                 </HStack>
       
        <Divider orientation="horizontal" />
       
        <HStack my="20px" >
           <Text size="md" >Total</Text>
-          <Box w="84%"  borderBottom="2px dashed grey" ></Box>
-        <Text>${}</Text>
+          <Box w="75%"  borderBottom="2px dashed grey" ></Box>
+        <Text>Rs {p+p*14/100}/-</Text>
                 </HStack>
        </Box>
 
@@ -259,7 +286,7 @@ const SingleHotel = () => {
             <Button colorScheme='blue' mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant='ghost'>Secondary Action</Button>
+            <Button colorScheme={"blue"} onClick={submitFunc} variant='ghost'>Request to Book</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

@@ -171,7 +171,7 @@ const HotelLists = () => {
         <div className={style.lists}>
           {
             data && data.map((item)=>{
-              return( <Link to={`hotel-list/${search_query}/singlehotelpage/${item.id}`}> 
+              return( <Link to={`hotel-list/${search_query}/SinglHotel/${item.id}`}> 
               <HotelCardVertical 
                 name={item.title}
                 price={(item.max_price_in_usd*80).toFixed(2)}
