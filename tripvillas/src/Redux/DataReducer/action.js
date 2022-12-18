@@ -34,10 +34,10 @@ const getHotelListErr = () => {
   }
 }
 
-const getData = (q) => (dispatch) => {
+const getData = (q, p) => (dispatch) => {
   dispatch(getHotelListReq())
   return axios
-    .get(`https://long-plum-mite-cape.cyclic.app/results?q=${q}&_limit=7`)
+    .get(`https://long-plum-mite-cape.cyclic.app/results?q=${q}&_limit=7`, p)
     .then((res) => dispatch(getHotelListSuc(res.data)))
     .catch((err) => dispatch(getHotelListErr()))
 }

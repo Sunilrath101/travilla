@@ -1,75 +1,54 @@
-import React from "react";
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
+import React, {useState, useEffect} from "react";
+import { Tabs, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import style from './Footer.module.css';
 import {Link} from 'react-router-dom';
+import axios from "axios";
 
 const Footer = () => {
-  return <div>
+  const [data, setData]= useState();
+  const fetchData=()=>{
+    axios
+      .get("https://long-plum-mite-cape.cyclic.app/Continents")
+      .then((res)=> setData(res.data))
+      .catch((err)=> console.log(err))
+  }
+
+  useEffect(()=>{
+    fetchData();
+  },[])
+
+  
+  return <div className={style.container}>
 
 <Tabs>
-  <TabList>
+  <div style={{ overflowX: "scroll", display:"flex", borderBottom:"1px solid #cccc"}}>
     <Tab>ASIA</Tab>
     <Tab>EUROPE</Tab>
     <Tab>NORTH AMERICA</Tab>
     <Tab>SOUTH AMERICA</Tab>
     <Tab>AFRICA</Tab>
     <Tab>OCEANIA</Tab>
-  </TabList>
+  </div>
 
   <TabPanels>
     <TabPanel className={style.box}>
+
+      {/* Column 1 */}
+
       <div className={style.first}>
-        <div>
-          <Link to='/search-state/India'>India</Link>
-          <p>3262 holiday homes</p>
-        </div>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
+        {
+          data && data.ASIA?.map((item)=>{
+            return <div>
+            <Link to='/search-state/India'>{item.country}</Link>
+            <p>{item.holidays}</p>
+          </div>
+          })
+        }
+        
       </div>
-      <div className={style.first}>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-      </div>
-      <div className={style.first}>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-      </div>
-      <div className={style.first}>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-      </div>
-      <div className={style.first}>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-      </div>
-      <div className={style.first}>
-        <div>
-          <p>India</p>
-          <p>3262 holiday homes</p>
-        </div>
-      </div>
+
+    {/* Column 2 */}
+
       
     </TabPanel>
     <TabPanel>

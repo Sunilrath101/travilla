@@ -11,16 +11,12 @@
 .left > .top{
     /* top: 110px; */
     position: fixed;
-    border: 1px solid gray;
+    border: 1px solid #dedede;
     background-color: white;
     width: 60%;
     display: flex;
     justify-content: space-between;
-    padding: 15px;
-}
-.left > .top > div{
-    padding: 5px;
-    border: 1px solid rgb(219, 214, 214);
+    padding: 10px 15px;
 }
 .left > .bottom{
     margin-top: 100px;
@@ -33,12 +29,11 @@
     justify-content: space-between;
 }
 .lists{
-    
     overflow-y: scroll;
 }
 .right{
     width: 40%;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
     height: 100vh;
     position: fixed;
     right: 0;
