@@ -1,5 +1,5 @@
 import { background, Box, Button, Center, Heading, HStack,Image, Text, VStack, Wrap, WrapItem,Divider } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { ImageSwiper } from "../../Components/SingleHotelComps/ImageSwiper";
 import {BottomPart} from "../../Components/SingleHotelComps/BottomPart"
 import { RouteComp } from "../../Components/SingleHotelComps/RouteComp";
@@ -20,7 +20,8 @@ import { useDispatch, useSelector } from "react-redux";
 const SingleHotel = () => {
   const dispatch = useDispatch()
   dispatch(getDatafromLocal)
-  const {BookedData} = useSelector((store)=> store.dataReducer);
+  const {BookedData,hotelList} = useSelector((store)=> store.dataReducer);
+  console.log(hotelList)
   var initial = []
   if(BookedData.date!=undefined){
      initial = BookedData.date;
@@ -29,15 +30,14 @@ const SingleHotel = () => {
   const [date,setDate] = useState(initial);
   const [ load,setLoad ] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
-    const { userId } = useParams();
+    const { id,search_query } = useParams();
 
-   console.log(date)
+   console.log(id,search_query)
   var country = "India";
   var state = "Goa";
   var city = "Vizag";
   var hotel = "hotel";
   const [availability,setAvailable] = useState(true);
- console.log(date)
 
  const details = [ ["Check in",""],["Check Out",""],["Guests",1] ]
   const OpenModafunc = () => {
@@ -60,7 +60,7 @@ const SingleHotel = () => {
       var range = date[1].dayOfBeginning-date[0].dayOfBeginning +1;
       var price = 52;
       var guest = +(document.getElementById("guest").value);
-       console.log(checkin,day,guest)
+   
       if(checkin == day  ){
         setAvailable(false)
       } else {
