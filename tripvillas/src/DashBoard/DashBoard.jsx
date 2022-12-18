@@ -1,92 +1,81 @@
 import React from "react";
 import AddProperty from "./AddProperty";
 import styles from "./DashBoard.module.css";
-import NoResults from "./NoResults";
-import {
-  Divider,
-  Image,
-  ButtonGroup,
-  Button,
-  CardFooter,
-  Tabs,
-  TabPanel,
-  Tab,
-  TabList,
-  TabPanels,
-  Radio,
-  Stack,
-  Box,
-  Card,
-  CardHeader,
-  CardBody,
-  StackDivider,
-  Text,
-  RadioGroup,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Heading,
-} from "@chakra-ui/react";
 import MyProfile from "./MyProfile";
 import AllMyProperties from "./AllMyProperties";
 import MyBookings from "./MyBookings";
+import { loadData } from "../utils/accesslocalStorage";
+import { RxAvatar } from "react-icons/rx";
+import { TagItems } from "./TagItems/TagItems";
+import { CardFooter } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const DashBoard = () => {
+  const { isAuth } = useSelector((store) => store.authReducer);
+  const user = loadData("user");
+  const [activeTab, setActiveTab] = React.useState("Properties");
+  const getCorrectScreen = (tab) => {
+    switch (tab) {
+      case "Properties":
+        return <AddProperty />;
+      case "PropertiesSale":
+        return <AllMyProperties />;
+      case "Bookings":
+        return <MyBookings />;
+      case "Payouts":
+        return <AddProperty />;
+      case "Payouts":
+        return <AddProperty />;
+      case "Accounts":
+        return <AddProperty />;
+      case "Profile":
+        return <MyProfile />;
+      default:
+        return <AddProperty />;
+    }
+  };
+  const navigate=useNavigate()
+  if(!isAuth){
+    navigate('/')
+    return 
+  }
   console.log("welcome");
   return (
     <>
-      <div className={styles.container}>
-        {/* <div className={styles.nav}>i m nav</div> */}
-        <div className={styles.mainpanel}>
-          <div className={styles.leftpanel}>
-            <div className={styles.user_nam}>user name</div>
-            <div>my properties</div>
-            <div>properties for sale</div>
-            <div>bookings</div>
-            <div>payouts</div>
-            <div>bankAccounts</div>
-            <div>Reviews</div>
-            <div>My customers</div>
-            <div>My Profile</div>
+      <div className={styles.dashboard_container}>
+        <div className={styles.dashboard_container_leftpanel}>
+          <div className={styles.dashboard_avatar}>
+            <div style={{ border: "1px solid " }}>
+              <img
+                src="https://d2v8elt324ukrb.cloudfront.net/static/dashboard/img/avatars/male.cc4fc62d561f.png"
+                width={"40px"}
+                alt=""
+              />
+            </div>
+            <div style={{ fontWeight: "500", fontSize: "20px" }}>{user}</div>
           </div>
-          <div className={styles.rightpanel}>
-            <div className={styles.pathbread}>
-              <Breadcrumb>
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">Home</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem>
-                  <BreadcrumbLink href="#">Dashboard</BreadcrumbLink>
-                </BreadcrumbItem>
-
-                <BreadcrumbItem isCurrentPage>
-                  <BreadcrumbLink href="#">MyProfile</BreadcrumbLink>
-                </BreadcrumbItem>
-              </Breadcrumb>
-            </div>
-
-            {/* <AddProperty /> */}
-            {/* 
-              addProperty is a component
-           
-            noresults is a component which should render when length is 0
-            <NoResults /> */}
-
-            {/* <AllMyProperties /> */}
-
-            {/* 
-              // my profile is a component which shows myProfile when visited my profile section
-           */}
-
-            <MyProfile />
-
-            {/* <MyBookings/> */}
-
-            <div className={styles.privatetag}>
-              {" "}
-              <p>(c) Tripvillas Pte. Ltd.</p> <button>leave a message</button>{" "}
-            </div>
+          <div className={styles.dashboard_tagItems}>
+            <TagItems activeTab={activeTab} setActiveTab={setActiveTab} />
+          </div>
+        </div>
+        <div className={styles.dashboard_container_rightpanel}>
+          <div
+            style={{
+              height: "50px",
+              display: "flex",
+              alignItems: "center",
+              marginLeft: "13px",
+              color: "GrayText",
+            }}
+          >
+            / home / {activeTab}
+          </div>
+          <div className={styles.dashboard_render}>
+            {getCorrectScreen(activeTab)}
+          </div>
+          <div className={styles.dashboard_footer}>
+            (c) Tripvillas Pte. Ltd.
           </div>
         </div>
       </div>
