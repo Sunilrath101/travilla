@@ -10,6 +10,19 @@
   align-items: flex-start;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
+.spin {
+  width: 90%;
+  max-width: 900px;
+  height: 400px;
+  /* border: 1px solid red; */
+  margin: auto;
+  margin-top: 50px;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
 
 .containor > h1 {
   font-size: 1.45rem;

@@ -25,6 +25,7 @@
   align-items: center;
   justify-content: center;
   color: white;
+  padding: 30px;
 }
 .section1 > .box > h1{
   font-size: 25px;
@@ -37,9 +38,10 @@
   align-items: center;
   padding: 0 40px;
   height: auto;
+  width: 100%;
 }
 .section3 > .left{
-  border: 1px soldi green;
+  /* border: 1px soldi green; */
   width: 32%;
   height: auto;
   display: flex;
@@ -76,7 +78,7 @@
 .section3 > .right{
   /* border: 1px solid blue; */
   width: 62%;
-  height: auto;
+  height: 100%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
@@ -92,11 +94,54 @@
   align-items: center;
   padding: 0 40px;
   gap: 0 40px;
+  width: 100%;
 }
 
 footer{
   padding: 0 40px;
 }
-footer > h2{
-  font-size: 18px;
+h2{
+  /* font-size: 18px; */
+  margin: 30px 0;
+  font-size: 22px;
+}
+
+
+
+@media all and (min-width:481px) and (max-width:1024px){
+
+}
+
+
+@media all and (min-width:320px) and (max-width:481px){
+  .box > h1+h1{
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .section3{
+    flex-direction: column;
+    padding: 40px 30px;
+    gap: 30px;
+  }
+  .section3 > .left{
+    width: 100%;
+  }
+  .section3 >h2{
+    margin-bottom: 0;
+  }
+  .section3 > .right{
+    /* border: 1px solid green; */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px 0;
+    padding: 40px 30px;
+    margin: auto;
+  }
+  .section4{
+    /* border: 1px solid brown; */
+    flex-direction: column;
+    padding: 40px 30px;
+  }
+
 }

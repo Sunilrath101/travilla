@@ -6,7 +6,8 @@ import {useParams} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import { getData } from "../../Redux/DataReducer/action";
 import axios from "axios"
-import {Link} from "react-router-dom";
+import Searchbar from '../../Components/Searchbar/Searchbar'
+import {Link, useSearchParams} from "react-router-dom";
 import {
   Modal,
   ModalOverlay,
@@ -24,11 +25,11 @@ import {
   RadioGroup,
   Stack
 } from '@chakra-ui/react'
-import {BsFilterSquare} from "react-icons/bs"
+import {BsFileEarmarkSlidesFill, BsFilterSquare} from "react-icons/bs"
 
-const features=["Swimming Pool", "Air Conditioner", "Internet", "Television", "Parking", "Housekeeping",
+const features=["Swimming Pool", "AC", "Wifi", "TV", "Internet", "Television", "Parking", "Housekeeping",
                "Function Kitchen", "Washing Machine", "Dish Washer", "Refrigirator", "Gym", "Spa", "Cook On Call"]
-const propTypes=["Luxury Yacht", "Camping Ground", "Farm", "Homestay", "Apartment", "Villa", "Hostel", "Service Appartment", "Villa",
+const propTypes=["Room", "Luxury Yacht", "Camping Ground", "Farm", "Homestay", "Apartment", "Villa", "Hostel", "Service Appartment", "Villa",
                "Hostel", "Serviced Appartment", "Royakan (Japanese Inn)", "Bed and Breakfast"]
 
 const HotelLists = () => {
@@ -38,32 +39,54 @@ const HotelLists = () => {
   const data=useSelector((store)=> store.dataReducer.hotelList)
   const { isOpen, onOpen, onClose } = useDisclosure()
 
+  const [open, setOpen] = useState(false);
+
   const dispatch= useDispatch()
-  // const [data, setData]= useState();
 
-  // const getData=()=>{
-  //   axios
-  //     .get("https://long-plum-mite-cape.cyclic.app/results?state=himachal&_limit=7")
-  //     .then((res)=> setData(res.data))
-  //     .catch((err)=> console.log(err))
-  // }
+  const [searchParams, setsearchParams] = useSearchParams();
+  const initialCategory = searchParams.getAll("property_type");
+  const [category, setCategory] = useState(initialCategory || []);
 
+  const openFunc=()=>{
+    setOpen(true)
+  }
+  const closeFunc=()=>{
+    setOpen(false)
+  }
+
+  const handleFilterCat = (e) => {
+    const newCategory = [...category];
+    if (newCategory.includes(e.target.value)) {
+      newCategory.splice(newCategory.indexOf(e.target.value), 1);
+    } else {
+      newCategory.push(e.target.value);
+    }
+    setCategory(newCategory);
+  };
+
+  const [searchP] = useSearchParams();
 
   useEffect(()=>{
-    dispatch(getData(search_query))
+    let params = {};
+    params.property_type = category;
+    setsearchParams(params);
+
+    const param={params:{property_type:searchP.getAll("property_type")}}
+    dispatch(getData(search_query, param))
     console.log("data:", data)
-    // getData()
-  },[dispatch])
+
+  },[dispatch, category, setsearchParams, data.length])
 
   return <div className={style.container}>
     <div className={style.left}>
       <div className={style.top}>
       <Button 
       leftIcon={<BsFilterSquare/>} 
-      onClick={onOpen} borderRadius="0" 
+      onClick={onOpen} borderRadius="0"
+      fontSize="12px" 
       background="transparent" 
-      border="1px solid #999991"
-      _hover={{border:"1px solid black", pointer:"cursor"}}
+      border="1px solid #dedede"
+      _hover={{border:"1px solid gray", pointer:"cursor"}}
       >APPLY FILTER</Button>
 
 <Modal isOpen={isOpen} onClose={onClose} size={'xl'}> 
@@ -76,7 +99,7 @@ const HotelLists = () => {
         <Heading as='h2' size="md">Features</Heading>
         {
         features && features?.map((item)=>{
-          return <Checkbox>{item}</Checkbox>
+          return <Checkbox value={item}  checked={category.includes(item)} onChange={handleFilterCat}>{item}</Checkbox>
         })
         }
         
@@ -85,7 +108,7 @@ const HotelLists = () => {
       <Heading as='h2' size="md">Property Type</Heading>
       {
         propTypes && propTypes?.map((item)=>{
-          return <Checkbox>{item}</Checkbox>
+          return <Checkbox value={item} onChange={handleFilterCat}>{item}</Checkbox>
         })
         }
       </VStack>
@@ -111,7 +134,30 @@ const HotelLists = () => {
     </ModalFooter>
   </ModalContent>
 </Modal>
-        <div>MODIFY SEARCH</div>
+
+<Button 
+      leftIcon={<BsFilterSquare/>} 
+      onClick={openFunc} borderRadius="0"
+      fontSize="12px" 
+      background="transparent" 
+      border="1px solid #dedede"
+      _hover={{border:"1px solid gray", pointer:"cursor"}}
+      >MODIFY SEARCH</Button>
+
+<Modal size="3xl" isOpen={open} onClose={closeFunc}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody display="flex" justifyContent="center">
+            <Searchbar/>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+
+
+
       </div>
       <div className={style.bottom}>
         <div className={style.tools}>
@@ -131,6 +177,11 @@ const HotelLists = () => {
                 price={(item.max_price_in_usd*80).toFixed(2)}
                 id={item.id}
                 image={item.images_medium[0]}
+                city={item.city?.charAt(0).toUpperCase() + item.city?.slice(1)}
+                state={item.state}
+                country={item.country}
+                tags={item.prop_tags}
+                
               />
               </Link>)
             })

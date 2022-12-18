@@ -29,3 +29,9 @@
     height: 100%;
     object-fit: cover;
   }
+
+  @media all and (min-width:320px) and (max-width:481px){
+    .swiper{
+      width: 1000px;
+    }
+  }

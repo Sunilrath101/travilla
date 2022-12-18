@@ -19,5 +19,6 @@ const Container= styled.div`
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 150px;  
+  height: 150px;
+  width: 100%;
 `

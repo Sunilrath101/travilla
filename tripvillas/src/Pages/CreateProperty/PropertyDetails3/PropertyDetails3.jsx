@@ -1,8 +1,37 @@
 import React from "react";
 import styles from "./PropertyDetails3.module.css";
 import { Checkbox, Select } from "@chakra-ui/react";
-const PropertyDetails3 = ({ type = "Cottage" }) => {
-  const [value, setValue] = React.useState("1");
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  amenities,
+  bedrooms,
+  bethrooms,
+  maxGuests,
+  propertyQuantity,
+} from "../../../Redux/DataReducer/action";
+import { useEffect } from "react";
+
+const PropertyDetails3 = () => {
+  const [value, setValue] = React.useState([]);
+  const type = useSelector((store) => store.dataReducer.propertyType);
+  const disptach = useDispatch();
+
+  const amenitieshandler = (prop) => {
+    let newValue;
+    if (value.includes(prop)) {
+      value.splice(value.indexOf(prop), 1);
+      newValue = [...value];
+    } else {
+      newValue = [...value, prop];
+    }
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    disptach(amenities(value));
+  }, [value]);
+
   return (
     <div className={styles.container}>
       <div>
@@ -16,11 +45,11 @@ const PropertyDetails3 = ({ type = "Cottage" }) => {
           </div>
           <div className={styles.box_2_selection_2}>
             <div>
-              <label>How many {type} do you have? </label>
-              <Select>
-                <option value="1" selected="selected">
-                  1
-                </option>
+              <label>How many {type || "Cottage"} do you have? </label>
+              <Select
+                onChange={(e) => disptach(propertyQuantity(e.target.value))}
+              >
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -63,11 +92,9 @@ const PropertyDetails3 = ({ type = "Cottage" }) => {
               </Select>
             </div>
             <div>
-              <label>Max Guests In Each Apartment</label>
-              <Select>
-                <option value="1" selected="selected">
-                  1
-                </option>
+              <label>Max Guests In Each {type || "Cottage"}</label>
+              <Select onChange={(e) => disptach(maxGuests(e.target.value))}>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -111,11 +138,9 @@ const PropertyDetails3 = ({ type = "Cottage" }) => {
             </div>
 
             <div>
-              <label>Bedrooms In Each Apartment</label>
-              <Select>
-                <option value="1" selected="selected">
-                  1
-                </option>
+              <label>Bedrooms In Each {type || "Cottage"}</label>
+              <Select onChange={(e) => disptach(bedrooms(e.target.value))}>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -128,11 +153,9 @@ const PropertyDetails3 = ({ type = "Cottage" }) => {
               </Select>
             </div>
             <div>
-              <label>Bathrooms In Each Apartment</label>
-              <Select>
-                <option value="1" selected="selected">
-                  1
-                </option>
+              <label>Bathrooms In Each {type || "Cottage"}</label>
+              <Select onChange={(e) => disptach(bethrooms(e.target.value))}>
+                <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
@@ -146,8 +169,11 @@ const PropertyDetails3 = ({ type = "Cottage" }) => {
             </div>
           </div>
           <div className={styles.box_2_selection_3}>
-            <h1>Select whats applicable for Apartment</h1>
-            <div onChange={setValue} value={value}>
+            <h1>Select whats applicable for {type || "Cottage"}</h1>
+            <div
+              onChange={(e) => amenitieshandler(e.target.value)}
+              value={value}
+            >
               <Checkbox value="Kitchen">Kitchen</Checkbox>
               <Checkbox value="AC">AC</Checkbox>
               <Checkbox value="TV">TV</Checkbox>
@@ -167,8 +193,12 @@ const PropertyDetails3 = ({ type = "Cottage" }) => {
           </div>
         </div>
         <div className={styles.box_3}>
-          <button>PREVIOUS</button>
-          <button>NEXT</button>
+          <Link to="/host/create-property/2">
+            <button>PREVIOUS</button>
+          </Link>
+          <Link to="/host/create-property/4">
+            <button>NEXT</button>
+          </Link>
         </div>
       </div>
     </div>
