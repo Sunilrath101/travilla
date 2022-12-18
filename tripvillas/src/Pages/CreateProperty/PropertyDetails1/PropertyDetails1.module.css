@@ -100,7 +100,7 @@
   align-items: center;
   padding: 1.5rem 3rem;
 }
-.box_3 > button {
+.box_3 button {
   font-size: 0.75rem;
   color: white;
   background-color: #1e87f0;

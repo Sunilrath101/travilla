@@ -1,25 +1,95 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styles from "./PropertyDetails7.module.css";
-const data = [
-  "LONAVALA, MAHARASHTRA, INDIA",
-  "COTTAGE",
-  "6 PHOTOS",
-  "1 MAX GUESTS",
-  "1 UNIT",
-  "1 BEDROOM",
-  "SOFA",
-  "POWER BACKUP",
-  "PARKING",
-  "PETS NOT ALLOWED",
-  "INR2000 ON WEEKDAYS FOR 1 GUEST",
-  "INR20000 ON WEEKENDS FOR 1 GUEST",
-  "INR FOR EXTRA PERSON",
-  "EUROPEAN PLAN",
-  "COMMON CANCELLATION POLICY",
-];
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+// const data = [
+//   "LONAVALA, MAHARASHTRA, INDIA",
+//   "COTTAGE",
+//   "6 PHOTOS",
+//   "1 MAX GUESTS",
+//   "1 UNIT",
+//   "1 BEDROOM",
+//   "SOFA",
+//   "POWER BACKUP",
+//   "PARKING",
+//   "PETS NOT ALLOWED",
+//   "INR2000 ON WEEKDAYS FOR 1 GUEST",
+//   "INR20000 ON WEEKENDS FOR 1 GUEST",
+//   "INR FOR EXTRA PERSON",
+//   "EUROPEAN PLAN",
+//   "COMMON CANCELLATION POLICY",
+// ];
 
 const PropertyDetails6 = () => {
-  const [value, setValue] = React.useState("1");
+  const [data, setData] = React.useState([]);
+  let [newData, setNewData] = React.useState([]);
+  const allData = useSelector((store) => store.dataReducer);
+  console.log("data:", data);
+  const disptach = useDispatch();
+
+  useEffect(() => {
+    newData = [...data];
+
+    if (allData.amenities.length > 0 || allData.commonAmenities > 0) {
+      let city = allData.city.toUpperCase();
+      newData.push(city);
+      let propertyType = allData.propertyType.toUpperCase();
+      newData.push(propertyType);
+      let imageCount = `${allData.imageCount} PHOTOS`;
+      newData.push(imageCount);
+      let maxGuests = `${allData.maxGuests} MAX GUESTS`;
+      newData.push(maxGuests);
+      let unit = `${allData.propertyQuantity} UNIT`;
+      newData.push(unit);
+      let bedrooms = `${allData.bedrooms} BEDROOM`;
+      newData.push(bedrooms);
+      let bethrooms = `${allData.bethrooms} BETHROOMS`;
+      newData.push(bethrooms);
+      let amenities = allData.amenities;
+      for (let i of amenities) {
+        newData.push(i.toUpperCase());
+      }
+
+      let commonAmenities = allData.commonAmenities;
+      for (let i of commonAmenities) {
+        newData.push(i.toUpperCase());
+      }
+
+      let petsAllowed = `${
+        allData.petsAllowed ? "PETS NOT ALLOWED" : "PETS ALLOWED"
+      }`;
+      newData.push(petsAllowed);
+      let weekday = `${allData.currency}${allData.weekday} ON WEEKDAYS FOR ${allData.maxGuests} GUEST`;
+      newData.push(weekday);
+      let weekend = `${allData.currency}${allData.weekend} ON WEEKENDS FOR ${allData.maxGuests} GUEST`;
+      newData.push(weekend);
+      let mealplan = allData.mealplan.toUpperCase();
+      newData.push(mealplan);
+      let policy = allData.policy.toUpperCase();
+      newData.push(policy);
+      setData((prev) => newData);
+    } else {
+      setData((prev) => [
+        "LONAVALA, MAHARASHTRA, INDIA",
+        "COTTAGE",
+        "6 PHOTOS",
+        "1 MAX GUESTS",
+        "1 UNIT",
+        "1 BEDROOM",
+        "SOFA",
+        "POWER BACKUP",
+        "PARKING",
+        "PETS NOT ALLOWED",
+        "INR2000 ON WEEKDAYS FOR 1 GUEST",
+        "INR20000 ON WEEKENDS FOR 1 GUEST",
+        "INR FOR EXTRA PERSON",
+        "EUROPEAN PLAN",
+        "COMMON CANCELLATION POLICY",
+      ]);
+    }
+  }, [allData]);
+
   return (
     <div className={styles.container}>
       <div>
@@ -46,8 +116,12 @@ const PropertyDetails6 = () => {
           </div>
         </div>
         <div className={styles.box_3}>
-          <button>PREVIOUS</button>
-          <button>UPLOAD YOUR LISTING</button>
+          <Link to="/host/create-property/6">
+            <button>PREVIOUS</button>
+          </Link>
+          <Link to="/host/create-property/8">
+            <button>UPLOAD YOUR LISTING</button>
+          </Link>
         </div>
       </div>
     </div>

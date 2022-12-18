@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./PropertyDetails6.module.css";
 import {
   Button,
@@ -12,9 +12,33 @@ import {
   Select,
   useDisclosure,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  currency,
+  mealplan,
+  policy,
+  weekday,
+  weekend,
+} from "../../../Redux/DataReducer/action";
+import { useEffect } from "react";
+
 const PropertyDetails6 = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [value, setValue] = React.useState("1");
+  const [weekdayValue, setWeekdayValue] = useState("");
+  const [weekendValue, setWeekendValue] = useState("");
+
+  const type = useSelector((store) => store.dataReducer.propertyType);
+  const data = useSelector((store) => store.dataReducer);
+  console.log("data:", data);
+
+  const disptach = useDispatch();
+
+  useEffect(() => {
+    disptach(weekday(weekdayValue));
+    disptach(weekend(weekendValue));
+  }, [weekdayValue, weekendValue, disptach]);
+
   return (
     <div className={styles.container}>
       <div>
@@ -25,10 +49,8 @@ const PropertyDetails6 = () => {
           <div className={styles.box_2_selection_1}>
             <p>Which currency do you operate in?</p>
             <div>
-              <Select>
-                <option value="INR" selected="selected">
-                  India Rupee (INR)
-                </option>
+              <Select onChange={(e) => disptach(currency(e.target.value))}>
+                <option value="INR">India Rupee (INR)</option>
                 <option value="AED">United Arab Emirates Dirham (AED)</option>
                 <option value="AUD">Australia Dollar (AUD)</option>
                 <option value="BRL">Brazil Real (BRL)</option>
@@ -58,37 +80,45 @@ const PropertyDetails6 = () => {
             </div>
           </div>
           <div className={styles.box_2_selection_2}>
-            <p>Default Rates For Cottage</p>
+            <p>Default Rates For {type || "Cottage"}</p>
             <div className={styles.divider}></div>
 
             <div>
               <div>
                 <label>Weekday Rate (Mon to Thu)</label>
-                <input placeholder="In Number" type="number"></input>
+                <input
+                  placeholder="In Number"
+                  type="number"
+                  value={weekdayValue}
+                  onChange={({ target }) => setWeekdayValue(target.value)}
+                ></input>
               </div>
               <div>
                 <label>Weekend Rate (Fri to Sun)</label>
-                <input placeholder="In Number" type="number"></input>
+                <input
+                  placeholder="In Number"
+                  type="number"
+                  value={weekendValue}
+                  onChange={({ target }) => setWeekendValue(target.value)}
+                ></input>
               </div>
               <div>
                 <label>Rates Valid For Guests</label>
                 <Select>
-                  <option value="1" selected="selected">
-                    1
-                  </option>
+                  <option value="1">1</option>
                 </Select>
               </div>
 
               <div>
                 <label>Meal Plan</label>
-                <Select>
+                <Select onChange={(e) => disptach(mealplan(e.target.value))}>
                   <option value="European Plan">European Plan</option>
                   <option value="Continental Plan">Continental Plan</option>
                   <option value="Modified American Plan">
                     Modified American Plan
                   </option>
                   <option value="All American Plan">All American Plan</option>
-                  <option value="Breakfast, Lunch, Dinner" selected="selected">
+                  <option value="Breakfast, Lunch, Dinner">
                     Breakfast, Lunch, Dinner
                   </option>
                 </Select>
@@ -160,12 +190,10 @@ const PropertyDetails6 = () => {
               </div>
               <div>
                 <label>Cancellation Policy</label>
-                <Select>
+                <Select onChange={(e) => disptach(policy(e.target.value))}>
                   <option value="Lenient">Lenient</option>
                   <option value="Friendly">Friendly</option>
-                  <option value="Common" selected="selected">
-                    Common
-                  </option>
+                  <option value="Common">Common</option>
                   <option value="Stringent">Stringent</option>
                   <option value="Rigorous">Rigorous</option>
                   <option value="Non Refundable">Non Refundable</option>
@@ -175,8 +203,12 @@ const PropertyDetails6 = () => {
           </div>
         </div>
         <div className={styles.box_3}>
-          <button>PREVIOUS</button>
-          <button>NEXT</button>
+          <Link to="/host/create-property/5">
+            <button>PREVIOUS</button>
+          </Link>
+          <Link to="/host/create-property/7">
+            <button>NEXT</button>
+          </Link>
         </div>
       </div>
     </div>
