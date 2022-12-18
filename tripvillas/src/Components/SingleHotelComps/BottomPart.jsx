@@ -14,33 +14,7 @@ const [scrollPosition, setScrollPosition] = useState(0);
   const Aminitie = useRef(null);
   const Map = useRef(null);
   const Policies = useRef(null);
-  const nav = useRef(null)
   var search_query = "goa";
-
-  const handleScroll = () => {
-      const position = window.pageYOffset;
-      setScrollPosition(position);
-  };
-  
-  useEffect(() => {
-     if(scrollPosition>650){
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      console.log(scrollPosition)
-     }else{
-        setIstop((state)=>!state)
-            console.log(isTop)
-     }
-  
-      return () => {
-          window.removeEventListener('scroll', handleScroll);
-          // if(scrollPosition>650){
-          //   setIstop((state)=>!state)
-          //   console.log(isTop)
-          // } 
-      };
-      
-  }, []);
-     
    
 
   const scrollFunc = (el) => {
@@ -56,7 +30,7 @@ const Aminities = [
 ]
   return (
     <Box w="100%" mt= "10px" >
-      <HStack w="70%" id="nav" p=" 40px" pb="0px" ref={nav}   position = {isTop ? "fixed" : ""} z-index={isTop ? "2":"none"} top={isTop ? "-8" :"none"} > 
+      <HStack w={{base:"100%",lg:"100%"}} bg="white" id="nav" p=" 40px" pb="0px"  position = "sticky" top="0" > 
       <Button outline="none" colorScheme={"gray"} bg="none" onClick={()=>{scrollFunc(Overview)}}  _hover={{background:"none"}} leftIcon={<InfoOutlineIcon />} variant='solid'>
     OVERVIEW
   </Button>
@@ -98,7 +72,7 @@ const Aminities = [
               </Box>
           </Box>
 
-          <Box w="100%" >
+          <Box w={{base:"60%",lg:"100%"}} >
             <Text pb={"20px"} >
             Nestled in the south of Goa is a home away from home. Keeping in mind that one would come to Goa to get close to nature and close to the beach. We have to offer a holiday apartment with one bedroom, living area, dining, kitchen and a small balcony just overlooking the pool. The apartment is in a secured gated complex just across the road from the sands of Benaulim Beach. Literally, a hop, skip and a jump from the main gate.
             </Text>
@@ -193,19 +167,19 @@ const Aminities = [
       <Box p="40px" ref={Policies} >
         <Heading>POLICIES & FEES</Heading>
        < Divider orientation="horizontal" />
-      <HStack w="100%" >
-            <Box w="50%" >
+      <HStack w="100%" flexDirection={{base:"column",lg:"row"}} >
+            <Box w={{base:"100%",lg:"50%"}} >
               <Heading m="30px 14px" size={"md"} >Default Cancellation Policy</Heading>
              <Text>No charges will be levied if booking is canceled 61 days prior to check-in. If cancellation is done between 30 to 60 days prior to check-in, 50% of the total booking amount will be charged. Post that, there will be no refund.</Text>
               </Box>
              
-              <Box>
+              <Box   w={{base:"100%",lg:"50%"}}>
               <Heading m="30px 14px" size={"md"} >House Rules</Heading>
                <Text>Loud Music not allowed. Pets allowed on request</Text>
             </Box>
           </HStack>
 
-          <Box w="45%" alignItems={"flex-start"} >
+          <Box  w={{base:"100%",lg:"50%"}} alignItems={"flex-start"} >
               <Heading m="30px 14px" size={"md"} >Cleaning Fee</Heading>
                <Text>Cleaning Fee INR 700.00 Fixed Amount Per Stay</Text>
             </Box>

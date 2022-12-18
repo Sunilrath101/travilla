@@ -3,18 +3,24 @@ import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/input";
 import { Box, Heading, HStack, List, ListItem, VStack, Wrap, WrapItem, Divider,Text,Center, UnorderedList, Spacer } from "@chakra-ui/layout";
 import React, { useState } from "react";
 import { Button } from "@chakra-ui/button";
-import { CheckIcon } from "@chakra-ui/icons";
-import { useSelector } from "react-redux";
+import { CheckIcon, InfoOutlineIcon } from "@chakra-ui/icons";
+import { useDispatch, useSelector } from "react-redux";
 import { sendSignInLinkToEmail } from "@firebase/auth";
-import { Navigate } from "react-router";
+import { Navigate, useParams } from "react-router";
+import { getDatafromLocal } from "../../Redux/DataReducer/action";
 
  const BookingPage = () => {
   const [error,setError] = useState(false)
   const [mobile,setMobile] = useState("");
   const [fname,setFname] = useState("");
   const [email,setEmail] = useState("");
-  const { bookedData } = useSelector((state)=>state.dataReducer)
-   console.log(bookedData)
+  const dispatch = useDispatch();
+  dispatch(getDatafromLocal)
+  const { BookedData } = useSelector((state)=>state.dataReducer)
+  console.log(BookedData)
+   const p = BookedData.Price*80;
+   const r = BookedData.Range;
+   const {id} = useParams()
   const {isAuth} = useSelector((state)=> state.authReducer)
 
   const myfunc = () => {
@@ -29,11 +35,11 @@ import { Navigate } from "react-router";
     }
   }
 
-  const details = [ ["Check in"],["Check Out"],["Guests"],["Units"] ]
+  const details = [ ["Check in",BookedData.Checkin],["Check Out",BookedData.Checkout],["Guests",BookedData.guests],["Units",1] ]
 
-  return <HStack w="100%" p="40px" spacing="60px" alignItems="flexStart" >
-     <VStack w="55%" >
-       <Box bg="blue" p="40px" w="100%" my="20px" >
+  return <HStack w={{base:"150%",md:"100%"}} p="40px" spacing="60px" alignItems="flexStart" flexDirection={{base:"column",lg:"row"}} >
+     <VStack w={{base:"100%",lg:"55%"}}  >
+       <Box bg="blue.700" p="40px" w="100%" my="20px" >
          <Heading size="md" my="10px" >
           Book Tension Free
          </Heading>
@@ -50,11 +56,11 @@ import { Navigate } from "react-router";
        </Box>
 
        <HStack w="100%" h="170px" spacing="40px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} py = "20px" >
-           <Image w="320px" h="170px" src={""} fallbackSrc='https://via.placeholder.com/170' />
+           <Image display={{base:"none",lg:"inLine"}} w="320px" h="170px" src={BookedData?.Image} fallbackSrc='https://via.placeholder.com/170' />
            <Box w="100%" >
-            <Text>Property Ref ID {}</Text>
-            <Heading>Hotel{}</Heading>
-            <Text>{}state,city</Text>
+            <Text>Property Ref ID {id}</Text>
+            <Heading size="lg" >{BookedData.hotel}</Heading>
+            <Text>{BookedData.city },{BookedData.state}</Text>
             <Text> {},Accomodates max 5 guests | 2 Bedrooms | 2 Bathrooms </Text>
            </Box>
        </HStack>
@@ -64,8 +70,8 @@ import { Navigate } from "react-router";
           { details.map((el)=> {
             return (
               <WrapItem key={el} >
-                <Center w="170px" h="150px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
-                  <Heading>{}</Heading>
+                <Center w={{base:"150px",md:"300px" , lg:"160px"}} h="140px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) " }flexDirection="column"  >
+                  <Heading size="md" >{el[1]}</Heading>
                   <Text>{el[0]}</Text>
                 </Center>
               </WrapItem>
@@ -77,8 +83,8 @@ import { Navigate } from "react-router";
       <Box w="100%" p="10px" >
         <HStack my="10px" >
           <Text>Sub Total</Text>
-        <Box w="80%"  borderBottom="1px dashed grey" ></Box>
-        <Text>${}</Text>
+        <Box w="75%"  borderBottom="1px dashed grey" ></Box>
+        <Text>Rs {r*(p).toFixed(2)}/-</Text>
                 </HStack>
 
                 <HStack my="10px" >
@@ -89,21 +95,22 @@ import { Navigate } from "react-router";
 
                 <HStack my="10px" >
           <Text>Tax</Text>
-          <Box w="85%"  borderBottom="1px dashed grey" ></Box>
-        <Text>${}</Text>
+          <Box w="80%"  borderBottom="1px dashed grey" ></Box>
+        <Text>Rs {(r*p*0.14).toFixed(2)}/-</Text>
                 </HStack>
       
        <Divider orientation="horizontal" />
       
        <HStack my="20px" >
           <Text size="md" >Total</Text>
-          <Box w="84%"  borderBottom="2px dashed grey" ></Box>
-        <Text>${}</Text>
+          <Box w="75%"  borderBottom="2px dashed grey" ></Box>
+        <Text>Rs {r*(p+p*14/100).toFixed(2)}/-</Text>
                 </HStack>
        </Box>
 
        <Box w="97%" bg="red.200" color="red" p="10px" >
-        <Heading size="28px" >Above price DOES NOT include</Heading>
+      <HStack> <InfoOutlineIcon />
+        <Heading size="28px" >Above price DOES NOT include</Heading></HStack>
         <HStack  my="20px" >
           <Text>Cleaning Fee</Text>
           <Box w="74%" borderBottom="1px dashed red" ></Box>
@@ -130,10 +137,12 @@ import { Navigate } from "react-router";
        </Box>
      </VStack>
 
-     <VStack w="45%" >
-      <Box w="100%" h="50px" bg="red.100" color="red" p="10px" my="20px" >
-      Book fast. Your dates might get booked by someone else.
-      </Box>
+     <VStack w={{base:"80%",lg:"45%"}} m="auto" >
+      <HStack w="100%" h="50px" bg="red.100" color="red" p="10px" my="20px" >
+         <InfoOutlineIcon />
+       
+      <Text>Book fast. Your dates might get booked by someone else.</Text>
+      </HStack>
 
       <Box w="100%" h="auto" p="20px" boxShadow={"0 5px 15px rgb(0 0 0 / 8%) "} >
         <HStack p="10px" ><Heading size="md" >Enter your contact information</Heading></HStack>

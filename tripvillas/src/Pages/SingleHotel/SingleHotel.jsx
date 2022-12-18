@@ -15,6 +15,8 @@ import { Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHea
 import { getDatafromLocal, getSingleHotel, sendDatatoLocal } from "../../Redux/DataReducer/action";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import BookingPage from "../BookingPage/BookingPage";
+import { CheckIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 
 
 const SingleHotel = () => {
@@ -25,6 +27,7 @@ const SingleHotel = () => {
   const [val,setVal] = useState("")
   const [loader,setLoader] = useState(false);
   const [p,setP]=useState(0)
+  const [r,setR] = useState(1)
 
   var initial = []
   if(BookedData.date!=undefined){
@@ -34,8 +37,10 @@ const SingleHotel = () => {
   const [date,setDate] = useState(initial);
   const [ load,setLoad ] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const k = useDisclosure()
     const {search_query, id } = useParams();
-
+   const [isOpen1, onOpen1, onClose1 ]=[1,2,3]
+  console.log(k)
 
     useEffect(()=> {
       
@@ -72,6 +77,10 @@ const SingleHotel = () => {
       var checkout =  `${date[1].day}/${date[1].monthIndex+1}/${ date[1].year}`;
       var range = date[1].dayOfBeginning-date[0].dayOfBeginning +1;
       var price = p;
+      var image = obj.images_large[0];
+      var city = obj.city;
+      var state = obj.state;
+      var hotel = obj.title;
    
       if(checkin == day  ){
         setAvailable(false)
@@ -83,12 +92,17 @@ const SingleHotel = () => {
           Range : range,
           Price : p,
           guests : guests || 1,
-          date : date
+          date : date,
+          Image : image,
+          hotel : hotel,
+          city : city,
+          state : state
          }
          console.log(typeof(date[0]))
         if(typeof(date[0])!=='number'){
           dispatch(sendDatatoLocal(BookedData))
         }
+        
       }
     }
    }
@@ -107,9 +121,16 @@ const SingleHotel = () => {
     //  console.log(Facilities)
     useEffect(()=>{
       const price = Math.floor(obj?.max_price_in_usd * 80);
+      if(date.length !==0){
+        const Range = date[1]?.dayOfBeginning-date[0].dayOfBeginning  || 1
+      setR(Range);
+      }
       setP(price)
-    },[obj])
-  return   <HStack w={"100%"} p={"20px"}  >
+      console.log(r)
+    },[date,obj])
+
+  
+  return <Box   >  <HStack w={{base:"150%",md:"100%"}} p={"20px"}  >
    <Box w={{base:"100%",md:"100%",lg:"70%"}} marginLeft={{sm:"6%"}} paddingRight={"40px"} borderRight={"1px solid #A9A9A9"} >
    <RouteComp />
    <Divider colorScheme={"#D3D3D3"} orientation='horizontal' />
@@ -139,9 +160,28 @@ const SingleHotel = () => {
   </HStack>
   <BottomPart bed = {obj?.number_of_rooms} bath = {obj?.number_of_bathrooms} type = {obj?.property_type} guest={guests} />
    </Box>
+{/* 
+   for small and medium screen */}
 
-   <Divider colorScheme={"#D3D3D3"} orientation='vertical' display = {{base:"none",md:"none","lg":"block"}} />
-  <Box w="370px" h={"100%"} position="fixed" top="14" right={"0"} p="40px"  display = {{base:"none",md:"none","lg":"block"}} >
+     <HStack w="100%" h="80px" bg="black" px="20px" position = "fixed" z-index="3" bottom="0" left="-1" display={{base:"flex",lg:"none"}} >
+     <HStack>
+  
+  <Heading size="md" >Rs {p}/-</Heading>
+  <Text>per Night</Text>
+  </HStack>
+
+    <Spacer/>
+    <Button colorScheme="blue" onClick={k.onOpen} > CHECK AVAILABILITY </Button>
+     </HStack>
+
+
+     <Modal isOpen={k.isOpen} size="full" onClose={k.onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader></ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+          <Box w="100%" h={"100%"} p="40px" >
       <Text>Starting</Text>
       <HStack>
   
@@ -149,7 +189,7 @@ const SingleHotel = () => {
       <Text>per Night</Text>
       </HStack>
 
-      { date.length<2 ? <Box bg="red.100" p="10px" color={"red.900"} >Select dates</Box> : (availability) ? <Box bg="green.100" p="10px" color={"green.900"} >Your dates are available to book</Box> : <Box  bg="red.100" p="10px" color={"red.900"} >Advance Booking 1 day prior</Box> }
+      { date.length<2 ? <HStack bg="red.100" p="10px" color={"red.900"} > <InfoOutlineIcon /><Text>Select dates</Text></HStack> : (availability) ? <HStack bg="green.100" p="10px" color={"green.900"} ><CheckIcon boxSize="4" /><Text>Your dates are available to book</Text></HStack> : <Box  bg="red.100" p="10px" color={"red.900"} >Advance Booking 1 day prior</Box> }
 
      <Box mt="20px"   > <DatePicker style={{
     background: "none",
@@ -188,7 +228,78 @@ const SingleHotel = () => {
     </Box>
    <Spacer />
     <Box>
-      <Text fontSize="lg" >Rs {p+p*14/100}/-</Text>
+      <Text fontSize="lg" >Rs {(r*(p+p*0.14)).toFixed(2)}/-</Text>
+      <Link onClick={OpenModafunc} fontSize="xs" color="blue" >view Details</Link>
+    </Box>
+   </HStack>
+
+   <Button w="100%" mt="20px"
+   colorScheme={"blue"}
+  isLoading={loader}
+   height="50px"
+   onClick={submitFunc}
+  spinner={<BeatLoader size={10} color='white' />}
+>
+  Request to Book
+</Button>
+  </Box>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    
+  
+
+
+   <Divider colorScheme={"#D3D3D3"} orientation='vertical' display = {{base:"none",md:"none","lg":"block"}} />
+
+  <Box w="370px" h={"100%"} position="fixed" top="14" right={"0"} p="40px"  display = {{base:"none",md:"none","lg":"block"}} >
+      <Text>Starting</Text>
+      <HStack>
+  
+      <Heading>Rs {p}/-</Heading>
+      <Text>per Night</Text>
+      </HStack>
+
+      { date.length<2 ? <HStack bg="red.100" p="10px" color={"red.900"} > <InfoOutlineIcon /><Text>Select dates</Text></HStack> : (availability) ? <HStack bg="green.100" p="10px" color={"green.900"} ><CheckIcon boxSize="4" /><Text>Your dates are available to book</Text></HStack> : <Box  bg="red.100" p="10px" color={"red.900"} >Advance Booking 1 day prior</Box> }
+
+     <Box mt="20px"   > <DatePicker style={{
+    background: "none",
+    height: "38px",
+    width:"290px",
+    borderRadius: "3px",
+    fontSize: "14px",
+    padding: "3px 50px",
+    border:"1px solid grey",
+  
+  }} placeholder="Check in               Check out"  range={true} rangeHover={true} numberOfMonths={2} value={date}
+   onChange={setDate}  layout="mobile" /></Box>
+
+  <HStack mt="-40px" zIndex="3" spacing="100px" w="300px" h="38px" >
+  <Box><CiLogin size={"28px"} /></Box>
+  <Box w="15px" h="100%" bg="default"  ></Box>
+  <Box ><CiLogout  size={"28px"} /></Box>
+  </HStack>
+
+  <Box width="100%" my="20px" >
+  <Select id="guest" placeholder='Select Guests' onChange={(e)=>{setGuests(e.target.value)}} >
+  <option value='1'>1 Guest</option>
+  <option value='2'>2 Guests</option>
+  <option value='3'>3 Guests</option>
+  <option value='4'>4 Guests</option>
+  <option value='5'>5 Guests</option>
+</Select>
+  </Box>
+
+  <Text fontSize="sm" >Rateplan: No meals provided (European Plan)</Text>
+
+   <HStack mt="20px" >
+    <Box>
+      <Text fontSize="lg" >Total</Text>
+      <Text fontSize="xs" >Include Taxes and fees</Text>
+    </Box>
+   <Spacer />
+    <Box>
+      <Text fontSize="lg" >Rs {(r*(p+p*0.14)).toFixed(2)}/-</Text>
       <Link onClick={OpenModafunc} fontSize="xs" color="blue" >view Details</Link>
     </Box>
    </HStack>
@@ -242,7 +353,7 @@ const SingleHotel = () => {
                 <HStack my="10px" >
           <Text>Tax</Text>
           <Box w="73%"  borderBottom="1px dashed grey" ></Box>
-        <Text>Rs {p*0.14}/-</Text>
+        <Text>Rs {(p*0.14*r).toFixed(2)}/-</Text>
                 </HStack>
       
        <Divider orientation="horizontal" />
@@ -250,7 +361,7 @@ const SingleHotel = () => {
        <HStack my="20px" >
           <Text size="md" >Total</Text>
           <Box w="75%"  borderBottom="2px dashed grey" ></Box>
-        <Text>Rs {p+p*14/100}/-</Text>
+        <Text>Rs {(r*(p+p*0.14)).toFixed(2)}/-</Text>
                 </HStack>
        </Box>
 
@@ -290,9 +401,11 @@ const SingleHotel = () => {
           </ModalFooter>
         </ModalContent>
       </Modal>
-
+     
 </HStack>   
-
+<BookingPage />
+</Box>
+   
 };
 
 export default SingleHotel;
