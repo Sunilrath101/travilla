@@ -3,9 +3,19 @@ import styles from "./PropertyDetails1.module.css";
 import Map from "../../../../src/Components/Map/Map";
 import { useState } from "react";
 import { Select } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { city } from "../../../Redux/DataReducer/action";
 
 const PropertyDetails1 = () => {
-  const [city, setCity] = useState("");
+  const disptach = useDispatch();
+  const [iscity, setIsCity] = useState("");
+
+  useEffect(() => {
+    disptach(city("Patna"));
+  }, [disptach, iscity]);
+
   return (
     <div className={styles.container}>
       <div>
@@ -22,37 +32,29 @@ const PropertyDetails1 = () => {
               <input
                 type="text"
                 placeholder="Search your location"
-                value={city}
-                onChange={({ target }) => setCity(target.value)}
+                value={iscity}
+                onChange={({ target }) => setIsCity(target.value)}
               />
-              <Map height="400px" width="100%" city={city || "delhi"} />
+              <Map height="400px" width="100%" city={iscity || "delhi"} />
             </div>
             <div>
               <div>
                 <label>Country</label>
                 <Select>
-                  <option value="INDIA" selected="selected">
-                    INDIA
-                  </option>
+                  <option value="INDIA">INDIA</option>
                 </Select>
               </div>
               <div>
                 <label>State</label>
                 <Select>
-                  <option value="Bihar" selected="selected">
-                    Bihar
-                  </option>
+                  <option value="Bihar">Bihar</option>
                 </Select>
               </div>
               <div>
                 <label>City</label>
                 <Select>
-                  <option value="Patana" selected="selected">
-                    Patana
-                  </option>
-                  <option value="Gaya" selected="selected">
-                    Gaya
-                  </option>
+                  <option value="Patana">Patana</option>
+                  <option value="Gaya">Gaya</option>
                 </Select>
               </div>
               <div>
@@ -62,7 +64,9 @@ const PropertyDetails1 = () => {
           </div>
         </div>
         <div className={styles.box_3}>
-          <button>NEXT</button>
+          <Link to="/host/create-property/2">
+            <button>NEXT</button>
+          </Link>
         </div>
       </div>
     </div>

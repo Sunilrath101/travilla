@@ -133,12 +133,12 @@
   padding: 1.5rem 3rem;
   /* border: 1px solid goldenrod; */
 }
-.box_3 > button:nth-child(1) {
+.box_3 > a:nth-child(1) > button {
   font-size: 0.75rem;
   border: 1px solid gray;
   padding: 0.5rem 1.5rem;
 }
-.box_3 > button:nth-child(2) {
+.box_3 > a:nth-child(2) > button {
   font-size: 0.75rem;
   color: white;
   background-color: #1e87f0;

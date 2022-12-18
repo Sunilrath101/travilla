@@ -1,8 +1,23 @@
 import React from "react";
 import styles from "./PropertyDetails2.module.css";
 import { Radio, RadioGroup } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loadData, saveData } from "../../../utils/accesslocalStorage";
+import { propertyType } from "../../../Redux/DataReducer/action";
+
 const PropertyDetails2 = () => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = React.useState(loadData("propertyType") || "");
+  // const data = useSelector((store) => store.dataReducer);
+  const disptach = useDispatch();
+
+  useEffect(() => {
+    saveData("propertyType", value);
+    disptach(propertyType(value));
+  }, [value]);
+
+  // console.log("value:", data);
   return (
     <div className={styles.container}>
       <div>
@@ -15,7 +30,7 @@ const PropertyDetails2 = () => {
               Select one of these if you have rooms that you rent out
               individually
             </h1>
-            <RadioGroup onChange={setValue} value={value}>
+            <RadioGroup>
               <Radio value="Resort">Resort</Radio>
               <Radio value="Homestay">Homestay</Radio>
               <Radio value="Farm">Farm</Radio>
@@ -33,7 +48,7 @@ const PropertyDetails2 = () => {
               Select one of these if you rent out entire properties of the types
               below
             </h1>
-            <RadioGroup onChange={setValue} value={value}>
+            <RadioGroup onChange={(e) => setValue(e)} checked={value}>
               <Radio value="Room In Your House">Room In Your House</Radio>
               <Radio value="Studio">Studio</Radio>
               <Radio value="Villa">Villa</Radio>
@@ -48,8 +63,12 @@ const PropertyDetails2 = () => {
           </div>
         </div>
         <div className={styles.box_3}>
-          <button>PREVIOUS</button>
-          <button>NEXT</button>
+          <Link to="/host/create-property">
+            <button>PREVIOUS</button>
+          </Link>
+          <Link to="/host/create-property/3">
+            <button>NEXT</button>
+          </Link>
         </div>
       </div>
     </div>
