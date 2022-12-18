@@ -3,6 +3,7 @@ import * as types from "./actionTypes"
 import axios from "axios";
 
 const sendDatatoLocal = (payload) => {
+
   return {
     type: types.SendToLocalStorage,
     payload
@@ -12,6 +13,14 @@ const sendDatatoLocal = (payload) => {
 const getDatafromLocal = () => {
   return {
     type: types.GetFromLocalStorage
+  }
+}
+
+const getSingleHotel = (payload) => {
+  console.log(payload)
+  return {
+    type : types.getHotelbyId,
+    payload
   }
 }
 
@@ -37,9 +46,9 @@ const getHotelListErr = () => {
 const getData = (q) => (dispatch) => {
   dispatch(getHotelListReq())
   return axios
-    .get(`https://long-plum-mite-cape.cyclic.app/results?q=${q}&_limit=7`)
+    .get(`https://long-plum-mite-cape.cyclic.app/results?q=${q}&_limit=7}`)
     .then((res) => dispatch(getHotelListSuc(res.data)))
     .catch((err) => dispatch(getHotelListErr()))
 }
 
-export { sendDatatoLocal, getDatafromLocal, getHotelListErr, getHotelListReq, getHotelListSuc, getData }
+export { sendDatatoLocal, getDatafromLocal, getHotelListErr, getHotelListReq, getHotelListSuc, getData,getSingleHotel }
