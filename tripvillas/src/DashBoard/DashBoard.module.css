@@ -294,7 +294,7 @@
   height: 91.5vh;
   /* align-items: center; */
   /* justify-content: center; */
-  border: 4px solid red;
+  
 }
 .dashboard_container_leftpanel {
   border: 1px solid;
@@ -314,8 +314,8 @@
   margin-top: 10px;
 }
 .dashboard_container_rightpanel {
-  border: 3px solid teal;
-  width: 100%;
+  
+  width: 80%;
 
 }
 .dashboard_footer {
@@ -323,7 +323,7 @@
   color: #fff;
   position: absolute;
   bottom: 0px;
-  width: 100%;
+  width: 80%;
   height: 60px;
   padding-left: 20px;
   padding-top: 14px;

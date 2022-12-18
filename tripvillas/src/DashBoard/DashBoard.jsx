@@ -35,10 +35,10 @@ const DashBoard = () => {
         return <AddProperty />;
     }
   };
-  const navigate=useNavigate()
-  if(!isAuth){
-    navigate('/')
-    return 
+  const navigate = useNavigate();
+  if (!isAuth) {
+    navigate("/");
+    return;
   }
   console.log("welcome");
   return (
