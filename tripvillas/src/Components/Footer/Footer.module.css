@@ -1,7 +1,37 @@
+.container{
+    width: 100%;
+    /* border: 1px solid green; */
+}
 .box{
+    /* border: 1px solid green; */
     display: flex;
     gap: 40px;
+    margin: 20px 0px 50px 0;
 }
-.first{
-    border: 1px solid red;
+.box > .first{
+    /* border: 1px solid black; */
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px 20px;
 }
+.first > div{
+    text-align: center;
+    /* border: 1px solid red; */
+}
+.first > div > a{
+    color: black;
+    font-size: 14px;
+}
+.first > div > p{
+    color: gray;
+    font-size: 12px;
+}
+
+@media all and (min-width:320px) and (max-width:481px){
+    .box > .first{
+        grid-template-columns: repeat(3 ,1fr) 
+    }
+    /* .css-1xhq01z{
+        
+    } */
+  }

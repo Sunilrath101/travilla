@@ -45,6 +45,8 @@ const Home = () => {
           <BoxSlider q="topDestinations"/>
         </Box>
 
+        {/* Section - 3 */}
+
         <div className={style.section3}>
           <div className={style.left}>
             <h2>Fully Managed Communities By Tripvillas</h2>
@@ -92,6 +94,8 @@ const Home = () => {
               })}
           </div>
         </div>
+
+        {/* Sectio - 4 */}
 
         <div className={style.section4}>
           <HomeCard />
