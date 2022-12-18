@@ -3,13 +3,14 @@ import styles from "./PropertyDetails5.module.css";
 import { Checkbox, Select } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { imageCount } from "../../../Redux/DataReducer/action";
 
 const PropertyDetails5 = () => {
   const [value, setValue] = React.useState([]);
   const [image, setImage] = React.useState([]);
-
+  const data = useSelector((store) => store.dataReducer);
+  console.log("data:", data);
   const disptach = useDispatch();
 
   const counterHandler = (index) => {

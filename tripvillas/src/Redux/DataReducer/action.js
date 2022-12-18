@@ -16,6 +16,7 @@ import {
   WEEKEND,
   IMAGE,
 } from "./actionTypes";
+import axios from "axios";
 
 export const city = (payload) => {
   return { type: CITY, payload };
@@ -66,4 +67,12 @@ export const policy = (payload) => {
 };
 export const image = (payload) => {
   return { type: IMAGE, payload };
+};
+
+export const addData = (payload) => (dispatch) => {
+  return axios
+    .post("https://long-plum-mite-cape.cyclic.app/results", payload)
+    .then((res) => {
+      console.log(res.data);
+    });
 };

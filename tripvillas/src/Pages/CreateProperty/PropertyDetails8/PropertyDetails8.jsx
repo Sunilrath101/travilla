@@ -2,9 +2,21 @@ import React, { useState } from "react";
 import styles from "./PropertyDetails8.module.css";
 import { BsCheck2 } from "react-icons/bs";
 import { CircularProgress } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addData } from "../../../Redux/DataReducer/action";
 const PropertyDetails8 = () => {
   const [time, setTime] = useState(false);
+  const data = useSelector((store) => store.dataReducer);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const navigationHandle = () => {
+    dispatch(addData(data)).then((res) => {
+      navigate("/dashboard");
+    });
+  };
 
   useEffect(() => {
     let id;
@@ -28,7 +40,7 @@ const PropertyDetails8 = () => {
       {time && (
         <div className={styles.containor}>
           <h1>Listings created successfully.</h1>
-          <button onClick={"dashboard"}>GO TO DASHBOARD</button>
+          <button onClick={navigationHandle}>GO TO DASHBOARD</button>
           <div className={styles.box_1}>
             <div>
               <p>
