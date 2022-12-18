@@ -13,12 +13,15 @@ import PropertyDetails8 from "./CreateProperty/PropertyDetails8/PropertyDetails8
 
 import Home from "./Home/Home";
 import HotelLists from "./HotelLists/HotelLists";
+import SearchCity from "./SearchCity/SearchCity";
 import SearchState from "./SearchState/SearchState";
+import SingleHotel from "./SingleHotel/SingleHotel";
 
 const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+<<<<<<< HEAD
       <Route path="/dashBoard" element={<DashBoard />} />
       <Route path="/search-state" element={<SearchState />} />
       <Route path="/hotel-list" element={<HotelLists />} />
@@ -30,6 +33,14 @@ const AllRoutes = () => {
       <Route path="/host/create-property/6" element={<PropertyDetails6 />} />
       <Route path="/host/create-property/7" element={<PropertyDetails7 />} />
       <Route path="/host/create-property/8" element={<PropertyDetails8 />} />
+=======
+      <Route path="/dashboard" element={<DashBoard />} />
+      <Route path="/search-state/:state_query" element={<SearchState />} />
+      <Route path="/search-city/:city_query" element={<SearchCity />} />
+      <Route path="/hotel-list/:search_query" element={<HotelLists />} />
+      <Route path="/host/create-property" element={<CreateProperty />} />
+      <Route path="/singlehotelpage/:id" element={<SingleHotel />} />
+>>>>>>> main
     </Routes>
   );
 };

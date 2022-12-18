@@ -1,3 +1,5 @@
+import * as types from "./actionTypes"
+
 import {
   AMENITIES,
   BATHROOMS,
@@ -17,6 +19,7 @@ import {
   WEEKEND,
 } from "./actionTypes";
 
+var obj = JSON.parse(localStorage.getItem("BookedData")) || {};
 const intialData = {
   city: "delhi",
   propertyType: "",
@@ -34,10 +37,24 @@ const intialData = {
   mealplan: "",
   policy: "",
   image: [],
-};
+  isLoading: false,
+  isError: false,
+  BookedData: obj,
+  hotelList: "",
+}
+
+
+// const intialData = {
+//   isLoading: false,
+//   isError: false,
+//   BookedData: obj,
+//   hotelList: "",
+
+// };
 
 export const reducer = (state = intialData, { type, payload }) => {
   switch (type) {
+
     case IMAGE:
       return { ...state, image: payload };
     case CITY:
@@ -70,6 +87,27 @@ export const reducer = (state = intialData, { type, payload }) => {
       return { ...state, mealplan: payload };
     case POLICY:
       return { ...state, policy: payload };
+
+    case types.SendToLocalStorage: localStorage.setItem(("BookedData"), JSON.stringify(payload)); return state;
+
+
+    case types.GetFromLocalStorage:
+      var obj = JSON.parse(localStorage.getItem("BookedData")) || {}; console.log(obj); return {
+        ...state, BookedData: obj
+      }
+
+    // GET HOTEL LIST 
+
+    case types.getHotelListReq:
+      return { ...state, isLoading: true }
+
+    case types.getHotelListSuc:
+      return { ...state, isLoading: false, hotelList: payload }
+
+    case types.getHotelListErr:
+      return { ...state, isLoading: false, isError: true }
+
+
     default:
       return state;
   }
