@@ -718,7 +718,9 @@ const Navbar = () => {
                         <Link to="/host/create-property">
                           <div>List New Property</div>
                         </Link>
-                        <div>Sign In to Your Dashboard</div>
+                        <Link to="/dashboard">
+                          <div>Sign In to Your Dashboard</div>
+                        </Link>
                       </div>
                       <hr style={{ marginTop: "20px" }} />
                     </div>

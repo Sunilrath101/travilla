@@ -63,7 +63,7 @@ const MyBookings = () => {
               <Td>{Bookings?.Checkin}</Td>
               <Td>{Bookings?.Checkout}</Td>
               <Td>{Bookings?.guests}</Td>
-              <Td>{Bookings?.Price}</Td>
+              <Td>{Bookings?.Price*Bookings?.Range}</Td>
             </Tr>
         
           </Tbody>
