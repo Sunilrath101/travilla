@@ -11,6 +11,7 @@ import { Navigate, useParams } from "react-router";
 import { getDatafromLocal } from "../../Redux/DataReducer/action";
 
 import { Spinner, useDisclosure } from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import Payment from "../../Components/Payment/Payment";
 
 

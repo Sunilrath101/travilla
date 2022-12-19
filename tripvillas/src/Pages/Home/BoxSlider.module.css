@@ -34,4 +34,7 @@
     .swiper{
       width: 1000px;
     }
+    .swiper-wrapper > div{
+      width: 130px;
+    }
   }

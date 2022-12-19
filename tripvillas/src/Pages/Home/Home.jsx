@@ -85,7 +85,7 @@ const Home = () => {
             {bodyData &&
               bodyData.map((item) => {
                 return (
-                  <HomeImageBox
+                  <HomeImageBox className={style.grid}
                     name={item.name}
                     img={item.img}
                     location={item.location}
@@ -98,8 +98,32 @@ const Home = () => {
         {/* Sectio - 4 */}
 
         <div className={style.section4}>
-          <HomeCard />
-          <HomeCard />
+          <HomeCard 
+          heading="Holiday Home Investment Opportunities" 
+          img1="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/growth.svg"
+          img2="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/maids.svg"
+          img3="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/give-money.svg"
+          img4="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/plan.svg"
+          p1="Low Cost High Appreciation"
+          p2="Professionally Managed"
+          p3="Guaranteed To Produce Income"
+          p4="We Designed Floor Plans"
+          text="EXPLORE INVESTMENT OPPORTUNITIES"
+          link=""
+          />
+          <HomeCard 
+          heading="Are You A Holiday Home Owner/Manager?" 
+          img1="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/network.svg"
+          img2="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/layout.svg"
+          img3="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/flash.svg"
+          img4="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/smartphone-call.svg"
+          p1="Get Bookings From 100+ Websites"
+          p2="One Dashboard - Total Control"
+          p3="Instant Book Or Request To Book"
+          p4="Both iOS & Android App Available."
+          text="LIST YOUR PROPERTIES"
+          link="/host/create-property"
+          />
         </div>
 
         <Box p="40px">
