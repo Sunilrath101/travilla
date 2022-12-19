@@ -1,30 +1,31 @@
 import React from 'react'
 import Button from '../Button/Button'
 import style from './HomeCard.module.css'
+import {Link} from "react-router-dom"
 
-const HomeCard = () => {
+const HomeCard = ({heading, img1, img2, img3, img4, p1, p2, p3, p4, text, link}) => {
   return (
     <div className={style.box}>
-      <h2>Fully Managed Communities By Tripvillas</h2>
+      <h2>{heading}</h2>
         <div>
           <div>
-            <img src="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/housekeeper.svg" alt="" />
-            <p>High Quality housekeeping</p>
+            <img src={img1} alt="" />
+            <p>{p1}</p>
           </div>
           <div>
-            <img src="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/towel.svg" alt="" />
-            <p>Comfortable Linen and Toiletries</p>
+            <img src={img2} alt="" />
+            <p>{p2}</p>
           </div>
           <div>
-            <img src="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/bed.svg" alt="" />
-            <p>Quality Furniture & Fittings</p>
+            <img src={img3} alt="" />
+            <p>{p3}</p>
           </div>
           <div>
-            <img src="https://d2vcelvjdj7n25.cloudfront.net/newhome/icons/dinner.svg" alt="" />
-            <p>Food Delivery Or Central Restaurant</p>
+            <img src={img4} alt="" />
+            <p>{p4}</p>
           </div>
         </div>
-        <Button text="EXPLORE INVESTMENT OPPORTUNITIES"/>
+        <Link to={link}><Button text={text}/></Link>
     </div>
   )
 }
