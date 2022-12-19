@@ -3,9 +3,11 @@ import Button from '../Button/Button'
 import style from './HomeCard.module.css'
 import {Link} from "react-router-dom"
 
+
 const HomeCard = ({heading, img1, img2, img3, img4, p1, p2, p3, p4, text, link}) => {
   return (
     <div className={style.box}>
+    
       <h2>{heading}</h2>
         <div>
           <div>
@@ -27,7 +29,7 @@ const HomeCard = ({heading, img1, img2, img3, img4, p1, p2, p3, p4, text, link})
         </div>
         <Link to={link}><Button text={text}/></Link>
     </div>
-  )
-}
+  );
+};
 
-export default HomeCard
+export default HomeCard;

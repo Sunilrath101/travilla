@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Modal,
   ModalBody,
@@ -8,17 +9,19 @@ import {
   ModalHeader,
   ModalOverlay,
   useDisclosure,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import styles from "./Payment.module.css";
 import { MdArrowForwardIos } from "react-icons/md";
 import { SiPhonepe } from "react-icons/si";
-const Payment = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+import { Link, useNavigate } from "react-router-dom";
+
+const Payment = ({ isOpen, onOpen, onClose }) => {
+  const toast = useToast();
+  const navigate = useNavigate();
   return (
     <div>
-      <Button onClick={onOpen}>Open Modal</Button>
-
       <Modal isOpen={isOpen} onClose={onClose} size="sm" borderRadius="0">
         <ModalOverlay />
         <ModalContent borderRadius="0">
@@ -191,14 +194,28 @@ const Payment = () => {
             >
               <div style={{ width: "40%" }}>Value</div>
               <div style={{ width: "280px" }}>
-                <Button
-                  colorScheme="blue"
-                  mr={3}
-                  onClick={onClose}
-                  width="100%"
-                >
-                  Pay Now
-                </Button>
+                <Link to="/">
+                  
+                  <Button
+                    colorScheme="blue"
+                    mr={3}
+                    onClick={
+                      (onClose,
+                      () =>
+                        toast({
+                          position: "bottom-left",
+                          render: () => (
+                            <Box color="white" p={3} bg="green.500">
+                              Payment Successfull
+                            </Box>
+                          ),
+                        }))
+                    }
+                    width="100%"
+                  >
+                    Pay Now
+                  </Button>
+                </Link>
               </div>
             </div>
           </ModalFooter>

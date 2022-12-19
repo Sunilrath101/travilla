@@ -1,6 +1,7 @@
 .container{
     /* border: 1px solid red; */
     display: flex;
+    margin-top: 60px;
 }
 .left{
     /* border: 1px solid green; */

@@ -19,6 +19,7 @@ import {
   WEEKEND,
   IMAGE,
 } from "./actionTypes";
+import { saveData } from "../../utils/accesslocalStorage";
 export const city = (payload) => {
   return { type: CITY, payload };
 };
@@ -70,15 +71,20 @@ export const image = (payload) => {
   return { type: IMAGE, payload };
 };
 
-export const addData = (payload) => (dispatch) => {
-  return axios
-    .post("https://long-plum-mite-cape.cyclic.app/results", payload)
-    .then((res) => {
-      console.log(res.data);
-    });
-};
+// export const addData = (payload) => (dispatch) => {
+//   return axios
+//     .post("https://long-plum-mite-cape.cyclic.app/results", payload)
+//     .then((res) => {
+//       console.log(res.data);
+//     });
+// };
+
+export const addData=(p)=>{
+  saveData('create_property',p)
+}
 
 const sendDatatoLocal = (payload) => {
+
   return {
     type: types.SendToLocalStorage,
     payload,
@@ -90,6 +96,14 @@ const getDatafromLocal = () => {
     type: types.GetFromLocalStorage,
   };
 };
+
+const getSingleHotel = (payload) => {
+  console.log(payload)
+  return {
+    type : types.getHotelbyId,
+    payload
+  }
+}
 
 // HOTEL LIST REQUEST
 
@@ -114,16 +128,12 @@ const getData = (q, p) => (dispatch) => {
   dispatch(getHotelListReq())
 
   return axios
+
     .get(`https://long-plum-mite-cape.cyclic.app/results?q=${q}&_limit=7`, p)
     .then((res) => dispatch(getHotelListSuc(res.data)))
     .catch((err) => dispatch(getHotelListErr()));
 };
 
-export {
-  sendDatatoLocal,
-  getDatafromLocal,
-  getHotelListErr,
-  getHotelListReq,
-  getHotelListSuc,
-  getData,
-};
+
+export { sendDatatoLocal, getDatafromLocal, getHotelListErr, getHotelListReq, getHotelListSuc, getData,getSingleHotel }
+
