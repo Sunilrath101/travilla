@@ -19,7 +19,7 @@ const [scrollPosition, setScrollPosition] = useState(0);
 
   const scrollFunc = (el) => {
    window.scrollTo({
-     top:el.current.offsetTop ,
+     top:el.current.offsetTop-30 ,
      behavior : "smooth"
    })
  }
@@ -30,7 +30,7 @@ const Aminities = [
 ]
   return (
     <Box w="100%" mt= "10px" >
-      <HStack w={{base:"100%",lg:"100%"}} bg="white" id="nav" p=" 40px" pb="0px"  position = "sticky" top="0" > 
+      <HStack w={{base:"100%",lg:"100%"}} bg="white" id="nav" p=" 40px" pb="0px"  position = "sticky" top="5" > 
       <Button outline="none" colorScheme={"gray"} bg="none" onClick={()=>{scrollFunc(Overview)}}  _hover={{background:"none"}} leftIcon={<InfoOutlineIcon />} variant='solid'>
     OVERVIEW
   </Button>
