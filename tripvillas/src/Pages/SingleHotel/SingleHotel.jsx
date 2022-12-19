@@ -139,7 +139,7 @@ const SingleHotel = () => {
     },[date,obj])
 
   
-  return <Box   >  <HStack w={{base:"150%",md:"100%"}} p={"20px"}  >
+  return <Box  mt="30px" >  <HStack w={{base:"150%",md:"100%"}} p={"20px"}  >
    <Box w={{base:"100%",md:"100%",lg:"70%"}} marginLeft={{sm:"6%"}} paddingRight={"40px"} borderRight={"1px solid #A9A9A9"} >
    <RouteComp />
    <Divider colorScheme={"#D3D3D3"} orientation='horizontal' />
@@ -412,7 +412,7 @@ const SingleHotel = () => {
       </Modal>
      
 </HStack>   
-<BookingPage />
+{/* <BookingPage /> */}
 </Box>
    
 };

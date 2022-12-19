@@ -10,8 +10,7 @@ import { sendSignInLinkToEmail } from "@firebase/auth";
 import { Navigate, useParams } from "react-router";
 import { getDatafromLocal } from "../../Redux/DataReducer/action";
 
-import { Navigate } from "react-router";
-import { useDisclosure } from "@chakra-ui/react";
+import { Spinner, useDisclosure } from "@chakra-ui/react";
 import Payment from "../../Components/Payment/Payment";
 
 
@@ -29,6 +28,21 @@ import Payment from "../../Components/Payment/Payment";
    const {id} = useParams()
   const {isAuth} = useSelector((state)=> state.authReducer)
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [discount,setDiscount] = useState("");
+  const [dis,setDis] = useState(0)
+  const [x,setX] = useState(false)
+  const discountFunc = (e)=> {
+    setX(true)
+    setDiscount(e.target.value)
+     if(e.target.value == "MASAI1000"){
+       setDis(1000)
+     }
+  }
+
+  const removeFunc = () => {
+    setDis(0)
+  }
+
   const myfunc = () => {
     if(isAuth){
       
@@ -44,7 +58,7 @@ import Payment from "../../Components/Payment/Payment";
 
   const details = [ ["Check in",BookedData.Checkin],["Check Out",BookedData.Checkout],["Guests",BookedData.guests],["Units",1] ]
 
-  return <HStack w={{base:"150%",md:"100%"}} p="40px" spacing="60px" alignItems="flexStart" flexDirection={{base:"column",lg:"row"}} >
+  return <HStack w={{base:"150%",md:"100%"}} p="40px" spacing="60px" alignItems="flexStart" flexDirection={{base:"column",lg:"row"}} onClick={()=>{setX(false)}} >
      <VStack w={{base:"100%",lg:"55%"}}  >
        <Box bg="blue.700" p="40px" w="100%" my="20px" >
          <Heading size="md" my="10px" >
@@ -96,9 +110,14 @@ import Payment from "../../Components/Payment/Payment";
 
                 <HStack my="10px" >
           <Text>Discount</Text>
-          <Box w="80%"  borderBottom="1px dashed grey" ></Box>
-        <Text>${}</Text>
+          <Box w="70%"  borderBottom="1px dashed grey" ></Box>
+        <Text >Rs {dis}/-</Text><Text onClick={removeFunc} cursor="pointer" color="red" >(Remove)</Text>
                 </HStack>
+
+                <HStack flexDirection={{base:"column",lg:"row"}} ><Text>You can Get Discount by coupon code</Text> <Spacer /><VStack w="40%">
+                   <Text>Enter Coupon Code Here</Text>
+                   <input type="text"   border="1px solid black" placeholder="Enter Here...." onChange={(e)=>{discountFunc(e)}} />
+                  </VStack> {(x) ? (dis!=0&&discount=="MASAI1000") ?<CheckIcon /> : <Spinner />:<Box></Box>} </HStack>
 
                 <HStack my="10px" >
           <Text>Tax</Text>
@@ -111,7 +130,7 @@ import Payment from "../../Components/Payment/Payment";
        <HStack my="20px" >
           <Text size="md" >Total</Text>
           <Box w="75%"  borderBottom="2px dashed grey" ></Box>
-        <Text>Rs {r*(p+p*14/100).toFixed(2)}/-</Text>
+        <Text>Rs {r*(p+p*14/100).toFixed(2)-dis}/-</Text>
                 </HStack>
        </Box>
 
