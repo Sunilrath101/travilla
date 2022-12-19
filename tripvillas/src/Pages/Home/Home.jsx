@@ -31,7 +31,7 @@ const Home = () => {
         <div className={style.section1}>
           <div className={style.box}>
             <h1>Book <strike>Hotels</strike> Vacation Rentals</h1>
-            <h1>op Holiday Homes - Villas, Apartments & Homestays</h1>
+            <h1>Top Holiday Homes - Villas, Apartments & Homestays</h1>
             <Searchbar />
           </div>
         </div>
