@@ -9,8 +9,6 @@ import { sendSignInLinkToEmail } from "@firebase/auth";
 
 import { Navigate, useParams } from "react-router";
 import { getDatafromLocal } from "../../Redux/DataReducer/action";
-
-import { Navigate } from "react-router";
 import { useDisclosure } from "@chakra-ui/react";
 import Payment from "../../Components/Payment/Payment";
 
