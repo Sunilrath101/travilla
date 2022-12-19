@@ -1,7 +1,7 @@
 import { Image } from "@chakra-ui/image";
 import { Input, InputGroup, InputLeftAddon } from "@chakra-ui/input";
 import { Box, Heading, HStack, List, ListItem, VStack, Wrap, WrapItem, Divider,Text,Center, UnorderedList, Spacer } from "@chakra-ui/layout";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@chakra-ui/button";
 import { CheckIcon, InfoOutlineIcon } from "@chakra-ui/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,6 +38,23 @@ import Payment from "../../Components/Payment/Payment";
        setDis(1000)
      }
   }
+
+  function reloadPage() {
+    // The last "domLoading" Time //
+    var currentDocumentTimestamp =
+    new Date(performance.timing.domLoading).getTime();
+    // Current Time //
+    var now = Date.now();
+    // Ten Seconds //
+    var tenSec = 10 * 1000;
+    // Plus Ten Seconds //
+    var plusTenSec = currentDocumentTimestamp + tenSec;
+    if (now > plusTenSec) {
+    window.location.reload();
+    } else {}
+    }
+    reloadPage()
+ 
 
   const removeFunc = () => {
     setDis(0)
