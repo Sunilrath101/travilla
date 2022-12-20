@@ -73,3 +73,20 @@
     font-size: 13px;
     padding-bottom: 2px;
 }
+
+
+
+@media all and (min-width:320px) and (max-width:481px){
+    .container{
+        flex-direction: column;
+        width: 100%;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    }
+    .container > img{
+        width: 100%;
+    }
+    .details{
+        width: 100%;
+        padding: 20px;
+    }
+}

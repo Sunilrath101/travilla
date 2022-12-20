@@ -47,14 +47,14 @@ const PropertyDetails1 = () => {
               <div>
                 <label>State</label>
                 <Select>
-                  <option value="Bihar">Bihar</option>
+                  <option value="Maharastra">Maharastra</option>
                 </Select>
               </div>
               <div>
                 <label>City</label>
                 <Select>
                   <option value="Patana">Patana</option>
-                  <option value="Gaya">Gaya</option>
+                  <option value="Bihar">Bihar</option>
                 </Select>
               </div>
               <div>

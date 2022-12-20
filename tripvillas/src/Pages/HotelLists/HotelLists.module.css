@@ -39,3 +39,15 @@
     position: fixed;
     right: 0;
 }
+
+@media all and (min-width:320px) and (max-width:481px){
+    .right{
+        display: none;
+    }
+    .left{
+        width: 100%;
+    }
+    .left > .top{
+        width:100%;
+    }
+}
