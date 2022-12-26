@@ -30,11 +30,13 @@
 }
 @media all and (min-width: 320px) and (max-width: 481px) {
   .search_container {
-    width: 100%;
+    width: 97%;
     margin: auto;
   }
   .home_search_form {
     grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    margin: auto;
   }
   .home_search_form > div {
     margin-bottom: 9px;
