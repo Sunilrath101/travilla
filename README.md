@@ -1,8 +1,8 @@
 # Travilla
 
-> Tripvillas is one of Asia's largest Holiday Home Rental Companies
+> Travilla is one of Asia's largest Holiday Home Rental Companies
 
-The TripVillas website has been cloned by myself and my team of 4 members as project of our construct week at Masai School over 5 days.
+The Travilla website has been cloned by myself and my team of 4 members as project of our construct week at Masai School over 5 days.
 
 # Tech-Stacks
 
@@ -20,7 +20,7 @@ The TripVillas website has been cloned by myself and my team of 4 members as pro
 - Private Routes
 - search for hotels
 - make payment
-- book your trip
+- book homestays, appartment, villa
 - dashboard
 
 ## Snapshots of the project
